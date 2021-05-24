@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -18,6 +20,18 @@ namespace Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        protected void Application_BeginRequest(Object sender, EventArgs e)
+        {
+            //Configurar
+            CultureInfo myCulture =
+            (CultureInfo)System.Threading.Thread.CurrentThread.CurrentCulture.Clone
+            ();
+            myCulture.NumberFormat.NumberDecimalSeparator = ".";
+            myCulture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
+            myCulture.DateTimeFormat.DateSeparator = "/";
+            Thread.CurrentThread.CurrentCulture = myCulture;
         }
     }
 }
