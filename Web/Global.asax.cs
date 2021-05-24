@@ -20,6 +20,7 @@ namespace Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            log4net.Config.XmlConfigurator.Configure();
         }
 
         protected void Application_BeginRequest(Object sender, EventArgs e)
@@ -32,6 +33,12 @@ namespace Web
             myCulture.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
             myCulture.DateTimeFormat.DateSeparator = "/";
             Thread.CurrentThread.CurrentCulture = myCulture;
+        }
+
+        protected void Application_Error()
+        {
+            var ex = Server.GetLastError();
+            Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod());
         }
     }
 }
