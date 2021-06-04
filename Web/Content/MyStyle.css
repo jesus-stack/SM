@@ -1,0 +1,223 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+:root {
+    --Width_bar_hide: 78px;
+    --width_bar_display: 240px;
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: #E4E9F7;
+    ;
+}
+
+.content {
+    margin-left: var(--Width_bar_hide);
+}
+
+.content_hide {
+    margin-left: var(--width_bar_display);
+}
+
+.sidebar {
+    background-color: rgba(241, 97, 65, 0.8);
+    width: var(--width_bar_display);
+    height: 100%;
+    position: fixed;
+    padding: 6px 14px;
+    color: #E3DAC9;
+}
+
+.sidebar_hide {
+    width: var(--Width_bar_hide);
+}
+
+.sidebar .brand .brand_content {
+    display: flex;
+}
+
+.sidebar_hide .brand {
+    opacity: 0;
+}
+
+.sidebar .brand .brand_content #brand_logo {
+    font-size: 35px;
+    margin-right: 10px;
+}
+
+.sidebar .brand .brand_content .brand_name .word {
+    display: flex;
+    font-weight:600;
+}
+
+.sidebar #btn_menu {
+    position: absolute;
+    color: #E3DAC9;
+    top: 6px;
+    right: 5%;
+    font-size: 22px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.sidebar_hide #btn_menu {
+    right: 25%;
+}
+
+.sidebar ul {
+    margin-top: 20px;
+    width: 100px;
+    list-style: none;
+}
+
+    .sidebar ul li {
+        position: relative;
+        height: 50px;
+        width: 100%;
+        margin: 0 5px;
+        list-style: none;
+        line-height: 50px;
+        margin: 5px 0;
+        width: 210px;
+        align-items: center;
+        cursor: pointer;
+    }
+
+        .sidebar ul li i {
+            margin-right: 30px;
+            margin-left: 15px;
+            position: relative;
+        }
+
+        .sidebar ul li a {
+            color: #E3DAC9;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            border-radius: 12px;
+            white-space: nowrap;
+            transition: all 0.4s ease;
+            width: 100%;
+            text-align: center;
+            font-weight: 500;
+        }
+
+            .sidebar ul li a:hover {
+                color: rgba(241, 97, 65, 0.8);
+                border-radius: 12px;
+            }
+
+        .sidebar ul li:hover a {
+            color: rgba(241, 97, 65, 0.8);
+        }
+
+        .sidebar ul li:hover {
+            background: #E3DAC9;
+            border-radius: 12px;
+        }
+
+.sidebar_hide ul li:hover {
+    background: none;
+}
+
+.sidebar_hide ul li a:hover {
+    width: 50px;
+    background: #E3DAC9;
+}
+
+.sidebar_hide ul li a {
+    width: var(--Width_bar_hide);
+    overflow: hidden;
+}
+
+    .sidebar_hide ul li a .link_name {
+        opacity: 0;
+    }
+
+.sidebar ul li .tooltip {
+    position: absolute;
+    left: 30%;
+    top: 0;
+    opacity: 0;
+    min-width: 120px;
+    color: black;
+    background-color: rgba(241, 97, 65, 0.5);
+    padding: 10px;
+    text-align: center;
+    border-bottom-right-radius: 12px;
+    border-top-right-radius: 12px;
+    height: 40px;
+    line-height: 20px;
+    transition: 0s;
+    font-weight: 400;
+}
+
+.sidebar_hide ul li:hover .tooltip {
+    opacity: 1;
+    transition: all 0.5s ease;
+    top: 50%
+}
+
+.sidebar .profile_content {
+    position: absolute;
+    left: 0;
+    bottom: 0px;
+    display: flex;
+    width: 100%;
+}
+
+    .sidebar .profile_content .profile {
+        display: flex;
+        background: #1d1b31;
+        width: 100%;
+        padding-top: 10px;
+        padding-bottom: 5px;
+    }
+
+.sidebar_hide .profile {
+    opacity: 0;
+    background: none;
+}
+
+.sidebar .profile_content #icon {
+    font-size: 40px;
+    margin-right: 5px;
+}
+
+.sidebar .profile_content .profile_detail .profile_name {
+    font-size: 16px;
+}
+
+.sidebar .profile_content .profile_detail .profile_type {
+    font-size: 13px;
+}
+
+.sidebar .profile_content #log_out {
+    font-size: 25px;
+    position: absolute;
+    right: 5%;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    background: #1d1b31;
+}
+
+.sidebar_hide .profile_content #log_out {
+    bottom: 0;
+    right: 25%;
+    padding-right: 5px;
+    border-radius: 12px;
+    ;
+}
