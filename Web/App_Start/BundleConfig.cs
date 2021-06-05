@@ -25,8 +25,11 @@ namespace Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/MyStyle.css",
-                      "~/Content/about.css"));
+                      "~/Content/MyStyle.css"));
+                      
+
+            bundles.Add(new Bundle("~/content/about").Include(
+                      "~/content/about.css"));
         }
     }
 }

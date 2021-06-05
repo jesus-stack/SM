@@ -33,7 +33,9 @@ body {
     width: var(--width_bar_display);
     height: 100%;
     position: fixed;
-    padding: 6px 14px;
+    top:0;
+    left:0;
+    
     color: #E3DAC9;
 }
 
@@ -166,7 +168,8 @@ body {
 .sidebar_hide ul li:hover .tooltip {
     opacity: 1;
     transition: all 0.5s ease;
-    top: 50%
+    top: 50%;
+    z-index:99;
 }
 
 .sidebar .profile_content {
