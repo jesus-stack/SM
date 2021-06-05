@@ -1,0 +1,141 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.title {
+    background: rgba(241, 97, 65, 0.8);
+    color: #E4E9F7;
+    padding: 5px;
+    line-height: 50px;
+}
+
+.company {
+    background: #E4E9F7;
+    color: rgba(241, 97, 65, 0.8);
+    font-size: 30px;
+    padding: 15px;
+}
+
+    .company p {
+        margin-left: 45%;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .company .desc {
+        color: indigo;
+        font-size: 15px;
+    }
+
+hr {
+    color: lightskyblue;
+    border: solid 2px;
+    margin: 3px;
+}
+
+#logo {
+    font-size: 400px;
+    float: right;
+    position: absolute;
+    right: 20px;
+    z-index: -1;
+}
+
+.content, .content_hide {
+    background-color: rgba(0, 0, 0, 0.5);
+    min-height: 100vh;
+    position: absolute;
+    padding-left:2px;
+    top: 0;
+      left: 0;
+    
+}
+
+.equipo {
+    position: relative;
+    width: 950px;
+    display: flex;
+}
+
+h3 {
+    margin-left: 25%;
+    float: top;
+    color: rgba(241, 97, 65, 0.8);
+    font-size: 25px;
+}
+
+.equipo img {
+    width: 300px;
+    border-radius: 50%;
+}
+
+.equipo .info {
+    font-size: 20px;
+    color: #E4E9F7;
+    font-weight: bold;
+}
+
+.equipo .participantel {
+    margin-right: 50px;
+}
+
+.equipo .participanter {
+    margin-left: 50px;
+}
+
+.productos {
+    margin-top: 20px;
+    display: flex;
+    margin-left: 30%;
+}
+
+    .productos .producto {
+        margin: 10px;
+        padding: 10px;
+        margin-right: 10px;
+        color: #E4E9F7;
+    }
+
+        .productos .producto #icono {
+            font-size: 50px;
+        }
+
+        .productos .producto .producto_name .word {
+            display: table-row;
+        }
+
+.bottom {
+    margin-top: 10px;
+    height: 3vh;
+    background-color: rgba(241, 97, 65, 0.8);
+}
+
+#pt {
+    margin-top: 20px;
+    margin-left: 35%;
+}
+
+.contact_content {
+    width: 100%;
+    min-height: 150px;
+    position: relative;
+}
+
+    .contact_content .contact {
+        position: absolute;
+        right: 20px;
+    }
+
+        .contact_content .contact h2 {
+            color: rgba(241, 97, 65, 0.8);
+        }
+
+    .contact_content .contact {
+        color: #E4E9F7;
+        font-weight: bold;
+    }
