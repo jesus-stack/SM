@@ -32,19 +32,9 @@
         font-size: 15px;
     }
 
-hr {
-    color: lightskyblue;
-    border: solid 2px;
-    margin: 3px;
-}
 
-#logo {
-    font-size: 400px;
-    float: right;
-    position: absolute;
-    right: 20px;
-    z-index: -1;
-}
+
+
 
 .content, .content_hide {
     background-color: rgba(0, 0, 0, 0.5);
@@ -60,10 +50,11 @@ hr {
     position: relative;
     width: 950px;
     display: flex;
+    margin-left:15%;
 }
 
 h3 {
-    margin-left: 25%;
+    margin-left: 40%;
     float: top;
     color: rgba(241, 97, 65, 0.8);
     font-size: 25px;
