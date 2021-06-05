@@ -12,24 +12,28 @@
     color: #E4E9F7;
     padding: 5px;
     line-height: 50px;
+    border-bottom:solid 3px black;
+    text-align:center;
 }
 
 .company {
     background: #E4E9F7;
-    color: rgba(241, 97, 65, 0.8);
+    color: #1d1b31;
     font-size: 30px;
     padding: 15px;
+    background: none;
 }
 
     .company p {
-        margin-left: 45%;
+        font-size:50px;
+        margin-left: 35%;
         margin-top: 5px;
         margin-bottom: 5px;
     }
 
     .company .desc {
-        color: indigo;
-        font-size: 15px;
+        color: #E4E9F7;
+        font-size: 30px;
     }
 
 
@@ -56,7 +60,7 @@
 h3 {
     margin-left: 40%;
     float: top;
-    color: rgba(241, 97, 65, 0.8);
+    color: #1d1b31;
     font-size: 25px;
 }
 
@@ -123,7 +127,7 @@ h3 {
     }
 
         .contact_content .contact h2 {
-            color: rgba(241, 97, 65, 0.8);
+            color: #1d1b31;
         }
 
     .contact_content .contact {
