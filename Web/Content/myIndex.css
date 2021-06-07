@@ -1,0 +1,100 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+   
+}
+
+.title {
+font-size:45px;
+
+}
+
+
+
+
+.btn-Content {
+    display: flex;
+    padding: 3px 5px;
+    background-color: #1d1b31;
+    color:rgba(241,97,65,1);
+  
+}
+.button {
+    margin-right: 15px;
+    border-right: solid 2px rgba(241,97,65,1);
+    margin-left:4px;
+    padding-right:15px;
+    cursor:pointer;
+}
+
+.tab-list {
+    position:relative;
+    text-align:center;
+    width:100%;
+    
+
+}
+table {
+align-content: center;
+}
+
+.contenedor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    
+}
+.activo {
+opacity:1;
+
+}
+
+
+table {
+border: solid 1px black;
+
+}
+
+thead {
+    background: rgba(241,97,65,0.9);
+}
+
+th {
+    padding-right: 20px;
+    padding-left: 10px;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    text-align: center;
+   
+    
+}
+td {
+    text-align: center;
+    border: solid 1px black;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.imgInven {
+    width: 400px;
+    height: 400px;
+    padding-top: 5%;
+    border-radius: 5%;
+}
+
+.text {
+font-size :23px;
+justify-content: right;
+height: 20px;
+
+}
+
+.imgBienvenidos {
+    width: 700px;
+    height: 250px;
+    padding-top: 9%;
+}

@@ -27,5 +27,15 @@ namespace Web.Controllers
             return View();
         }
 
+
+        public ActionResult Login()
+        {
+            ViewBag.Message = "Bienvenido a login.";
+
+            return View();
+        }
+
+
+
     }
 }

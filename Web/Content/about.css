@@ -12,8 +12,8 @@
     color: #E4E9F7;
     padding: 5px;
     line-height: 50px;
-    border-bottom:solid 3px black;
-    text-align:center;
+    border-bottom: solid 3px black;
+    text-align: center;
 }
 
 .company {
@@ -65,7 +65,8 @@ h3 {
 }
 
 .equipo img {
-    width: 300px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
 }
 
@@ -134,3 +135,8 @@ h3 {
         color: #E4E9F7;
         font-weight: bold;
     }
+
+.imgAbout{
+    height:30px;
+}
+

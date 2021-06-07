@@ -30,6 +30,9 @@ namespace Web
 
             bundles.Add(new Bundle("~/content/about").Include(
                       "~/content/about.css"));
+
+            bundles.Add(new Bundle("~/content/Index").Include(
+                     "~/content/myIndex.css"));
         }
     }
 }
