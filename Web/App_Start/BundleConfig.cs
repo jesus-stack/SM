@@ -35,6 +35,7 @@ namespace Web
                      "~/content/myIndex.css"));
             bundles.Add(new Bundle("~/content/inventario").Include(
                    "~/content/inventario.css"));
+           
         }
     }
 }

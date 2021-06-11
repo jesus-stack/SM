@@ -15,15 +15,21 @@ namespace Web.Controllers
         {
             IEnumerable<Producto> lista = null;
             ServiceProducto service = new ServiceProducto();
+            IEnumerable<Categoria> listaCategorias = null;
+            ServiceCategoria serviceCategoria = new ServiceCategoria();
+
+
             try
             {
                 lista = service.GetProducto();
+                listaCategorias = serviceCategoria.GetCategoria();
+              
             }
             catch (Exception e)
             {
                 Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
             }
-
+            ViewBag.categorias = listaCategorias;
             return View(lista);
         }
         public ActionResult Ir()

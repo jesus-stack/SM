@@ -59,3 +59,44 @@ table tbody tr td {
     font-size: 35px;
 }
 
+.tab_list {
+    margin-left: 10vw;
+    display:flex;
+    cursor:pointer;
+    margin-right:5vw;
+
+    border-bottom: solid 2px #1d1b31;
+
+}
+    .tab_list .tab {
+        max-width: 200px;
+        min-width:100px;
+        background-color: #1d1b31;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        padding: 8px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin:1px;
+        color: orange;
+        font-weight300;
+    }
+    .tab_list .tab:hover{
+        background-color:black;
+    }
+.tab_list div.active{
+    background-color:cornflowerblue;
+    color:#fff;
+}
+
+
+.tab_content {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+    .tab_active {
+        display: block;
+    }
+

@@ -6,38 +6,87 @@
 @Styles.Render("~/Content/inventario")
 <h2>Productos</h2>
 
-<table>
-    <thead>
-        <tr>
-            <th>Detalle</th>
-            <th>@Html.DisplayNameFor(model =>model.Id)</th>
-            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
-            <th>@Html.DisplayNameFor(model => model.cantidad_minima)</th>
-            <th>@Html.DisplayNameFor(model => model.cantidad_maxima)</th>
-            <th>@Html.DisplayNameFor(model => model.Total)</th>
-            <th>Acciones </th>
-            <th>     </th>
-        </tr>
-    </thead>
-        <tbody>
-       @foreach (var item in Model) {
+<div class="tab_list">
+    <div class="tab active" onclick="mostrar(event,'all')">Todos</div>
+  
+    @foreach (var item in (IEnumerable<Infraestructure.Models.Categoria>)ViewBag.categorias)
+    {
+        <div class="tab" onclick="mostrar(event,@item.Id)">@item.Descripcion</div>
+    }
+</div>
+<div class="tab_content tab_active" id="all">
+    <h2>Todos</h2>
+    <table>
+        <thead>
             <tr>
-                <td><i class='bx bxs-detail'></i></td>
-                <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                <td>@Html.DisplayFor(modelItem => item.cantidad_minima)</td>
-                <td>@Html.DisplayFor(modelItem => item.cantidad_maxima)</td>
-                <td>@Html.DisplayFor(modelItem => item.Total)</td>
-                <td><a class='bx bx-edit'></a></td>
-                <td><a class='bx bxs-trash'></a></td>
-
+                <th>Detalle</th>
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                <th>@Html.DisplayNameFor(model => model.cantidad_minima)</th>
+                <th>@Html.DisplayNameFor(model => model.cantidad_maxima)</th>
+                <th>@Html.DisplayNameFor(model => model.Total)</th>
+                <th>Acciones </th>
+                <th>     </th>
             </tr>
-       }
-
-
-
-
-
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><i class='bx bxs-detail'></i></td>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.cantidad_minima)</td>
+                    <td>@Html.DisplayFor(modelItem => item.cantidad_maxima)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                    <td><a class='bx bx-edit'></a></td>
+                    <td><a class='bx bxs-trash'></a></td>
+                </tr>
+            }
         </tbody>
-    </thead>
-</table>
+
+    </table>
+</div>
+
+@foreach (var itemC in (IEnumerable<Infraestructure.Models.Categoria>)ViewBag.categorias)
+{
+
+<div class="tab_content" id="@itemC.Id">
+    <h2>@itemC.Descripcion</h2>
+   
+    <table>
+        <thead>
+            <tr>
+                <th>Detalle</th>
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                <th>@Html.DisplayNameFor(model => model.cantidad_minima)</th>
+                <th>@Html.DisplayNameFor(model => model.cantidad_maxima)</th>
+                <th>@Html.DisplayNameFor(model => model.Total)</th>
+                <th>Acciones </th>
+                <th>     </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                if (item.Categoria1.Id == itemC.Id)
+                {
+                <tr>
+                    <td><i class='bx bxs-detail'></i></td>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.cantidad_minima)</td>
+                    <td>@Html.DisplayFor(modelItem => item.cantidad_maxima)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                    <td><a class='bx bx-edit'></a></td>
+                    <td><a class='bx bxs-trash'></a></td>
+                </tr>
+                }
+            }
+        </tbody>
+
+    </table>
+</div>
+}
+

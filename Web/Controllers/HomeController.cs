@@ -34,6 +34,12 @@ namespace Web.Controllers
 
             return View();
         }
+        public ActionResult Mantenimiento()
+        {
+            ViewBag.Message = "Mantenimiento";
+
+            return View();
+        }
 
 
 

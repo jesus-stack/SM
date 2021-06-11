@@ -164,6 +164,7 @@
     <Content Include="Content\inventario.css" />
     <Content Include="Content\myIndex.css" />
     <Content Include="Content\MyStyle.css" />
+    <Content Include="Content\producto.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -302,7 +303,7 @@
     <Content Include="Views\Shared\_PartialMenu.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Producto\Index.cshtml" />
-    <Content Include="Views\Producto\Ir.cshtml" />
+    <Content Include="Views\Home\Mantenimiento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
