@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<Infraestructure.Models.Producto>
+
 @{
     ViewBag.Title = "Inventario Productos";
 }
@@ -7,80 +8,35 @@
 
 <table>
     <thead>
-        <th>Codigo</th>
-        <th>Nombre</th>
-        <th>Costo Unitario</th>
-        <th>Total Existencias</th>
-        <th>Acciones </th>
-         <th>     </th>
+        <tr>
+            <th>Detalle</th>
+            <th>@Html.DisplayNameFor(model =>model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.cantidad_minima)</th>
+            <th>@Html.DisplayNameFor(model => model.cantidad_maxima)</th>
+            <th>@Html.DisplayNameFor(model => model.Total)</th>
+            <th>Acciones </th>
+            <th>     </th>
+        </tr>
     </thead>
         <tbody>
+       @foreach (var item in Model) {
             <tr>
-             
-                    <td><a>0001</a></td>
-                    <td>Arroz to pelon</td>
-                    <td>$ 1500</td>
-                    <td>1000</td>
-                    <td><a class='bx bx-edit'></a></td>
-                    <td><i class='bx bxs-trash'></i></td>
-                
-            </tr>
-            <tr>
-                <td>0001</td>
-                <td>Arroz to pelon</td>
-                <td>$ 1500</td>
-                <td>1000</td>
+                <td><i class='bx bxs-detail'></i></td>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                <td>@Html.DisplayFor(modelItem => item.cantidad_minima)</td>
+                <td>@Html.DisplayFor(modelItem => item.cantidad_maxima)</td>
+                <td>@Html.DisplayFor(modelItem => item.Total)</td>
                 <td><a class='bx bx-edit'></a></td>
-                <td><i class='bx bxs-trash'></i></td>
+                <td><a class='bx bxs-trash'></a></td>
+
             </tr>
-            <tr>
-                <td>0001</td>
-                <td>Arroz to pelon</td>
-                <td>$ 1500</td>
-                <td>1000</td>
-                <td><a class='bx bx-edit'></a></td>
-                <td><i class='bx bxs-trash'></i></td>
-            </tr>
-            <tr>
-                <td>0001</td>
-                <td>Arroz to pelon</td>
-                <td>$ 1500</td>
-                <td>1000</td>
-                <td><a class='bx bx-edit'></a></td>
-                <td><i class='bx bxs-trash'></i></td>
-            </tr>
-            <tr>
-                <td>0001</td>
-                <td>Arroz to pelon</td>
-                <td>$ 1500</td>
-                <td>1000</td>
-                <td><a class='bx bx-edit'></a></td>
-                <td><i class='bx bxs-trash'></i></td>
-            </tr>
-            <tr>
-                <td>0001</td>
-                <td>Arroz to pelon</td>
-                <td>$ 1500</td>
-                <td>1000</td>
-                <td><a class='bx bx-edit'></a></td>
-                <td><i class='bx bxs-trash'></i></td>
-            </tr>
-            <tr>
-                <td>0001</td>
-                <td>Arroz to pelon</td>
-                <td>$ 1500</td>
-                <td>1000</td>
-                <td><a class='bx bx-edit'></a></td>
-                <td><i class='bx bxs-trash'></i></td>
-            </tr>
-            <tr>
-                <td>0001</td>
-                <td>Arroz to pelon</td>
-                <td>$ 1500</td>
-                <td>1000</td>
-                <td><a class='bx bx-edit'></a></td>
-                <td><i class='bx bxs-trash'></i></td>
-            </tr>
+       }
+
+
+
+
 
         </tbody>
     </thead>

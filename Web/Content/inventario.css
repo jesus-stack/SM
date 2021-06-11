@@ -19,38 +19,43 @@ table {
    
 }
 
-    table thead th {
+table thead th {
         padding: 10px;
         padding-left: 15px;
         padding-right: 15px;
         border-top: solid black 1px;
         background-color:rgba(241,97,65,0.8);
-    }
-    table tbody tr {
+}
+table tbody tr {
         border-top: solid black 1px;
         border-bottom: solid black 1px;
      
         height: 40px;
         
-    }
-        table tbody tr td {
+}
+table tbody tr td {
             text-align: center;
             padding: 10px;
-        }
-
-        table tbody tr:nth-child(even) {
+ }
+ table tbody tr:nth-child(even) {
             background: #EEE2DF;
-        }
-        .bx:hover{
+ }
+.bx:hover{
             color:orange;
-        }
-        .bx-edit{
+}
+.bx-edit{
             background-color:green;
             color:#fff;
             font-size:35px;
-        }
+}
 .bxs-trash {
     background-color: red;
     color: #fff;
     font-size: 35px;
 }
+.bxs-detail {
+    background-color: cornflowerblue;
+    color: #fff;
+    font-size: 35px;
+}
+

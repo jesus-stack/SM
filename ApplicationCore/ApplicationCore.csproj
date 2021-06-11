@@ -42,10 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IserviceProducto.cs" />
+    <Compile Include="Services\ServiceProducto.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOS\" />
-    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Infraestructure\Infraestructure.csproj">

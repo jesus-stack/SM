@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Infraestructure.Models.Producto>
+
+@{
+    ViewBag.Title = "Ir";
+}
+
+<h2>Ir</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidad_minima)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cantidad_maxima)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Costo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Categoria)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidad_minima)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cantidad_maxima)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Costo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Categoria1.Descripcion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,1028 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Contacto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Telefono" Type="varchar" MaxLength="30" />
+          <Property Name="Correo" Type="varchar" MaxLength="50" />
+          <Property Name="IdProveedor" Type="int" />
+        </EntityType>
+        <EntityType Name="Entrada">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdMovimiento" Type="int" />
+          <Property Name="Comentario" Type="varchar" MaxLength="50" />
+          <Property Name="IdUsuario" Type="bigint" />
+        </EntityType>
+        <EntityType Name="EntradaProducto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdEntrada" />
+          </Key>
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEntrada" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdProveedor" Type="int" />
+          <Property Name="idSeccion" Type="int" />
+          <Property Name="cantidad" Type="bigint" />
+          <Property Name="Lote" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="FechaVencimiento" Type="date" />
+        </EntityType>
+        <EntityType Name="Movimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Tipo" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="70" />
+          <Property Name="cantidad minima" Type="int" />
+          <Property Name="cantidad maxima" Type="bigint" />
+          <Property Name="Costo" Type="decimal" Precision="18" Scale="5" />
+          <Property Name="Total" Type="bigint" />
+          <Property Name="Categoria" Type="int" />
+          <Property Name="imagen" Type="image" />
+        </EntityType>
+        <EntityType Name="ProductoSeccion">
+          <Key>
+            <PropertyRef Name="IdSeccion" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="Lote" />
+          </Key>
+          <Property Name="IdSeccion" Type="int" Nullable="false" />
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Lote" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Cantidad" Type="bigint" />
+          <Property Name="FechaVencimiento" Type="date" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="NombreOrganizacion" Type="varchar" MaxLength="50" />
+          <Property Name="Direccion" Type="varchar" MaxLength="80" />
+          <Property Name="Pais" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="ProveedorProducto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdProveedor" />
+          </Key>
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdProveedor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Salida">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdMovimiento" Type="int" />
+          <Property Name="comentario" Type="varchar" MaxLength="50" />
+          <Property Name="IdUsuario" Type="bigint" />
+        </EntityType>
+        <EntityType Name="SalidaProducto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdSalida" />
+          </Key>
+          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSalida" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSeccion" Type="int" />
+          <Property Name="Cantidad" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Seccion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TipoUsuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" Nullable="false" />
+          <Property Name="contrasena" Type="varbinary(max)" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" />
+          <Property Name="TipoUsuario" Type="int" />
+          <Property Name="Estado" Type="bit" />
+          <Property Name="Imagen" Type="image" />
+        </EntityType>
+        <Association Name="FK_Contacto_Proveedor">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+          <End Role="Contacto" Type="Self.Contacto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contacto">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entrada_Movimiento">
+          <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="0..1" />
+          <End Role="Entrada" Type="Self.Entrada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movimiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entrada">
+              <PropertyRef Name="IdMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entrada_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Entrada" Type="Self.Entrada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entrada">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntradaProducto_Entrada">
+          <End Role="Entrada" Type="Self.Entrada" Multiplicity="1" />
+          <End Role="EntradaProducto" Type="Self.EntradaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entrada">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntradaProducto">
+              <PropertyRef Name="IdEntrada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntradaProducto_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="EntradaProducto" Type="Self.EntradaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntradaProducto">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntradaProducto_Seccion">
+          <End Role="Seccion" Type="Self.Seccion" Multiplicity="0..1" />
+          <End Role="EntradaProducto" Type="Self.EntradaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seccion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntradaProducto">
+              <PropertyRef Name="idSeccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producto_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductoSeccion_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="ProductoSeccion" Type="Self.ProductoSeccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductoSeccion">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductoSeccion_Seccion">
+          <End Role="Seccion" Type="Self.Seccion" Multiplicity="1" />
+          <End Role="ProductoSeccion" Type="Self.ProductoSeccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seccion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductoSeccion">
+              <PropertyRef Name="IdSeccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedorProducto_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="ProveedorProducto" Type="Self.ProveedorProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProveedorProducto">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProveedorProducto_Proveedor">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="ProveedorProducto" Type="Self.ProveedorProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProveedorProducto">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salida_Movimiento">
+          <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="0..1" />
+          <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movimiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="IdMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salida_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalidaProducto_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="SalidaProducto" Type="Self.SalidaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalidaProducto">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalidaProducto_Salida">
+          <End Role="Salida" Type="Self.Salida" Multiplicity="1" />
+          <End Role="SalidaProducto" Type="Self.SalidaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salida">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalidaProducto">
+              <PropertyRef Name="IdSalida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalidaProducto_Seccion">
+          <End Role="Seccion" Type="Self.Seccion" Multiplicity="0..1" />
+          <End Role="SalidaProducto" Type="Self.SalidaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seccion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalidaProducto">
+              <PropertyRef Name="IdSeccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TipoUsuario">
+          <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SMModelStoreContainer">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacto" EntityType="Self.Contacto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Entrada" EntityType="Self.Entrada" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EntradaProducto" EntityType="Self.EntradaProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movimiento" EntityType="Self.Movimiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductoSeccion" EntityType="Self.ProductoSeccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProveedorProducto" EntityType="Self.ProveedorProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Salida" EntityType="Self.Salida" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SalidaProducto" EntityType="Self.SalidaProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seccion" EntityType="Self.Seccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Contacto_Proveedor" Association="Self.FK_Contacto_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Contacto" EntitySet="Contacto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entrada_Movimiento" Association="Self.FK_Entrada_Movimiento">
+            <End Role="Movimiento" EntitySet="Movimiento" />
+            <End Role="Entrada" EntitySet="Entrada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entrada_Usuario" Association="Self.FK_Entrada_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Entrada" EntitySet="Entrada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntradaProducto_Entrada" Association="Self.FK_EntradaProducto_Entrada">
+            <End Role="Entrada" EntitySet="Entrada" />
+            <End Role="EntradaProducto" EntitySet="EntradaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntradaProducto_Producto" Association="Self.FK_EntradaProducto_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="EntradaProducto" EntitySet="EntradaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntradaProducto_Seccion" Association="Self.FK_EntradaProducto_Seccion">
+            <End Role="Seccion" EntitySet="Seccion" />
+            <End Role="EntradaProducto" EntitySet="EntradaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Categoria" Association="Self.FK_Producto_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductoSeccion_Producto" Association="Self.FK_ProductoSeccion_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="ProductoSeccion" EntitySet="ProductoSeccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductoSeccion_Seccion" Association="Self.FK_ProductoSeccion_Seccion">
+            <End Role="Seccion" EntitySet="Seccion" />
+            <End Role="ProductoSeccion" EntitySet="ProductoSeccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedorProducto_Producto" Association="Self.FK_ProveedorProducto_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="ProveedorProducto" EntitySet="ProveedorProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProveedorProducto_Proveedor" Association="Self.FK_ProveedorProducto_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="ProveedorProducto" EntitySet="ProveedorProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salida_Movimiento" Association="Self.FK_Salida_Movimiento">
+            <End Role="Movimiento" EntitySet="Movimiento" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salida_Usuario" Association="Self.FK_Salida_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalidaProducto_Producto" Association="Self.FK_SalidaProducto_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="SalidaProducto" EntitySet="SalidaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalidaProducto_Salida" Association="Self.FK_SalidaProducto_Salida">
+            <End Role="Salida" EntitySet="Salida" />
+            <End Role="SalidaProducto" EntitySet="SalidaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalidaProducto_Seccion" Association="Self.FK_SalidaProducto_Seccion">
+            <End Role="Seccion" EntitySet="Seccion" />
+            <End Role="SalidaProducto" EntitySet="SalidaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="Self.FK_Usuario_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Categoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_Producto_Categoria" FromRole="Categoria" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Contacto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdProveedor" Type="Int32" />
+          <NavigationProperty Name="Proveedor" Relationship="Self.FK_Contacto_Proveedor" FromRole="Contacto" ToRole="Proveedor" />
+        </EntityType>
+        <EntityType Name="Entrada">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdMovimiento" Type="Int32" />
+          <Property Name="Comentario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="Int64" />
+          <NavigationProperty Name="Movimiento" Relationship="Self.FK_Entrada_Movimiento" FromRole="Entrada" ToRole="Movimiento" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Entrada_Usuario" FromRole="Entrada" ToRole="Usuario" />
+          <NavigationProperty Name="EntradaProducto" Relationship="Self.FK_EntradaProducto_Entrada" FromRole="Entrada" ToRole="EntradaProducto" />
+        </EntityType>
+        <EntityType Name="EntradaProducto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdEntrada" />
+          </Key>
+          <Property Name="IdProducto" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdEntrada" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdProveedor" Type="Int32" />
+          <Property Name="idSeccion" Type="Int32" />
+          <Property Name="cantidad" Type="Int64" />
+          <Property Name="Lote" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FechaVencimiento" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Entrada" Relationship="Self.FK_EntradaProducto_Entrada" FromRole="EntradaProducto" ToRole="Entrada" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_EntradaProducto_Producto" FromRole="EntradaProducto" ToRole="Producto" />
+          <NavigationProperty Name="Seccion" Relationship="Self.FK_EntradaProducto_Seccion" FromRole="EntradaProducto" ToRole="Seccion" />
+        </EntityType>
+        <EntityType Name="Movimiento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Entrada" Relationship="Self.FK_Entrada_Movimiento" FromRole="Movimiento" ToRole="Entrada" />
+          <NavigationProperty Name="Salida" Relationship="Self.FK_Salida_Movimiento" FromRole="Movimiento" ToRole="Salida" />
+        </EntityType>
+        <EntityType Name="Producto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad_minima" Type="Int32" />
+          <Property Name="cantidad_maxima" Type="Int64" />
+          <Property Name="Costo" Type="Decimal" Precision="18" Scale="5" />
+          <Property Name="Total" Type="Int64" />
+          <Property Name="Categoria" Type="Int32" />
+          <Property Name="imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Categoria1" Relationship="Self.FK_Producto_Categoria" FromRole="Producto" ToRole="Categoria" />
+          <NavigationProperty Name="EntradaProducto" Relationship="Self.FK_EntradaProducto_Producto" FromRole="Producto" ToRole="EntradaProducto" />
+          <NavigationProperty Name="ProductoSeccion" Relationship="Self.FK_ProductoSeccion_Producto" FromRole="Producto" ToRole="ProductoSeccion" />
+          <NavigationProperty Name="SalidaProducto" Relationship="Self.FK_SalidaProducto_Producto" FromRole="Producto" ToRole="SalidaProducto" />
+          <NavigationProperty Name="Proveedor" Relationship="Self.ProveedorProducto" FromRole="Producto" ToRole="Proveedor" />
+        </EntityType>
+        <EntityType Name="ProductoSeccion">
+          <Key>
+            <PropertyRef Name="IdSeccion" />
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="Lote" />
+          </Key>
+          <Property Name="IdSeccion" Type="Int32" Nullable="false" />
+          <Property Name="IdProducto" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Lote" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Cantidad" Type="Int64" />
+          <Property Name="FechaVencimiento" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_ProductoSeccion_Producto" FromRole="ProductoSeccion" ToRole="Producto" />
+          <NavigationProperty Name="Seccion" Relationship="Self.FK_ProductoSeccion_Seccion" FromRole="ProductoSeccion" ToRole="Seccion" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="NombreOrganizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Pais" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Contacto" Relationship="Self.FK_Contacto_Proveedor" FromRole="Proveedor" ToRole="Contacto" />
+          <NavigationProperty Name="Producto" Relationship="Self.ProveedorProducto" FromRole="Proveedor" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="Salida">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdMovimiento" Type="Int32" />
+          <Property Name="comentario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IdUsuario" Type="Int64" />
+          <NavigationProperty Name="Movimiento" Relationship="Self.FK_Salida_Movimiento" FromRole="Salida" ToRole="Movimiento" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Salida_Usuario" FromRole="Salida" ToRole="Usuario" />
+          <NavigationProperty Name="SalidaProducto" Relationship="Self.FK_SalidaProducto_Salida" FromRole="Salida" ToRole="SalidaProducto" />
+        </EntityType>
+        <EntityType Name="SalidaProducto">
+          <Key>
+            <PropertyRef Name="IdProducto" />
+            <PropertyRef Name="IdSalida" />
+          </Key>
+          <Property Name="IdProducto" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSalida" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdSeccion" Type="Int32" />
+          <Property Name="Cantidad" Type="Int64" />
+          <NavigationProperty Name="Producto" Relationship="Self.FK_SalidaProducto_Producto" FromRole="SalidaProducto" ToRole="Producto" />
+          <NavigationProperty Name="Salida" Relationship="Self.FK_SalidaProducto_Salida" FromRole="SalidaProducto" ToRole="Salida" />
+          <NavigationProperty Name="Seccion" Relationship="Self.FK_SalidaProducto_Seccion" FromRole="SalidaProducto" ToRole="Seccion" />
+        </EntityType>
+        <EntityType Name="Seccion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EntradaProducto" Relationship="Self.FK_EntradaProducto_Seccion" FromRole="Seccion" ToRole="EntradaProducto" />
+          <NavigationProperty Name="ProductoSeccion" Relationship="Self.FK_ProductoSeccion_Seccion" FromRole="Seccion" ToRole="ProductoSeccion" />
+          <NavigationProperty Name="SalidaProducto" Relationship="Self.FK_SalidaProducto_Seccion" FromRole="Seccion" ToRole="SalidaProducto" />
+        </EntityType>
+        <EntityType Name="TipoUsuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_TipoUsuario" FromRole="TipoUsuario" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" />
+          <Property Name="contrasena" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TipoUsuario" Type="Int32" />
+          <Property Name="Estado" Type="Boolean" />
+          <Property Name="Imagen" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Entrada" Relationship="Self.FK_Entrada_Usuario" FromRole="Usuario" ToRole="Entrada" />
+          <NavigationProperty Name="Salida" Relationship="Self.FK_Salida_Usuario" FromRole="Usuario" ToRole="Salida" />
+          <NavigationProperty Name="TipoUsuario1" Relationship="Self.FK_Usuario_TipoUsuario" FromRole="Usuario" ToRole="TipoUsuario" />
+        </EntityType>
+        <Association Name="FK_Producto_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="Categoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contacto_Proveedor">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+          <End Role="Contacto" Type="Self.Contacto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contacto">
+              <PropertyRef Name="IdProveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entrada_Movimiento">
+          <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="0..1" />
+          <End Role="Entrada" Type="Self.Entrada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movimiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entrada">
+              <PropertyRef Name="IdMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Entrada_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Entrada" Type="Self.Entrada" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Entrada">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntradaProducto_Entrada">
+          <End Role="Entrada" Type="Self.Entrada" Multiplicity="1" />
+          <End Role="EntradaProducto" Type="Self.EntradaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Entrada">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntradaProducto">
+              <PropertyRef Name="IdEntrada" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntradaProducto_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="EntradaProducto" Type="Self.EntradaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntradaProducto">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EntradaProducto_Seccion">
+          <End Role="Seccion" Type="Self.Seccion" Multiplicity="0..1" />
+          <End Role="EntradaProducto" Type="Self.EntradaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seccion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EntradaProducto">
+              <PropertyRef Name="idSeccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salida_Movimiento">
+          <End Role="Movimiento" Type="Self.Movimiento" Multiplicity="0..1" />
+          <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Movimiento">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="IdMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductoSeccion_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="ProductoSeccion" Type="Self.ProductoSeccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductoSeccion">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalidaProducto_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="SalidaProducto" Type="Self.SalidaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalidaProducto">
+              <PropertyRef Name="IdProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductoSeccion_Seccion">
+          <End Role="Seccion" Type="Self.Seccion" Multiplicity="1" />
+          <End Role="ProductoSeccion" Type="Self.ProductoSeccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seccion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductoSeccion">
+              <PropertyRef Name="IdSeccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Salida_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Salida" Type="Self.Salida" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Salida">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalidaProducto_Salida">
+          <End Role="Salida" Type="Self.Salida" Multiplicity="1" />
+          <End Role="SalidaProducto" Type="Self.SalidaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Salida">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalidaProducto">
+              <PropertyRef Name="IdSalida" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalidaProducto_Seccion">
+          <End Role="Seccion" Type="Self.Seccion" Multiplicity="0..1" />
+          <End Role="SalidaProducto" Type="Self.SalidaProducto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seccion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SalidaProducto">
+              <PropertyRef Name="IdSeccion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_TipoUsuario">
+          <End Role="TipoUsuario" Type="Self.TipoUsuario" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoUsuario">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="TipoUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProveedorProducto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="SMEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" />
+          <EntitySet Name="Contacto" EntityType="Self.Contacto" />
+          <EntitySet Name="Entrada" EntityType="Self.Entrada" />
+          <EntitySet Name="EntradaProducto" EntityType="Self.EntradaProducto" />
+          <EntitySet Name="Movimiento" EntityType="Self.Movimiento" />
+          <EntitySet Name="Producto" EntityType="Self.Producto" />
+          <EntitySet Name="ProductoSeccion" EntityType="Self.ProductoSeccion" />
+          <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
+          <EntitySet Name="Salida" EntityType="Self.Salida" />
+          <EntitySet Name="SalidaProducto" EntityType="Self.SalidaProducto" />
+          <EntitySet Name="Seccion" EntityType="Self.Seccion" />
+          <EntitySet Name="TipoUsuario" EntityType="Self.TipoUsuario" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <AssociationSet Name="FK_Producto_Categoria" Association="Self.FK_Producto_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contacto_Proveedor" Association="Self.FK_Contacto_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Contacto" EntitySet="Contacto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entrada_Movimiento" Association="Self.FK_Entrada_Movimiento">
+            <End Role="Movimiento" EntitySet="Movimiento" />
+            <End Role="Entrada" EntitySet="Entrada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Entrada_Usuario" Association="Self.FK_Entrada_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Entrada" EntitySet="Entrada" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntradaProducto_Entrada" Association="Self.FK_EntradaProducto_Entrada">
+            <End Role="Entrada" EntitySet="Entrada" />
+            <End Role="EntradaProducto" EntitySet="EntradaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntradaProducto_Producto" Association="Self.FK_EntradaProducto_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="EntradaProducto" EntitySet="EntradaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EntradaProducto_Seccion" Association="Self.FK_EntradaProducto_Seccion">
+            <End Role="Seccion" EntitySet="Seccion" />
+            <End Role="EntradaProducto" EntitySet="EntradaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salida_Movimiento" Association="Self.FK_Salida_Movimiento">
+            <End Role="Movimiento" EntitySet="Movimiento" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductoSeccion_Producto" Association="Self.FK_ProductoSeccion_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="ProductoSeccion" EntitySet="ProductoSeccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalidaProducto_Producto" Association="Self.FK_SalidaProducto_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="SalidaProducto" EntitySet="SalidaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductoSeccion_Seccion" Association="Self.FK_ProductoSeccion_Seccion">
+            <End Role="Seccion" EntitySet="Seccion" />
+            <End Role="ProductoSeccion" EntitySet="ProductoSeccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Salida_Usuario" Association="Self.FK_Salida_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Salida" EntitySet="Salida" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalidaProducto_Salida" Association="Self.FK_SalidaProducto_Salida">
+            <End Role="Salida" EntitySet="Salida" />
+            <End Role="SalidaProducto" EntitySet="SalidaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalidaProducto_Seccion" Association="Self.FK_SalidaProducto_Seccion">
+            <End Role="Seccion" EntitySet="Seccion" />
+            <End Role="SalidaProducto" EntitySet="SalidaProducto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_TipoUsuario" Association="Self.FK_Usuario_TipoUsuario">
+            <End Role="TipoUsuario" EntitySet="TipoUsuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="ProveedorProducto" Association="Self.ProveedorProducto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Proveedor" EntitySet="Proveedor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SMModelStoreContainer" CdmEntityContainer="SMEntities">
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="SMModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacto">
+            <EntityTypeMapping TypeName="SMModel.Contacto">
+              <MappingFragment StoreEntitySet="Contacto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Entrada">
+            <EntityTypeMapping TypeName="SMModel.Entrada">
+              <MappingFragment StoreEntitySet="Entrada">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdMovimiento" ColumnName="IdMovimiento" />
+                <ScalarProperty Name="Comentario" ColumnName="Comentario" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EntradaProducto">
+            <EntityTypeMapping TypeName="SMModel.EntradaProducto">
+              <MappingFragment StoreEntitySet="EntradaProducto">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdEntrada" ColumnName="IdEntrada" />
+                <ScalarProperty Name="IdProveedor" ColumnName="IdProveedor" />
+                <ScalarProperty Name="idSeccion" ColumnName="idSeccion" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="Lote" ColumnName="Lote" />
+                <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movimiento">
+            <EntityTypeMapping TypeName="SMModel.Movimiento">
+              <MappingFragment StoreEntitySet="Movimiento">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producto">
+            <EntityTypeMapping TypeName="SMModel.Producto">
+              <MappingFragment StoreEntitySet="Producto">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="cantidad_minima" ColumnName="cantidad minima" />
+                <ScalarProperty Name="cantidad_maxima" ColumnName="cantidad maxima" />
+                <ScalarProperty Name="Costo" ColumnName="Costo" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Categoria" ColumnName="Categoria" />
+                <ScalarProperty Name="imagen" ColumnName="imagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductoSeccion">
+            <EntityTypeMapping TypeName="SMModel.ProductoSeccion">
+              <MappingFragment StoreEntitySet="ProductoSeccion">
+                <ScalarProperty Name="IdSeccion" ColumnName="IdSeccion" />
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="Lote" ColumnName="Lote" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedor">
+            <EntityTypeMapping TypeName="SMModel.Proveedor">
+              <MappingFragment StoreEntitySet="Proveedor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NombreOrganizacion" ColumnName="NombreOrganizacion" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Salida">
+            <EntityTypeMapping TypeName="SMModel.Salida">
+              <MappingFragment StoreEntitySet="Salida">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdMovimiento" ColumnName="IdMovimiento" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SalidaProducto">
+            <EntityTypeMapping TypeName="SMModel.SalidaProducto">
+              <MappingFragment StoreEntitySet="SalidaProducto">
+                <ScalarProperty Name="IdProducto" ColumnName="IdProducto" />
+                <ScalarProperty Name="IdSalida" ColumnName="IdSalida" />
+                <ScalarProperty Name="IdSeccion" ColumnName="IdSeccion" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Seccion">
+            <EntityTypeMapping TypeName="SMModel.Seccion">
+              <MappingFragment StoreEntitySet="Seccion">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoUsuario">
+            <EntityTypeMapping TypeName="SMModel.TipoUsuario">
+              <MappingFragment StoreEntitySet="TipoUsuario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="SMModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ProveedorProducto" TypeName="SMModel.ProveedorProducto" StoreEntitySet="ProveedorProducto">
+            <EndProperty Name="Producto">
+              <ScalarProperty Name="Id" ColumnName="IdProducto" />
+            </EndProperty>
+            <EndProperty Name="Proveedor">
+              <ScalarProperty Name="Id" ColumnName="IdProveedor" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
