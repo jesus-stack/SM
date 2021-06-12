@@ -79,11 +79,13 @@ table tbody tr td {
         padding-right: 15px;
         margin:1px;
         color: orange;
-        font-weight300;
+        font-weight:300;
+        text-align:center;
     }
-    .tab_list .tab:hover{
-        background-color:black;
-    }
+        .tab_list .tab:hover {
+            background-color: black;
+            color: #fff;
+        }
 .tab_list div.active{
     background-color:cornflowerblue;
     color:#fff;

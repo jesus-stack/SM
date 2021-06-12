@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Salidas";
+}
+@model IEnumerable<Infraestructure.Models.Salida>
+
+@Styles.Render("~/content/inventario")
+<h2>Registro de Salidas</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+            </tr>
+
+        }
+    </tbody>
+</table>
