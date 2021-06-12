@@ -105,3 +105,59 @@ table tbody tr td {
         display: block;
     }
 
+
+
+
+.modal-dialog modal-content {
+    border-radius: 10%;
+}
+
+
+.modal-header {
+    background-color: rgba(241,97,65,0.8);
+    padding-left:20%;
+}
+
+
+.productPhoto {
+
+    float:right;
+    width:20vh;
+    height:20vh;
+}
+
+.selecI {
+    width: 20vh;
+    background-color: #E3DAC9;
+    border:solid 1px black;
+}
+
+h5 {
+
+    font-size: 15px;
+}
+
+.productInformation {
+    
+    width: 47vh;
+    font-size: 15px;
+}
+
+
+.modal-body {
+    background-color: #E3DAC9;
+    
+}
+.modal-footer {
+    
+    background-color: #E3DAC9;
+    border-top:solid 1px black;
+    align-items:center;
+    
+}
+
+.btn-secondary {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ff6666;
+}

@@ -32,16 +32,77 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td><i class='bx bxs-detail'></i></td>
-                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                    <td>@Html.DisplayFor(modelItem => item.cantidad_minima)</td>
-                    <td>@Html.DisplayFor(modelItem => item.cantidad_maxima)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Total)</td>
-                    <td><a class='bx bx-edit'></a></td>
-                    <td><a class='bx bxs-trash'></a></td>
-                </tr>
+            <tr>
+                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="title-modal" style="text-align:center;">   Detalle del producto</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img class="productPhoto" src="~/Source/img/jesus.png" />
+                                <div class="productInformation">
+                                    <h5>Código del producto:  @Html.DisplayFor(modelItem => item.Id)</h5>
+
+                                    <h5>Nombre del producto:@Html.DisplayFor(modelItem => item.Nombre) </h5>
+
+                                    <h5>Precio: ₡1500</h5>
+
+                                    <h5>Detalle:  @Html.DisplayFor(modelItem => item.Descripcion) </h5>
+                                    <h5>Categoría: @Html.DisplayFor(modelItem=>item.Categoria1.Descripcion)</h5>
+                                    <h5>Cantidad mínima: @Html.DisplayFor(modelItem=>item.cantidad_minima)</h5>
+                                    <h5>Cantidad máxima:  @Html.DisplayFor(modelItem => item.cantidad_maxima)</h5>
+                                    <h5>Total:  @Html.DisplayFor(modelItem => item.Total)</h5>
+                                    <h5>Ubicaciones</h5>
+                                    <div>
+                                        <select class="selecI">
+                                            <option>Bodega 1 </option>
+                                            <option>Bodega 2</option>
+                                            <option>Almacen</option>
+                                        </select>
+                                    </div>
+
+                                    <h5>
+                                        Proveedores
+                                    </h5>
+
+                                    <div>
+                                        <select class="selecI">
+                                            <option>Armenio </option>
+                                            <option>Salvador Ramirez</option>
+
+                                            <option>Cadena comercial sancarleña</option>
+                                        </select>
+                                    </div>
+
+
+
+
+                                </div>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <td><i class='bx bxs-detail btn btn-primary' data-toggle="modal" data-target="#staticBackdrop"></i></td>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                <td>@Html.DisplayFor(modelItem => item.cantidad_minima)</td>
+                <td>@Html.DisplayFor(modelItem => item.cantidad_maxima)</td>
+                <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                <td><a class='bx bx-edit'></a></td>
+                <td><a class='bx bxs-trash'></a></td>
+            </tr>
             }
         </tbody>
 
@@ -50,6 +111,7 @@
 
 @foreach (var itemC in (IEnumerable<Infraestructure.Models.Categoria>)ViewBag.categorias)
 {
+    
 
 <div class="tab_content" id="@itemC.Id">
     <h2>@itemC.Descripcion</h2>
@@ -57,8 +119,10 @@
     <table>
         <thead>
             <tr>
+              
+
                 <th>Detalle</th>
-                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model =>  model.Id)</th>
                 <th>@Html.DisplayNameFor(model => model.Nombre)</th>
                 <th>@Html.DisplayNameFor(model => model.cantidad_minima)</th>
                 <th>@Html.DisplayNameFor(model => model.cantidad_maxima)</th>
