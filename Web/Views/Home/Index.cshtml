@@ -3,6 +3,7 @@
 }
 
 @Styles.Render("~/Content/Index")
+@Styles.Render("~/Content/inventario")
 
 
 
@@ -15,253 +16,253 @@
 
 
 
-    <div class="btn-Content">
-        <div class="button" id="ActionButton1"> Inicio </div>
-        <div class="button" id="ActionButton2"> Total productos registrados </div>
-        <div class="button" id="ActionButton3"> Total de salidas registradas </div>
-        <div class="button" id="ActionButton4"> Total de entradas registradas </div>
-        <div class="button" id="ActionButton5"> Productos por solicitar </div>
+<div class="tab_list">
+    <div class=" tab" id="ActionButton1"> Inicio </div>
+    <div class=" tab" id="ActionButton2"> Total productos registrados </div>
+    <div class=" tab" id="ActionButton3"> Total de salidas registradas </div>
+    <div class=" tab " id="ActionButton4"> Total de entradas registradas </div>
+    <div class=" tab" id="ActionButton5"> Productos por solicitar </div>
+
+</div>
+
+
+<section class="tab-list">
+
+    <div class=" tab_content" id="inicio">
+        <h1>Inicio</h1>
+
+        <h3 class="text">
+            Bienvenidos a Stock mannagment, un sistema para la administración del inventario de tu negocio.
+            Aquí podrás observar cada movimiento de tu inventario, como por ejemplo: Entradas, salidas, reportes, productos próximos a vencer, productos en desabastecimientos y más.
+            Cualquier consulta que surga, no dudes en ponerte en contacto con algún administrador
+        </h3>
+
+        <img class="imgBienvenidos" src="~/Source/img/bienvenido.gif" alt="">
+
+
+    </div>
+
+    <div class="contenedor" id="productRegistrados">
+        <h1> Productos total registrados</h1>
+        <h2> 2</h2>
+
+
+        <center>
+            <table>
+                <thead>
+                <th>Código</th>
+                <th>Descripción</th>
+                <th>Cantidad disponible</th>
+                <th>Precio</th>
+                <th>Proveedor</th>
+
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>Atún pronto</td>
+                        <td>150</td>
+                        <td>₡  1150</td>
+                        <td> Salvador Ramirez</td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>Arroz Armenio</td>
+                        <td>200</td>
+                        <td>₡  1450</td>
+                        <td>DIstribuidora el Armenio</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+            <img class="imgInven" src="~/Source/img/inven.jpg" alt="">
+
+        </center>
+
+
+    </div>
+
+    <div class="contenedor" id="totalSalidas">
+        <h1> Total salidas del día</h1>
+        <h2>Se han registrado 3 salidas</h2>
+        <center>
+            <table>
+                <thead>
+                <th>Número de salida</th>
+                <th>Usuario</th>
+                <th>Producto</th>
+                <th>Fecha</th>
+                <th>Cantidad</th>
+                <th>Ubicación</th>
+
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>100</td>
+                        <td>Jesús Castilla</td>
+                        <td>Atún pronto</td>
+                        <td>05/06/2021</td>
+                        <td> 13</td>
+                        <td> Sección A</td>
+                    </tr>
+                    <tr>
+                        <td>101</td>
+                        <td>Hannyer Pitterson</td>
+                        <td>Aceite clover</td>
+                        <td>05/06/2021</td>
+                        <td> 5</td>
+                        <td> Sección C</td>
+                    </tr>
+                    <tr>
+                        <td>102</td>
+                        <td>Jesús Castilla</td>
+                        <td>Manteca clover</td>
+                        <td>05/06/2021</td>
+                        <td> 2</td>
+                        <td> Sección A</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+
+        </center>
+        <img class="imgInven" src="~/Source/img/Salida.jpg" alt="">
+
+    </div>
+
+    <div class="contenedor" id="totalEntradas">
+        <h1> Total entradas del día</h1>
+        <h2>Se han registrado 4 entradas</h2>
+        <center>
+            <table>
+                <thead>
+                <th>Número de entrada</th>
+                <th>Usuario</th>
+                <th>Producto</th>
+                <th>Fecha</th>
+                <th>Cantidad</th>
+                <th>Proveedor</th>
+                <th>Ubicación</th>
+
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>1000</td>
+                        <td>Jesús Castilla</td>
+                        <td>Leche pinito</td>
+                        <td>05/06/2021</td>
+                        <td> 40</td>
+                        <td> Dos pinos</td>
+                        <td> Sección A</td>
+                    </tr>
+                    <tr>
+                        <td>1001</td>
+                        <td>Hannyer Pitterson</td>
+                        <td>Jabón en polvo</td>
+                        <td>05/06/2021</td>
+                        <td> 50</td>
+                        <td> Salvador Ramirex</td>
+                        <td> Sección C</td>
+                    </tr>
+                    <tr>
+                        <td>1002</td>
+                        <td>Jesús Castilla</td>
+                        <td>Coca-cola 3 litros </td>
+                        <td>05/06/2021</td>
+                        <td> 32</td>
+                        <td> Coca-cola fensa CR</td>
+                        <td> Sección A</td>
+                    </tr>
+                    <tr>
+                        <td>1003</td>
+                        <td>Hannyer Pitterson</td>
+                        <td>Frijoles rojos </td>
+                        <td>05/06/2021</td>
+                        <td> 32</td>
+                        <td> Distribuidora el Armenio</td>
+                        <td> Sección A</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+
+        </center>
+        <img class="imgInven" src="~/Source/img/entrada.jpg" alt="">
+
+    </div>
+
+    <div class="contenedor" id="productSolicitar">
+        <h1> Productos por solcitar</h1>
+
+
+        <center>
+            <table>
+                <thead>
+                <th>Código de producto</th>
+
+                <th>Producto</th>
+                <th>Cantidad mínima</th>
+                <th>Cantidad actual</th>
+
+
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>10001</td>
+
+                        <td>Leche Condensada</td>
+
+                        <td> 15</td>
+                        <td> 11</td>
+
+                    </tr>
+
+                    <tr>
+                        <td>10002</td>
+
+                        <td>Numar</td>
+
+                        <td> 10</td>
+                        <td> 2</td>
+
+                    </tr>
+                    <tr>
+                        <td>10003</td>
+
+                        <td> Salsa lizano banquete </td>
+
+                        <td> 15</td>
+                        <td> 7</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+
+
+        </center>
+        <img class="imgInven" src="~/Source/img/compra.jpg" alt="">
+
+
+
 
     </div>
 
 
-    <section class="tab-list">
-
-        <div class="contenedor activo" id="inicio">
-            <h1>Inicio</h1>
-
-            <h3 class="text">
-                Bienvenidos a Stock mannagment, un sistema para la administración del inventario de tu negocio.
-                Aquí podrás observar cada movimiento de tu inventario, como por ejemplo: Entradas, salidas, reportes, productos próximos a vencer, productos en desabastecimientos y más.
-                Cualquier consulta que surga, no dudes en ponerte en contacto con algún administrador
-            </h3>
-
-            <img class="imgBienvenidos" src="~/Source/img/bienvenido.gif" alt="">
-
-
-        </div>
-
-        <div class="contenedor" id="productRegistrados">
-            <h1> Productos total registrados</h1>
-            <h2> 2</h2>
-
-
-            <center>
-                <table>
-                    <thead>
-                    <th>Código</th>
-                    <th>Descripción</th>
-                    <th>Cantidad disponible</th>
-                    <th>Precio</th>
-                    <th>Proveedor</th>
-
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>001</td>
-                            <td>Atún pronto</td>
-                            <td>150</td>
-                            <td>₡  1150</td>
-                            <td> Salvador Ramirez</td>
-                        </tr>
-                        <tr>
-                            <td>002</td>
-                            <td>Arroz Armenio</td>
-                            <td>200</td>
-                            <td>₡  1450</td>
-                            <td>DIstribuidora el Armenio</td>
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-                <img class="imgInven" src="~/Source/img/inven.jpg" alt="">
-
-            </center>
-
-
-        </div>
-
-        <div class="contenedor" id="totalSalidas">
-            <h1> Total salidas del día</h1>
-            <h2>Se han registrado 3 salidas</h2>
-            <center>
-                <table>
-                    <thead>
-                    <th>Número de salida</th>
-                    <th>Usuario</th>
-                    <th>Producto</th>
-                    <th>Fecha</th>
-                    <th>Cantidad</th>
-                    <th>Ubicación</th>
-
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>100</td>
-                            <td>Jesús Castilla</td>
-                            <td>Atún pronto</td>
-                            <td>05/06/2021</td>
-                            <td> 13</td>
-                            <td> Sección A</td>
-                        </tr>
-                        <tr>
-                            <td>101</td>
-                            <td>Hannyer Pitterson</td>
-                            <td>Aceite clover</td>
-                            <td>05/06/2021</td>
-                            <td> 5</td>
-                            <td> Sección C</td>
-                        </tr>
-                        <tr>
-                            <td>102</td>
-                            <td>Jesús Castilla</td>
-                            <td>Manteca clover</td>
-                            <td>05/06/2021</td>
-                            <td> 2</td>
-                            <td> Sección A</td>
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-
-
-            </center>
-            <img class="imgInven" src="~/Source/img/Salida.jpg" alt="">
-
-        </div>
-
-        <div class="contenedor" id="totalEntradas">
-            <h1> Total entradas del día</h1>
-            <h2>Se han registrado 4 entradas</h2>
-            <center>
-                <table>
-                    <thead>
-                    <th>Número de entrada</th>
-                    <th>Usuario</th>
-                    <th>Producto</th>
-                    <th>Fecha</th>
-                    <th>Cantidad</th>
-                    <th>Proveedor</th>
-                    <th>Ubicación</th>
-
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>1000</td>
-                            <td>Jesús Castilla</td>
-                            <td>Leche pinito</td>
-                            <td>05/06/2021</td>
-                            <td> 40</td>
-                            <td> Dos pinos</td>
-                            <td> Sección A</td>
-                        </tr>
-                        <tr>
-                            <td>1001</td>
-                            <td>Hannyer Pitterson</td>
-                            <td>Jabón en polvo</td>
-                            <td>05/06/2021</td>
-                            <td> 50</td>
-                            <td> Salvador Ramirex</td>
-                            <td> Sección C</td>
-                        </tr>
-                        <tr>
-                            <td>1002</td>
-                            <td>Jesús Castilla</td>
-                            <td>Coca-cola 3 litros </td>
-                            <td>05/06/2021</td>
-                            <td> 32</td>
-                            <td> Coca-cola fensa CR</td>
-                            <td> Sección A</td>
-                        </tr>
-                        <tr>
-                            <td>1003</td>
-                            <td>Hannyer Pitterson</td>
-                            <td>Frijoles rojos </td>
-                            <td>05/06/2021</td>
-                            <td> 32</td>
-                            <td> Distribuidora el Armenio</td>
-                            <td> Sección A</td>
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-
-
-            </center>
-            <img class="imgInven" src="~/Source/img/entrada.jpg" alt="">
-
-        </div>
-
-        <div class="contenedor" id="productSolicitar">
-            <h1> Productos por solcitar</h1>
-
-           
-            <center>
-                <table>
-                    <thead>
-                    <th>Código de producto</th>
-                    
-                    <th>Producto</th>
-                    <th>Cantidad mínima</th>
-                    <th>Cantidad actual</th>
-                    
-
-                    </thead>
-
-                    <tbody>
-                        <tr>
-                            <td>10001</td>
-
-                            <td>Leche Condensada</td>
-
-                            <td> 15</td>
-                            <td> 11</td>
-
-                        </tr>
-
-                        <tr>
-                            <td>10002</td>
-
-                            <td>Numar</td>
-
-                            <td> 10</td>
-                            <td> 2</td>
-
-                        </tr>
-                        <tr>
-                            <td>10003</td>
-
-                            <td> Salsa lizano banquete </td>
-
-                            <td> 15</td>
-                            <td> 7</td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-
-
-            </center>
-            <img class="imgInven" src="~/Source/img/compra.jpg" alt="">
-
-
-
-
-        </div>
-
-
-    </section>
+</section>
 
 

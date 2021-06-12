@@ -18,7 +18,7 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    lista = ctx.Salida.ToList();
+                    lista = ctx.Salida.Include("Movimiento").Include("Usuario").ToList();
                     return lista;
                 }
             }

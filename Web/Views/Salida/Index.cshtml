@@ -11,15 +11,21 @@
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Usuario.Nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.Movimiento.Nombre)</th>
+            <th>@Html.DisplayNameFor(model => model.fecha)</th>
         </tr>
     </thead>
     <tbody>
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Id)</td>
-            </tr>
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+            <td>@Html.DisplayFor(modelItem => item.Usuario.Nombre)</td>
+            <td>@Html.DisplayFor(modelItem => item.Movimiento.Nombre)</td>
+            <td>@Html.DisplayFor(modelItem => item.fecha)</td>
+        </tr>
 
         }
     </tbody>

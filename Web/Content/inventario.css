@@ -14,18 +14,20 @@ h2{
 }
 
 table {
-    margin-left: 20vw;
+    margin-left: 10vw;
     margin-top:75px;
    
 }
 
-table thead th {
+    table thead th {
         padding: 10px;
-        padding-left: 15px;
-        padding-right: 15px;
+        padding-left: 20px;
+        max-width: 250px;
+        padding-right: 20px;
         border-top: solid black 1px;
-        background-color:rgba(241,97,65,0.8);
-}
+        background-color: rgba(241,97,65,0.8);
+        text-align: center;
+    }
 table tbody tr {
         border-top: solid black 1px;
         border-bottom: solid black 1px;
@@ -34,6 +36,7 @@ table tbody tr {
         
 }
 table tbody tr td {
+    max-width:250px;
             text-align: center;
             padding: 10px;
  }

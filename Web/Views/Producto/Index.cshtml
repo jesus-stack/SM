@@ -72,16 +72,66 @@
             {
                 if (item.Categoria1.Id == itemC.Id)
                 {
-                <tr>
-                    <td><i class='bx bxs-detail'></i></td>
-                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                    <td>@Html.DisplayFor(modelItem => item.cantidad_minima)</td>
-                    <td>@Html.DisplayFor(modelItem => item.cantidad_maxima)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Total)</td>
-                    <td><a class='bx bx-edit'></a></td>
-                    <td><a class='bx bxs-trash'></a></td>
-                </tr>
+            <tr>
+                <td><i class='bx bxs-detail btn btn-primary' data-toggle="modal" data-target="#staticBackdrop"></i></td>
+                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="title-modal" style="text-align:center;">   Detalle del producto</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img class="productPhoto" src="~/Source/img/ArrozTioPelon.jpg " />
+                                <div class="productInformation">
+                                    <h5>Código del producto: 1000</h5>
+
+                                    <h5>Nombre del producto:@Html.DisplayFor(modelItem => item.Nombre) </h5>
+
+                                    <h5>Precio:$ 1500</h5>
+
+                                    <h5>Detalle: @Html.DisplayFor(modelItem => item.Descripcion) </h5>
+                                    <h5>Categoría: Grano básico.</h5>
+
+
+                                    <h5>
+                                        Proveedores
+                                    </h5>
+
+                                    <div>
+                                        <select class="proveedores">
+                                            <option>Armenio </option>
+                                            <option>Salvador Ramirez</option>
+
+                                            <option>Cadena comercial sancarleña</option>
+                                        </select>
+                                    </div>
+
+
+
+
+                                </div>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                <td>@Html.DisplayFor(modelItem => item.cantidad_minima)</td>
+                <td>@Html.DisplayFor(modelItem => item.cantidad_maxima)</td>
+                <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                <td><a class='bx bx-edit'></a></td>
+                <td><a class='bx bxs-trash'></a></td>
+            </tr>
                 }
             }
         </tbody>

@@ -24,6 +24,7 @@ namespace Infraestructure.Models
         public Nullable<int> IdMovimiento { get; set; }
         public string comentario { get; set; }
         public Nullable<long> IdUsuario { get; set; }
+        public Nullable<System.DateTime> fecha { get; set; }
     
         public virtual Movimiento Movimiento { get; set; }
         public virtual Usuario Usuario { get; set; }

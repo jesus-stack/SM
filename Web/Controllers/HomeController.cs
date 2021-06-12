@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ApplicationCore.Services;
+using Infraestructure.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -36,9 +38,18 @@ namespace Web.Controllers
         }
         public ActionResult Mantenimiento()
         {
-            ViewBag.Message = "Mantenimiento";
 
-            return View();
+            IEnumerable<Proveedor> lista = null;
+            ServiceProveedor service = new ServiceProveedor();
+            try
+            {
+                lista = service.GetProveedor();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
+            }
+            return View(lista);
         }
 
 
