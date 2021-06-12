@@ -1,34 +1,35 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Pagina Inicio";
 }
 
-@Styles.Render("~/Content/Index")
+
 @Styles.Render("~/Content/inventario")
+@Styles.Render("~/Content/Index")
 
 
 
-<center>
-    <h2 class="title">
+
+    <h1 class="title">
         Bienvenidos a Stock Management
-    </h2>
-</center>
+    </h1>
+
 
 
 
 
 <div class="tab_list">
-    <div class=" tab" id="ActionButton1"> Inicio </div>
-    <div class=" tab" id="ActionButton2"> Total productos registrados </div>
-    <div class=" tab" id="ActionButton3"> Total de salidas registradas </div>
-    <div class=" tab " id="ActionButton4"> Total de entradas registradas </div>
-    <div class=" tab" id="ActionButton5"> Productos por solicitar </div>
+    <div class=" tab active" onclick="mostrar(event,'inicio')"> Inicio </div>
+    <div class=" tab" onclick="mostrar(event,'productRegistrados')"> Total productos registrados </div>
+    <div class=" tab" onclick="mostrar(event,'totalSalidas')"> Total de salidas registradas </div>
+    <div class=" tab " onclick="mostrar(event,'totalEntradas')"> Total de entradas registradas </div>
+    <div class=" tab" onclick="mostrar(event,'productSolicitar')"> Productos por solicitar </div>
 
 </div>
 
 
 <section class="tab-list">
 
-    <div class=" tab_content" id="inicio">
+    <div class=" tab_content tab_active" id="inicio">
         <h1>Inicio</h1>
 
         <h3 class="text">
@@ -42,20 +43,21 @@
 
     </div>
 
-    <div class="contenedor" id="productRegistrados">
+    <div class="tab_content" id="productRegistrados">
         <h1> Productos total registrados</h1>
-        <h2> 2</h2>
+        <h4> 2</h4>
 
 
         <center>
             <table>
                 <thead>
-                <th>Código</th>
-                <th>Descripción</th>
-                <th>Cantidad disponible</th>
-                <th>Precio</th>
-                <th>Proveedor</th>
-
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Cantidad disponible</th>
+                        <th>Precio</th>
+                        <th>Proveedor</th>
+                    </tr>
                 </thead>
 
                 <tbody>
@@ -85,19 +87,20 @@
 
     </div>
 
-    <div class="contenedor" id="totalSalidas">
+    <div class="tab_content" id="totalSalidas">
         <h1> Total salidas del día</h1>
-        <h2>Se han registrado 3 salidas</h2>
+        <h4>Se han registrado 3 salidas</h4>
         <center>
             <table>
                 <thead>
-                <th>Número de salida</th>
-                <th>Usuario</th>
-                <th>Producto</th>
-                <th>Fecha</th>
-                <th>Cantidad</th>
-                <th>Ubicación</th>
-
+                    <tr>
+                        <th>Número de salida</th>
+                        <th>Usuario</th>
+                        <th>Producto</th>
+                        <th>Fecha</th>
+                        <th>Cantidad</th>
+                        <th>Ubicación</th>
+                    </tr>
                 </thead>
 
                 <tbody>
@@ -137,20 +140,21 @@
 
     </div>
 
-    <div class="contenedor" id="totalEntradas">
+    <div class="tab_content" id="totalEntradas">
         <h1> Total entradas del día</h1>
-        <h2>Se han registrado 4 entradas</h2>
+        <h4>Se han registrado 4 entradas</h4>
         <center>
             <table>
                 <thead>
-                <th>Número de entrada</th>
-                <th>Usuario</th>
-                <th>Producto</th>
-                <th>Fecha</th>
-                <th>Cantidad</th>
-                <th>Proveedor</th>
-                <th>Ubicación</th>
-
+                    <tr>
+                        <th>Número de entrada</th>
+                        <th>Usuario</th>
+                        <th>Producto</th>
+                        <th>Fecha</th>
+                        <th>Cantidad</th>
+                        <th>Proveedor</th>
+                        <th>Ubicación</th>
+                    </tr>
                 </thead>
 
                 <tbody>
@@ -202,20 +206,21 @@
 
     </div>
 
-    <div class="contenedor" id="productSolicitar">
+    <div class="tab_content" id="productSolicitar">
         <h1> Productos por solcitar</h1>
 
 
         <center>
             <table>
                 <thead>
-                <th>Código de producto</th>
+                    <tr>
+                        <th>Código de producto</th>
 
-                <th>Producto</th>
-                <th>Cantidad mínima</th>
-                <th>Cantidad actual</th>
+                        <th>Producto</th>
+                        <th>Cantidad mínima</th>
+                        <th>Cantidad actual</th>
 
-
+                    </tr>
                 </thead>
 
                 <tbody>

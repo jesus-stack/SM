@@ -8,11 +8,13 @@
    
 }
 
-.title {
-font-size:45px;
-
+.title{
+    color:rgba(241,97,65,0.8);
+    margin-left:20vw;
 }
-
+h2{
+    margin-left:10vw;
+}
 
 
 
