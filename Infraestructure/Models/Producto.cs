@@ -23,7 +23,7 @@ namespace Infraestructure.Models
             this.Proveedor = new HashSet<Proveedor>();
         }
     
-        public decimal Id { get; set; }
+        public long Id { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
         public Nullable<int> cantidad_minima { get; set; }

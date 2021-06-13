@@ -15,8 +15,8 @@ namespace Infraestructure.Models
     public partial class ProductoSeccion
     {
         public int IdSeccion { get; set; }
-        public decimal IdProducto { get; set; }
-        public decimal Lote { get; set; }
+        public long IdProducto { get; set; }
+        public long Lote { get; set; }
         public Nullable<long> Cantidad { get; set; }
         public Nullable<System.DateTime> FechaVencimiento { get; set; }
     

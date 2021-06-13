@@ -14,8 +14,8 @@ namespace Infraestructure.Models
     
     public partial class SalidaProducto
     {
-        public decimal IdProducto { get; set; }
-        public decimal IdSalida { get; set; }
+        public long IdProducto { get; set; }
+        public long IdSalida { get; set; }
         public Nullable<int> IdSeccion { get; set; }
         public Nullable<long> Cantidad { get; set; }
     

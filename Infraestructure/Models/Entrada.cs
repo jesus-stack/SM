@@ -20,7 +20,7 @@ namespace Infraestructure.Models
             this.EntradaProducto = new HashSet<EntradaProducto>();
         }
     
-        public decimal Id { get; set; }
+        public long Id { get; set; }
         public Nullable<int> IdMovimiento { get; set; }
         public string Comentario { get; set; }
         public Nullable<long> IdUsuario { get; set; }

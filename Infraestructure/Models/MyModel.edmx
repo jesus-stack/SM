@@ -26,7 +26,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="bigint" Nullable="false" />
           <Property Name="IdMovimiento" Type="int" />
           <Property Name="Comentario" Type="varchar" MaxLength="50" />
           <Property Name="IdUsuario" Type="bigint" />
@@ -37,12 +37,12 @@
             <PropertyRef Name="IdProducto" />
             <PropertyRef Name="IdEntrada" />
           </Key>
-          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdEntrada" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdProducto" Type="bigint" Nullable="false" />
+          <Property Name="IdEntrada" Type="bigint" Nullable="false" />
           <Property Name="IdProveedor" Type="int" />
           <Property Name="idSeccion" Type="int" />
           <Property Name="cantidad" Type="bigint" />
-          <Property Name="Lote" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Lote" Type="bigint" />
           <Property Name="FechaVencimiento" Type="date" />
         </EntityType>
         <EntityType Name="Movimiento">
@@ -57,7 +57,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="bigint" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="Descripcion" Type="varchar" MaxLength="70" />
           <Property Name="cantidad minima" Type="int" />
@@ -75,8 +75,8 @@
             <PropertyRef Name="Lote" />
           </Key>
           <Property Name="IdSeccion" Type="int" Nullable="false" />
-          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Lote" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdProducto" Type="bigint" Nullable="false" />
+          <Property Name="Lote" Type="bigint" Nullable="false" />
           <Property Name="Cantidad" Type="bigint" />
           <Property Name="FechaVencimiento" Type="date" />
         </EntityType>
@@ -94,14 +94,14 @@
             <PropertyRef Name="IdProducto" />
             <PropertyRef Name="IdProveedor" />
           </Key>
-          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdProducto" Type="bigint" Nullable="false" />
           <Property Name="IdProveedor" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Salida">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="bigint" Nullable="false" />
           <Property Name="IdMovimiento" Type="int" />
           <Property Name="comentario" Type="varchar" MaxLength="50" />
           <Property Name="IdUsuario" Type="bigint" />
@@ -112,8 +112,8 @@
             <PropertyRef Name="IdProducto" />
             <PropertyRef Name="IdSalida" />
           </Key>
-          <Property Name="IdProducto" Type="numeric" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdSalida" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdProducto" Type="bigint" Nullable="false" />
+          <Property Name="IdSalida" Type="bigint" Nullable="false" />
           <Property Name="IdSeccion" Type="int" />
           <Property Name="Cantidad" Type="bigint" />
         </EntityType>
@@ -458,7 +458,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" />
           <Property Name="IdMovimiento" Type="Int32" />
           <Property Name="Comentario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdUsuario" Type="Int64" />
@@ -472,12 +472,12 @@
             <PropertyRef Name="IdProducto" />
             <PropertyRef Name="IdEntrada" />
           </Key>
-          <Property Name="IdProducto" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdEntrada" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdProducto" Type="Int64" Nullable="false" />
+          <Property Name="IdEntrada" Type="Int64" Nullable="false" />
           <Property Name="IdProveedor" Type="Int32" />
           <Property Name="idSeccion" Type="Int32" />
           <Property Name="cantidad" Type="Int64" />
-          <Property Name="Lote" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Lote" Type="Int64" />
           <Property Name="FechaVencimiento" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Entrada" Relationship="Self.FK_EntradaProducto_Entrada" FromRole="EntradaProducto" ToRole="Entrada" />
           <NavigationProperty Name="Producto" Relationship="Self.FK_EntradaProducto_Producto" FromRole="EntradaProducto" ToRole="Producto" />
@@ -497,7 +497,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" MaxLength="70" FixedLength="false" Unicode="false" />
           <Property Name="cantidad_minima" Type="Int32" />
@@ -520,8 +520,8 @@
             <PropertyRef Name="Lote" />
           </Key>
           <Property Name="IdSeccion" Type="Int32" Nullable="false" />
-          <Property Name="IdProducto" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="Lote" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdProducto" Type="Int64" Nullable="false" />
+          <Property Name="Lote" Type="Int64" Nullable="false" />
           <Property Name="Cantidad" Type="Int64" />
           <Property Name="FechaVencimiento" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Producto" Relationship="Self.FK_ProductoSeccion_Producto" FromRole="ProductoSeccion" ToRole="Producto" />
@@ -542,7 +542,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Id" Type="Int64" Nullable="false" />
           <Property Name="IdMovimiento" Type="Int32" />
           <Property Name="comentario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdUsuario" Type="Int64" />
@@ -556,8 +556,8 @@
             <PropertyRef Name="IdProducto" />
             <PropertyRef Name="IdSalida" />
           </Key>
-          <Property Name="IdProducto" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
-          <Property Name="IdSalida" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="IdProducto" Type="Int64" Nullable="false" />
+          <Property Name="IdSalida" Type="Int64" Nullable="false" />
           <Property Name="IdSeccion" Type="Int32" />
           <Property Name="Cantidad" Type="Int64" />
           <NavigationProperty Name="Producto" Relationship="Self.FK_SalidaProducto_Producto" FromRole="SalidaProducto" ToRole="Producto" />

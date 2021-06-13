@@ -14,12 +14,12 @@ namespace Infraestructure.Models
     
     public partial class EntradaProducto
     {
-        public decimal IdProducto { get; set; }
-        public decimal IdEntrada { get; set; }
+        public long IdProducto { get; set; }
+        public long IdEntrada { get; set; }
         public Nullable<int> IdProveedor { get; set; }
         public Nullable<int> idSeccion { get; set; }
         public Nullable<long> cantidad { get; set; }
-        public Nullable<decimal> Lote { get; set; }
+        public Nullable<long> Lote { get; set; }
         public Nullable<System.DateTime> FechaVencimiento { get; set; }
     
         public virtual Entrada Entrada { get; set; }
