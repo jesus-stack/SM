@@ -70,6 +70,7 @@
     <Compile Include="Models\EntradaProducto.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Metadata.cs" />
     <Compile Include="Models\Movimiento.cs">
       <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
