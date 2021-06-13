@@ -18,7 +18,9 @@ namespace Infraestructure.Repository
                 using (MyContext ctx= new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    lista = ctx.Producto.Include("Categoria1").ToList();
+
+                    lista = ctx.Producto.Include("Categoria1").Include("Proveedor").Include("ProductoSeccion").Include("ProductoSeccion.Seccion").ToList();
+                    
                     return lista;
                 }
                

@@ -33,7 +33,7 @@
             @foreach (var item in Model)
             {
             <tr>
-                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal fade" id="b-@item.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -52,16 +52,17 @@
                                     <h5>Precio: ₡1500</h5>
 
                                     <h5>Detalle:  @Html.DisplayFor(modelItem => item.Descripcion) </h5>
-                                    <h5>Categoría: @Html.DisplayFor(modelItem=>item.Categoria1.Descripcion)</h5>
-                                    <h5>Cantidad mínima: @Html.DisplayFor(modelItem=>item.cantidad_minima)</h5>
+                                    <h5>Categoría: @Html.DisplayFor(modelItem => item.Categoria1.Descripcion)</h5>
+                                    <h5>Cantidad mínima: @Html.DisplayFor(modelItem => item.cantidad_minima)</h5>
                                     <h5>Cantidad máxima:  @Html.DisplayFor(modelItem => item.cantidad_maxima)</h5>
                                     <h5>Total:  @Html.DisplayFor(modelItem => item.Total)</h5>
                                     <h5>Ubicaciones</h5>
                                     <div>
                                         <select class="selecI">
-                                            <option>Bodega 1 </option>
-                                            <option>Bodega 2</option>
-                                            <option>Almacen</option>
+                                            @foreach (var u in item.ProductoSeccion)
+                                            {
+                                                <option>@u.Seccion.Descripcion</option>
+                                            }
                                         </select>
                                     </div>
 
@@ -71,10 +72,10 @@
 
                                     <div>
                                         <select class="selecI">
-                                            <option>Armenio </option>
-                                            <option>Salvador Ramirez</option>
-
-                                            <option>Cadena comercial sancarleña</option>
+                                            @foreach (var p in item.Proveedor)
+                                            {
+                                                <option>@p.NombreOrganizacion</option>
+                                            }
                                         </select>
                                     </div>
 
@@ -94,7 +95,9 @@
                     </div>
                 </div>
 
-                <td><i class='bx bxs-detail btn btn-primary' data-toggle="modal" data-target="#staticBackdrop"></i></td>
+                <td><i class='bx bxs-detail btn btn-primary' data-toggle="modal" data-target="#b-@item.Id"></i></td>
+
+
                 <td>@Html.DisplayFor(modelItem => item.Id)</td>
                 <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
                 <td>@Html.DisplayFor(modelItem => item.cantidad_minima)</td>
@@ -137,8 +140,7 @@
                 if (item.Categoria1.Id == itemC.Id)
                 {
             <tr>
-                <td><i class='bx bxs-detail btn btn-primary' data-toggle="modal" data-target="#staticBackdrop"></i></td>
-                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal fade" id="a-@item.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -148,28 +150,39 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <img class="productPhoto" src="~/Source/img/ArrozTioPelon.jpg " />
+                                <img class="productPhoto" src="~/Source/img/jesus.png" />
                                 <div class="productInformation">
-                                    <h5>Código del producto: 1000</h5>
+                                    <h5>Código del producto:  @Html.DisplayFor(modelItem => item.Id)</h5>
 
                                     <h5>Nombre del producto:@Html.DisplayFor(modelItem => item.Nombre) </h5>
 
-                                    <h5>Precio:$ 1500</h5>
+                                    <h5>Precio: ₡1500</h5>
 
-                                    <h5>Detalle: @Html.DisplayFor(modelItem => item.Descripcion) </h5>
-                                    <h5>Categoría: Grano básico.</h5>
-
+                                    <h5>Detalle:  @Html.DisplayFor(modelItem => item.Descripcion) </h5>
+                                    <h5>Categoría: @Html.DisplayFor(modelItem => item.Categoria1.Descripcion)</h5>
+                                    <h5>Cantidad mínima: @Html.DisplayFor(modelItem => item.cantidad_minima)</h5>
+                                    <h5>Cantidad máxima:  @Html.DisplayFor(modelItem => item.cantidad_maxima)</h5>
+                                    <h5>Total:  @Html.DisplayFor(modelItem => item.Total)</h5>
+                                    <h5>Ubicaciones</h5>
+                                    <div>
+                                        <select class="selecI">
+                                            @foreach (var u in item.ProductoSeccion)
+                                            {
+                                                <option>@u.Seccion.Descripcion</option>
+                                            }
+                                        </select>
+                                    </div>
 
                                     <h5>
                                         Proveedores
                                     </h5>
 
                                     <div>
-                                        <select class="proveedores">
-                                            <option>Armenio </option>
-                                            <option>Salvador Ramirez</option>
-
-                                            <option>Cadena comercial sancarleña</option>
+                                        <select class="selecI">
+                                            @foreach (var p in item.Proveedor)
+                                            {
+                                                <option>@p.NombreOrganizacion</option>
+                                            }
                                         </select>
                                     </div>
 
@@ -188,6 +201,8 @@
                         </div>
                     </div>
                 </div>
+
+                <td><i class='bx bxs-detail btn btn-primary' data-toggle="modal" data-target="#a-@item.Id"></i></td>
                 <td>@Html.DisplayFor(modelItem => item.Id)</td>
                 <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
                 <td>@Html.DisplayFor(modelItem => item.cantidad_minima)</td>
