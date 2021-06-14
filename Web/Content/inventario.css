@@ -92,6 +92,7 @@ table tbody tr td {
 .tab_list div.active{
     background-color:cornflowerblue;
     color:#fff;
+   
 }
 
 
@@ -160,4 +161,12 @@ h5 {
     margin-left: auto;
     margin-right: auto;
     background-color: #ff6666;
+}
+
+
+.entradaTable {
+    margin-left: auto;
+    margin-right: auto;
+
+
 }
