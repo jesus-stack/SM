@@ -277,6 +277,8 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Source\img\jesus.png" />
+    <Content Include="Source\img\pro.png" />
+    <Content Include="Source\img\proveedor.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

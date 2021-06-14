@@ -49,12 +49,32 @@ namespace Infraestructure.Models
         public virtual ICollection<Producto> Producto { get; set; }
     }
 
-    internal partial class EntradaMetadata
+   internal partial class EntradaMetadata
     {
+        [Display(Name ="N° Entrada")]
         public long Id { get; set; }
         public Nullable<int> IdMovimiento { get; set; }
         public string Comentario { get; set; }
         public Nullable<long> IdUsuario { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
+
+        public virtual Movimiento Movimiento { get; set; }
+        public virtual Usuario Usuario { get; set; }
+       
+        public virtual ICollection<EntradaProducto> EntradaProducto { get; set; }
+    }
+    internal partial class SalidaMetadata{
+
+        [Display(Name = "N° Salida")]
+        public long Id { get; set; }
+        public Nullable<int> IdMovimiento { get; set; }
+        public string comentario { get; set; }
+        public Nullable<long> IdUsuario { get; set; }
+        public Nullable<System.DateTime> fecha { get; set; }
+
+        public virtual Movimiento Movimiento { get; set; }
+        public virtual Usuario Usuario { get; set; }
+       
+        public virtual ICollection<SalidaProducto> SalidaProducto { get; set; }
     }
 }

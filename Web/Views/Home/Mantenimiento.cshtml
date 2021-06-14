@@ -45,7 +45,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <img class="productPhoto" src="~/Source/img/ArrozTioPelon.jpg " />
+                                <img class="productPhoto" src="~/Source/img/proveedor.png" />
                                 <div class="productInformation">
                                     <h5>Identificador del Proveedor: @item.Id</h5>
 
@@ -62,7 +62,7 @@
                                     </h5>
 
                                     <div>
-                                        <select class="select">
+                                        <select class="selecI">
                                             @foreach (var c in item.Contacto)
                                             {
                                                 <option>@c.Nombre _ @c.Telefono</option>
@@ -71,11 +71,11 @@
                                     </div>
 
                                     <h5>
-                                        Contactos
+                                        Productos
                                     </h5>
 
                                     <div>
-                                        <select class="select">
+                                        <select class="selecI">
                                             @foreach (var c in item.Producto)
                                             {
                                                 <option>@c.Nombre </option>
