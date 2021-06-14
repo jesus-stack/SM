@@ -48,4 +48,13 @@ namespace Infraestructure.Models
        
         public virtual ICollection<Producto> Producto { get; set; }
     }
+
+    internal partial class EntradaMetadata
+    {
+        public long Id { get; set; }
+        public Nullable<int> IdMovimiento { get; set; }
+        public string Comentario { get; set; }
+        public Nullable<long> IdUsuario { get; set; }
+        public Nullable<System.DateTime> fecha { get; set; }
+    }
 }

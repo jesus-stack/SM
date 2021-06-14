@@ -34,12 +34,12 @@
             {
             <tr>
 
-                <td><i class='bx bxs-detail btn btn-primary' data-toggle="modal" data-target="#staticBackdrop"></i></td>
-                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <td><i class='bx bxs-detail btn btn-primary' data-toggle="modal" data-target="#a-@item.Id"></i></td>
+                <div class="modal fade" id="a-@item.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h3 class="modal-title" id="title-modal" style="text-align:center;">   Detalle del producto</h3>
+                                <h3 class="modal-title" id="title-modal" style="text-align:center;">   Detalle del Proveedor</h3>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -47,26 +47,39 @@
                             <div class="modal-body">
                                 <img class="productPhoto" src="~/Source/img/ArrozTioPelon.jpg " />
                                 <div class="productInformation">
-                                    <h5>Código del producto: 1000</h5>
+                                    <h5>Identificador del Proveedor: @item.Id</h5>
 
-                                    <h5>Nombre del producto: Arroz tío pelón</h5>
+                                    <h5>Nombre de organización: @item.NombreOrganizacion</h5>
 
-                                    <h5>Precio:$ 1500</h5>
+                                    <h5>Dirección: @item.Direccion</h5>
 
-                                    <h5>Detalle: Arroz 91% grano entero </h5>
-                                    <h5>Categoría: Grano básico.</h5>
+                                    <h5>País: @item.Pais</h5>
+
 
 
                                     <h5>
-                                        Proveedores
+                                        Contactos
                                     </h5>
 
                                     <div>
-                                        <select class="proveedores">
-                                            <option>Armenio </option>
-                                            <option>Salvador Ramirez</option>
+                                        <select class="select">
+                                            @foreach (var c in item.Contacto)
+                                            {
+                                                <option>@c.Nombre _ @c.Telefono</option>
+                                            }
+                                        </select>
+                                    </div>
 
-                                            <option>Cadena comercial sancarleña</option>
+                                    <h5>
+                                        Contactos
+                                    </h5>
+
+                                    <div>
+                                        <select class="select">
+                                            @foreach (var c in item.Producto)
+                                            {
+                                                <option>@c.Nombre </option>
+                                            }
                                         </select>
                                     </div>
 
