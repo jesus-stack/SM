@@ -166,10 +166,16 @@
                                     <h5>Ubicaciones</h5>
                                     <div>
                                         <select class="selecI">
+<<<<<<< Updated upstream
                                             @foreach (var u in item.ProductoSeccion)
                                             {
                                                 <option>@u.Seccion.Descripcion</option>
                                             }
+=======
+                                            <option>Bodega 1 </option>
+                                            <option>Bodega 2</option>
+                                            <option>Almacen</option>
+>>>>>>> Stashed changes
                                         </select>
                                     </div>
 
@@ -179,10 +185,17 @@
 
                                     <div>
                                         <select class="selecI">
+<<<<<<< Updated upstream
                                             @foreach (var p in item.Proveedor)
                                             {
                                                 <option>@p.NombreOrganizacion</option>
                                             }
+=======
+                                            <option>Armenio </option>
+                                            <option>Salvador Ramirez</option>
+
+                                            <option>Cadena comercial sancarleña</option>
+>>>>>>> Stashed changes
                                         </select>
                                     </div>
 
@@ -202,7 +215,10 @@
                     </div>
                 </div>
 
+<<<<<<< Updated upstream
                 <td><i class='bx bxs-detail btn btn-primary' data-toggle="modal" data-target="#a-@item.Id"></i></td>
+=======
+>>>>>>> Stashed changes
                 <td>@Html.DisplayFor(modelItem => item.Id)</td>
                 <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
                 <td>@Html.DisplayFor(modelItem => item.cantidad_minima)</td>
