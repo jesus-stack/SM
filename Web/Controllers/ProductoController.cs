@@ -32,20 +32,24 @@ namespace Web.Controllers
             ViewBag.categorias = listaCategorias;
             return View(lista);
         }
-        public ActionResult Ir()
+        public PartialViewResult listarTabla()
         {
             IEnumerable<Producto> lista = null;
-            ServiceProducto service= new ServiceProducto();
+            ServiceProducto service = new ServiceProducto();
+         
+
             try
             {
                 lista = service.GetProducto();
+            
+
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
             }
-
-            return View(lista);
+          
+            return PartialView("_PartialTablaP",lista);
         }
     }
 }

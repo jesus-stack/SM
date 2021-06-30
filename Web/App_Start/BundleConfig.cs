@@ -13,6 +13,9 @@ namespace Web
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
+            //jquery.unobtrustive
+            bundles.Add(new ScriptBundle("~/bundles/jqueryajax").Include(
+                       "~/Scripts/jquery.unobtrusive*"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
@@ -24,8 +27,7 @@ namespace Web
                      "~/Scripts/src/Main.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/MyStyle.css"));
+                      "~/Content/bootstrap.css"));
                       
 
             bundles.Add(new Bundle("~/content/about").Include(
