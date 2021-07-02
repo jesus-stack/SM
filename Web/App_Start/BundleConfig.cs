@@ -27,7 +27,8 @@ namespace Web
                      "~/Scripts/src/Main.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css"));
+                      "~/Content/bootstrap.css",
+                      "~/Content/style.css"));
                       
 
             bundles.Add(new Bundle("~/content/about").Include(

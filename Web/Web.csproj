@@ -2241,6 +2241,7 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Source\img\jesus.png" />
+    <Content Include="Source\img\load.gif" />
     <Content Include="Source\img\pro.png" />
     <Content Include="Source\img\proveedor.png" />
     <Content Include="Source\img\stock.png" />
@@ -2276,6 +2277,9 @@
     <Content Include="Views\Entrada\Index.cshtml" />
     <Content Include="Views\Salida\Index.cshtml" />
     <Content Include="Views\Producto\_PartialTablaP.cshtml" />
+    <Content Include="Views\Producto\_PartialModalProducto.cshtml" />
+    <Content Include="Views\Producto\Crear.cshtml" />
+    <Content Include="Views\Producto\_PartialModalCrear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

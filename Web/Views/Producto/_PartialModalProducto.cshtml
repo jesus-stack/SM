@@ -1,0 +1,64 @@
+﻿@model Infraestructure.Models.Producto
+
+<div class="modal fade" id="b-@Model.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="title-modal" style="text-align:center;">   Detalle del producto</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img class="productPhoto" src="~/Source/img/pro.png" />
+                <div class="productInformation">
+                    <h5>Código del producto:  @Model.Id</h5>
+
+                    <h5>Nombre del producto: @Model.Id </h5>
+
+                    <h5>Precio: ₡1500</h5>
+
+                    <h5>Detalle:  @Model.Id </h5>
+                    <h5>Categoría: @Model.Id</h5>
+                    <h5>Cantidad mínima: @Model.Id</h5>
+                    <h5>Cantidad máxima: @Model.Id</h5>
+                    <h5>Total: @Model.Id</h5>
+                    <h5>Ubicaciones</h5>
+                    <div>
+                        <select class="selecI">
+                            @foreach (var u in Model.ProductoSeccion)
+                            {
+                                <option>@u.Seccion.Descripcion</option>
+                            }
+                        </select>
+                    </div>
+
+                    <h5>
+                        Proveedores
+                    </h5>
+
+                    <div>
+                        <select class="selecI">
+                            @foreach (var p in Model.Proveedor)
+                            {
+                                <option>@p.NombreOrganizacion</option>
+                            }
+                        </select>
+                    </div>
+
+
+
+
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+

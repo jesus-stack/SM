@@ -98,6 +98,11 @@ button5.onclick = function () {
 
 }
 
+function CrearModal() {
+  
+   $('#create').modal('show');
+}
+
 
 function mostrar(evt, tab) {
   

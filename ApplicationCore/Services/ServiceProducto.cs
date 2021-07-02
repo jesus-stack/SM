@@ -17,5 +17,23 @@ namespace ApplicationCore.Services
             return repository.GetProducto();
            
         }
+
+        public IEnumerable<Producto> GetProductoByCategoria(int id)
+        {
+            IRepositoryProducto repository = new RepositoryProducto();
+            return repository.GetProductoByCategoria(id);
+        }
+
+        public Producto GetProductoById(int id)
+        {
+            IRepositoryProducto repository = new RepositoryProducto();
+            return repository.GetProductoById(id);
+        }
+
+        public Producto Save(Producto pro)
+        {
+            IRepositoryProducto repository = new RepositoryProducto();
+            return repository.Save(pro);
+        }
     }
 }

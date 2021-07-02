@@ -10,5 +10,8 @@ namespace ApplicationCore.Services
  public   interface IserviceProducto
     {
         IEnumerable<Producto> GetProducto();
+        IEnumerable<Producto> GetProductoByCategoria(int id);
+        Producto GetProductoById(int id);
+        Producto Save(Producto pro);
     }
 }
