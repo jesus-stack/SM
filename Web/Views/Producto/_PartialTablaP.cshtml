@@ -20,19 +20,41 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+            <tr>
 
-                    @Html.Partial("_PartialModalProducto", item)
-                    <td><i class='bx bxs-detail ' data-toggle="modal" data-target="#b-@item.Id"></i></td>
+                @Html.Partial("_PartialModalProducto", item)
+                <td><i class='bx bxs-detail ' data-toggle="modal" data-target="#b-@item.Id"></i></td>
 
-                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                    <td>@Html.DisplayFor(modelItem => item.cantidad_minima)</td>
-                    <td>@Html.DisplayFor(modelItem => item.cantidad_maxima)</td>
-                    <td>@Html.DisplayFor(modelItem => item.Total)</td>
-                    <td><i class='action_right bx bx-edit'></i></td>
-                    <td><i class='action_left bx bxs-trash'></i></td>
-                </tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                <td>@Html.DisplayFor(modelItem => item.cantidad_minima)</td>
+                <td>@Html.DisplayFor(modelItem => item.cantidad_maxima)</td>
+                <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                <td>@Html.ActionLink(" ","Crear",new { id= item.Id},new { @class= "action_right bx bx-edit" })</td>
+                <td><i class='action_left bx bxs-trash' data-toggle="modal" data-target="#c-@item.Id"></i></td>
+                <div class="modal fade" id="c-@item.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                              Esta seguro que desea eliminar el producto
+                                <br/>
+                               "@item.Nombre "?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                @Html.ActionLink("Confirmar", "Delete", new {  id = item.Id},new { @class = "btn btn-primary" })
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </tr>
 
             }
         </tbody>

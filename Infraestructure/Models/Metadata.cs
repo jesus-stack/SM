@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,22 +9,37 @@ using System.Threading.Tasks;
 namespace Infraestructure.Models
 {
     internal partial class ProductoMetadata{
-        [Display(Name ="Codigo Producto")]
+        [Display(Name ="Código")]
         public long Id { get; set; }
-        [Display(Name = "Nombre Producto")]
+
+        [Display(Name = "Nombre")]
+        [MaxLength(50,ErrorMessage ="El {0} no debe de sobrepasar 50 caraceteres")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Nombre { get; set; }
+        [Display(Name = "Descripción")]
+        [MaxLength(70, ErrorMessage = "El {0} no debe de sobrepasar 70 caraceteres")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Descripcion { get; set; }
-        [Display(Name ="Cantidad Minima")]
+        [Display(Name ="Cantidad Mínima")]
+        [MaxLength(9, ErrorMessage = "El {0} no debe de sobrepasar 9 caraceteres")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> cantidad_minima { get; set; }
-        [Display(Name = "Cantidad Maxima")]
+        [Display(Name = "Cantidad Máxima")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [MaxLength(18, ErrorMessage = "El {0} no debe de sobrepasar 18 caraceteres")]
         public Nullable<long> cantidad_maxima { get; set; }
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public Nullable<decimal> Costo { get; set; }
         [Display(Name ="Total Existencias")]
         public Nullable<long> Total { get; set; }
+        [Display(Name = "Categoría")]
+        [Required(ErrorMessage = "Debe seleccionar una categoria")]
         public Nullable<int> Categoria { get; set; }
+        [DataType(DataType.ImageUrl,ErrorMessage ="solo se pueden seleccionar imagenes")]
         public byte[] imagen { get; set; }
-        public byte[] n { get; set; }
+        public Nullable<bool> Estado { get; set; }
 
+        [Display(Name = "Categoría")]
         public virtual Categoria Categoria1 { get; set; }
         
         public virtual ICollection<EntradaProducto> EntradaProducto { get; set; }
@@ -51,6 +67,7 @@ namespace Infraestructure.Models
 
    internal partial class EntradaMetadata
     {
+        
         [Display(Name ="N° Entrada")]
         public long Id { get; set; }
         public Nullable<int> IdMovimiento { get; set; }

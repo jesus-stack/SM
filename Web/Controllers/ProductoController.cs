@@ -2,6 +2,7 @@
 using Infraestructure.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -89,25 +90,86 @@ namespace Web.Controllers
             IEnumerable<Categoria> categorias = serviceCategoria.GetCategoria();
             return new SelectList(categorias, "Id", "Descripcion", idCategoria);
         }
-        public ActionResult Crear()
+        public MultiSelectList listaProveedores(ICollection<Proveedor> proveedores)
         {
-            ViewBag.ListaCategorias = listaCategorias();
-            
-            return View();
+            IServiceProveedor service = new ServiceProveedor();
+            IEnumerable<Proveedor> listaproveedores = service.GetProveedor();
+            int[] listaproveedoresSelect = null;
+
+            if (proveedores != null)
+            {
+
+                listaproveedoresSelect = proveedores.Select(s => s.Id).ToArray();
+            }
+
+            return new MultiSelectList(listaproveedores, "Id", "NombreOrganizacion", listaproveedoresSelect);
         }
-        [HttpPost]
-        public ActionResult save(Producto producto)
+        public ActionResult Crear(long? id)
         {
+            ServiceProducto service = new ServiceProducto();
+            Producto pro = new Producto();
             try
             {
-                ServiceProducto service = new ServiceProducto();
-                service.Save(producto);
-                return RedirectToAction("Index");
+               
+                if (id != null)
+                {    
+                    pro = service.GetProductoById((long)id);
+                    ViewBag.ListaCategorias = listaCategorias((int) pro.Categoria);
+                    ViewBag.ListaProveedores = listaProveedores(pro.Proveedor);
+                    ViewBag.Mantenimientotitulo = "Modificar";
+                }
+                else
+                {
+                    ViewBag.ListaCategorias = listaCategorias();
+                    ViewBag.ListaProveedores = listaProveedores(null);
+                    ViewBag.Mantenimientotitulo = "Crear";
+                }
             }
-            catch
+            catch (Exception e)
             {
-                return View("Crear");
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
             }
+           
+
+            return View(pro);
+        }
+        [HttpPost]
+        public ActionResult save(Producto producto, HttpPostedFileBase ImageFile, string[] selectedProveedores)
+        {
+            ServiceProducto service = new ServiceProducto();
+            MemoryStream target = new MemoryStream();
+            //try
+            //{
+               
+                    if (ImageFile != null)
+                    {
+                        ImageFile.InputStream.CopyTo(target);
+                        producto.imagen = target.ToArray();
+                       
+                        ModelState.Remove("Imagen");
+                    }
+
+             
+                if (ModelState.IsValid)
+                {
+                   
+                    service.Save(producto, selectedProveedores);
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Util.ValidateErrors(this);
+                    ViewBag.ListaCategorias = listaCategorias((int) producto.Categoria);
+                    ViewBag.ListaProveedores = listaProveedores(producto.Proveedor);
+                    return View("Crear", producto);
+                }
+               
+            //}
+            //catch
+            //{
+            //    return RedirectToAction("Crear");
+            //}
         }
 
         public ActionResult Editar(int? id)
@@ -137,6 +199,27 @@ namespace Web.Controllers
             }
             return View();
         }
+        public ActionResult Delete(long id)
+        {
+            IserviceProducto service = new ServiceProducto();
+            try
+            {
+
+                service.Delete(id);
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
+            }
+           
+            return RedirectToAction("Index");
+
+
+
+
+        }
     }
+
+ 
 
 }

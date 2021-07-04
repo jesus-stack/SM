@@ -47,11 +47,13 @@
     <Compile Include="Services\IserviceProducto.cs" />
     <Compile Include="Services\IServiceProveedor.cs" />
     <Compile Include="Services\IServiceSalida.cs" />
+    <Compile Include="Services\IServiceSeccion.cs" />
     <Compile Include="Services\ServiceCategoria.cs" />
     <Compile Include="Services\ServiceEntrada.cs" />
     <Compile Include="Services\ServiceProducto.cs" />
     <Compile Include="Services\ServiceProveedor.cs" />
     <Compile Include="Services\ServiceSalida.cs" />
+    <Compile Include="Services\ServiceSeccion.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOS\" />

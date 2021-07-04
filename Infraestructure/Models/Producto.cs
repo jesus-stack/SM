@@ -12,11 +12,11 @@ namespace Infraestructure.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-
     [MetadataType(typeof(ProductoMetadata))]
     public partial class Producto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+      
         public Producto()
         {
             this.EntradaProducto = new HashSet<EntradaProducto>();
@@ -34,7 +34,7 @@ namespace Infraestructure.Models
         public Nullable<long> Total { get; set; }
         public Nullable<int> Categoria { get; set; }
         public byte[] imagen { get; set; }
-        public byte[] n { get; set; }
+        public Nullable<bool> Estado { get; set; }
     
         public virtual Categoria Categoria1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

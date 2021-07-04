@@ -10,8 +10,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <img class="productPhoto" src="~/Source/img/pro.png" />
-                <div class="productInformation">
+
+                @if (Model.imagen != null)
+                {
+                <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(@Model.imagen)"class="productPhoto" alt="Producto @Model.Nombre">
+                }
+            else
+            {
+                <img src="~/Source/img/pro.png" class="productPhoto" />
+            }
+                    <div class="productInformation">
                     <h5>Código del producto:  @Model.Id</h5>
 
                     <h5>Nombre del producto: @Model.Id </h5>
@@ -19,10 +27,10 @@
                     <h5>Precio: ₡1500</h5>
 
                     <h5>Detalle:  @Model.Id </h5>
-                    <h5>Categoría: @Model.Id</h5>
-                    <h5>Cantidad mínima: @Model.Id</h5>
-                    <h5>Cantidad máxima: @Model.Id</h5>
-                    <h5>Total: @Model.Id</h5>
+                    <h5>Categoría: @Model.Categoria1.Descripcion</h5>
+                    <h5>Cantidad mínima: @Model.cantidad_minima</h5>
+                    <h5>Cantidad máxima: @Model.cantidad_maxima</h5>
+                    <h5>Total: @Model.Total</h5>
                     <h5>Ubicaciones</h5>
                     <div>
                         <select class="selecI">

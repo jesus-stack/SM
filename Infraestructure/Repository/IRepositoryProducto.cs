@@ -12,7 +12,10 @@ namespace Infraestructure.Repository
         IEnumerable<Producto> GetProducto();
         IEnumerable<Producto> GetProductoByCategoria(int id);
 
-        Producto GetProductoById(int id);
-        Producto Save(Producto pro);
+        Producto GetProductoById(long id);
+        Producto Save(Producto pro, string[] selectedProveedores);
+
+        void Delete(long id);
+         
     }
 }

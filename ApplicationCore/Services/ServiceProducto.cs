@@ -10,6 +10,13 @@ namespace ApplicationCore.Services
 {
     public class ServiceProducto : IserviceProducto
     {
+        public void Delete(long id)
+        {
+            IRepositoryProducto repository = new RepositoryProducto();
+             repository.Delete(id);
+        }
+
+
         public IEnumerable<Producto> GetProducto()
         {
         
@@ -24,16 +31,17 @@ namespace ApplicationCore.Services
             return repository.GetProductoByCategoria(id);
         }
 
-        public Producto GetProductoById(int id)
+        public Producto GetProductoById(long id)
         {
             IRepositoryProducto repository = new RepositoryProducto();
             return repository.GetProductoById(id);
         }
 
-        public Producto Save(Producto pro)
+        public Producto Save(Producto pro, string[] selectedProveedores)
         {
             IRepositoryProducto repository = new RepositoryProducto();
-            return repository.Save(pro);
+            return repository.Save(pro,selectedProveedores);
         }
+        
     }
 }
