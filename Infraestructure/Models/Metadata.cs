@@ -94,4 +94,19 @@ namespace Infraestructure.Models
        
         public virtual ICollection<SalidaProducto> SalidaProducto { get; set; }
     }
+    internal partial class ProductoSeccionMetadata
+    {
+        public int IdSeccion { get; set; }
+        public long IdProducto { get; set; }
+        public long Lote { get; set; }
+        [Required(ErrorMessage ="{0} es un dato requerido")]
+        public Nullable<long> Cantidad { get; set; }
+        [Required(ErrorMessage = "{0} es un dato requerido")]
+        [Display(Name ="Fecha de vencimiento")]
+        [DataType(DataType.Date, ErrorMessage ="Formato de fecha no valido")]
+        public Nullable<System.DateTime> FechaVencimiento { get; set; }
+
+        public virtual Producto Producto { get; set; }
+        public virtual Seccion Seccion { get; set; }
+    }
 }

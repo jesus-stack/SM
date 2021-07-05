@@ -118,9 +118,11 @@
     <Compile Include="Repository\IRepositoryCategoria.cs" />
     <Compile Include="Repository\IRepositoryEntrada.cs" />
     <Compile Include="Repository\IRepositoryProducto.cs" />
+    <Compile Include="Repository\IRepositoryProductoSeccion.cs" />
     <Compile Include="Repository\IrepositoryProveedor.cs" />
     <Compile Include="Repository\IRepositorySalida.cs" />
     <Compile Include="Repository\IRepositorySeccion.cs" />
+    <Compile Include="Repository\RepositoryProductoSeccion.cs" />
     <Compile Include="Repository\RepositorySeccion.cs" />
     <Compile Include="Repository\RepositoryCategoria.cs" />
     <Compile Include="Repository\RepositoryEntrada.cs" />

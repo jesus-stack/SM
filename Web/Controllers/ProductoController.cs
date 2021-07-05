@@ -107,6 +107,7 @@ namespace Web.Controllers
         public ActionResult Crear(long? id)
         {
             ServiceProducto service = new ServiceProducto();
+           
             Producto pro = new Producto();
             try
             {
@@ -116,6 +117,7 @@ namespace Web.Controllers
                     pro = service.GetProductoById((long)id);
                     ViewBag.ListaCategorias = listaCategorias((int) pro.Categoria);
                     ViewBag.ListaProveedores = listaProveedores(pro.Proveedor);
+                   
                     ViewBag.Mantenimientotitulo = "Modificar";
                 }
                 else
@@ -124,12 +126,13 @@ namespace Web.Controllers
                     ViewBag.ListaProveedores = listaProveedores(null);
                     ViewBag.Mantenimientotitulo = "Crear";
                 }
+               
             }
             catch (Exception e)
             {
                 Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
             }
-           
+          
 
             return View(pro);
         }
@@ -138,10 +141,10 @@ namespace Web.Controllers
         {
             ServiceProducto service = new ServiceProducto();
             MemoryStream target = new MemoryStream();
-            //try
-            //{
-               
-                    if (ImageFile != null)
+            try
+            {
+
+                if (ImageFile != null)
                     {
                         ImageFile.InputStream.CopyTo(target);
                         producto.imagen = target.ToArray();
@@ -164,12 +167,12 @@ namespace Web.Controllers
                     ViewBag.ListaProveedores = listaProveedores(producto.Proveedor);
                     return View("Crear", producto);
                 }
-               
-            //}
-            //catch
-            //{
-            //    return RedirectToAction("Crear");
-            //}
+
+            }
+            catch
+            {
+                return RedirectToAction("Crear");
+            }
         }
 
         public ActionResult Editar(int? id)
@@ -217,6 +220,14 @@ namespace Web.Controllers
 
 
 
+        }
+
+        public ActionResult saveps(ProductoSeccion ps) 
+        {
+            IServiceProductoSeccion serviceProductoSeccion = new ServiceProductoSeccion();
+            ps.IdProducto = (long) 1002;
+            serviceProductoSeccion.Save(ps);
+            return View("Crear");
         }
     }
 
