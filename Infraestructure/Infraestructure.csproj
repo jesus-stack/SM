@@ -76,18 +76,18 @@
     </Compile>
     <Compile Include="Models\MyContext.cs" />
     <Compile Include="Models\MyModel.Context.cs">
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>MyModel.Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MyModel.cs">
-      <DependentUpon>MyModel.tt</DependentUpon>
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\MyModel.Designer.cs">
-      <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
       <DependentUpon>MyModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Producto.cs">
@@ -118,8 +118,12 @@
     <Compile Include="Repository\IRepositoryCategoria.cs" />
     <Compile Include="Repository\IRepositoryEntrada.cs" />
     <Compile Include="Repository\IRepositoryProducto.cs" />
+    <Compile Include="Repository\IRepositoryProductoSeccion.cs" />
     <Compile Include="Repository\IrepositoryProveedor.cs" />
     <Compile Include="Repository\IRepositorySalida.cs" />
+    <Compile Include="Repository\IRepositorySeccion.cs" />
+    <Compile Include="Repository\RepositoryProductoSeccion.cs" />
+    <Compile Include="Repository\RepositorySeccion.cs" />
     <Compile Include="Repository\RepositoryCategoria.cs" />
     <Compile Include="Repository\RepositoryEntrada.cs" />
     <Compile Include="Repository\RepositoryProducto.cs" />
@@ -149,8 +153,8 @@
     </Content>
     <Content Include="Models\MyModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MyModel.cs</LastGenOutput>
       <DependentUpon>MyModel.edmx</DependentUpon>
+      <LastGenOutput>MyModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

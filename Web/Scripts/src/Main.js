@@ -98,6 +98,11 @@ button5.onclick = function () {
 
 }
 
+function CrearModal() {
+  
+   $('#create').modal('show');
+}
+
 
 function mostrar(evt, tab) {
   
@@ -119,3 +124,5 @@ function mostrar(evt, tab) {
     document.getElementById(tab).style.display = "block";
     evt.currentTarget.className += " active";
 }
+
+

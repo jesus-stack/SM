@@ -8,274 +8,85 @@
     <br />
     <div class="row">
         <div class="col-2 new_action">
-            <i class='bx bx-message-square-add'>
+            <a href="~/Producto/Crear" class="bx bx-message-square-add">
                 <strong>Nuevo</strong>
-            </i>
-            @Ajax.ActionLink("listar",
-           "listarTabla", null//parametros new{}
-                    , new AjaxOptions
+            </a>
+        </div>
+        <div class="offset-md-3 col-2"><h1 class="stock_h1">@ViewBag.Subtitle</h1></div>
+        <div class="offset-md-3 col-2">
+
+            <div class="btn-group dropleft">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Categoría
+                </button>
+                <div class="dropdown-menu bg-primary" aria-labelledby="dropdownMenuButton">
+                    <strong>
+                        @Ajax.ActionLink("Todas",
+              "listarTabla", null
+                       , new AjaxOptions
+                       {
+                           UpdateTargetId = "tabla",
+                           InsertionMode = InsertionMode.Replace
+                       }, new { @class = "dropdown-item shover" })
+                    </strong>
+                    @foreach (var item in (IEnumerable<Infraestructure.Models.Categoria>)ViewBag.categorias)
                     {
-                             UpdateTargetId = "tabla",
-                        InsertionMode = InsertionMode.Replace
-                         }, null)
+                        <strong>
+                            @Ajax.ActionLink(item.Descripcion,
+                  "listarTabla", new { id = item.Id, sub = item.Descripcion }
+                           , new AjaxOptions
+                           {
+                               UpdateTargetId = "tabla",
+                               InsertionMode = InsertionMode.Replace
+                           }, new { @class = "dropdown-item shover text-capitalize" })
+                        </strong>
+                    }
+
+                </div>
+            </div>
+
         </div>
-        <div class="offset-md-7 col-2">
-            <label for="categoria">Categoria</label>
-            <select id="categoria" class="form-control">
-                <option class="selected">Todas</option>
-                @foreach (var item in (IEnumerable<Infraestructure.Models.Categoria>)ViewBag.categorias)
-                {
-                    <option>
-                        @Ajax.ActionLink(item.Descripcion,
-        "listarTabla", null//parametros new{}
-             , new AjaxOptions
-             {
-                      UpdateTargetId = "tabla",
-                 InsertionMode = InsertionMode.Replace
-                  }, null)
-                    </option>
-                }
-            </select>
+        <br />
+        <div class="offset-md-8">
+            @using (Ajax.BeginForm("listarNombre", "Producto", new AjaxOptions
+            {
+                UpdateTargetId = "tabla",
+                InsertionMode = InsertionMode.Replace,
+                HttpMethod = "GET"
+            }))
+            {
+                <div class="card-body">
+                    <div class="input-group">
+                        <div class="ui-widget">
+                            @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Nombre" })
+                        </div>
+                    
+
+                        <button type="submit" class="btn btn-default">Buscar</button>
+
+                    </div>
+                </div>
+
+            }
         </div>
     </div>
-    <br />
-    <div id="tabla">
-
+    <div id="tabla" class="col-12">
+        <div id="ajaxLoader" class="center-block" alt="Cargando ..." style="height:100px;width:100px; display:none">
+            <img src="~/Source/img/load.gif" />
+        </div>
+        @Html.Partial("_PartialTablaP")
     </div>
-
 </div>
 @section scripts {
     @Scripts.Render("~/bundles/jqueryajax")
+    @Scripts.Render("~/bundles/jqueryui")
 }
+<script>
+   $(function () {
+        var lista = @Html.Raw(Json.Encode(ViewBag.ListaNombres));
+        $("#filtro").autocomplete({
+            source: lista
+        });
+    });
+</script>
 
-@*<div class="container">
-        <br/>
-        <h1 class="stock_h1">Productos</h1>
-        <br/>
-
-        <div class="tab_list">
-            <div class="tab active" onclick="mostrar(event,'all')">Todos</div>
-
-            @foreach (var item in (IEnumerable<Infraestructure.Models.Categoria>)ViewBag.categorias)
-            {
-                <div class="tab" onclick="mostrar(event,@item.Id)">@item.Descripcion</div>
-            }
-        </div>
-        <div class="tab_content tab_active" id="all">
-            <h2>Todos</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Detalle</th>
-                        <th>@Html.DisplayNameFor(model => model.Id)</th>
-                        <th>@Html.DisplayNameFor(model => model.Nombre)</th>
-                        <th>@Html.DisplayNameFor(model => model.cantidad_minima)</th>
-                        <th>@Html.DisplayNameFor(model => model.cantidad_maxima)</th>
-                        <th>@Html.DisplayNameFor(model => model.Total)</th>
-                        <th>Acciones </th>
-                        <th>     </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <div class="modal fade" id="b-@item.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h3 class="modal-title" id="title-modal" style="text-align:center;">   Detalle del producto</h3>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <img class="productPhoto" src="~/Source/img/pro.png" />
-                                            <div class="productInformation">
-                                                <h5>Código del producto:  @Html.DisplayFor(modelItem => item.Id)</h5>
-
-                                                <h5>Nombre del producto:@Html.DisplayFor(modelItem => item.Nombre) </h5>
-
-                                                <h5>Precio: ₡1500</h5>
-
-                                                <h5>Detalle:  @Html.DisplayFor(modelItem => item.Descripcion) </h5>
-                                                <h5>Categoría: @Html.DisplayFor(modelItem => item.Categoria1.Descripcion)</h5>
-                                                <h5>Cantidad mínima: @Html.DisplayFor(modelItem => item.cantidad_minima)</h5>
-                                                <h5>Cantidad máxima:  @Html.DisplayFor(modelItem => item.cantidad_maxima)</h5>
-                                                <h5>Total:  @Html.DisplayFor(modelItem => item.Total)</h5>
-                                                <h5>Ubicaciones</h5>
-                                                <div>
-                                                    <select class="selecI">
-                                                        @foreach (var u in item.ProductoSeccion)
-                                                        {
-                                                            <option>@u.Seccion.Descripcion</option>
-                                                        }
-                                                    </select>
-                                                </div>
-
-                                                <h5>
-                                                    Proveedores
-                                                </h5>
-
-                                                <div>
-                                                    <select class="selecI">
-                                                        @foreach (var p in item.Proveedor)
-                                                        {
-                                                            <option>@p.NombreOrganizacion</option>
-                                                        }
-                                                    </select>
-                                                </div>
-
-
-
-
-                                            </div>
-
-
-
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <td><i class='bx bxs-detail btn btn-primary' data-toggle="modal" data-target="#b-@item.Id"></i></td>
-
-
-                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                            <td>@Html.DisplayFor(modelItem => item.cantidad_minima)</td>
-                            <td>@Html.DisplayFor(modelItem => item.cantidad_maxima)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Total)</td>
-                            <td><a class='bx bx-edit'></a></td>
-                            <td><a class='bx bxs-trash'></a></td>
-                        </tr>
-                    }
-                </tbody>
-
-            </table>
-        </div>
-
-        @foreach (var itemC in (IEnumerable<Infraestructure.Models.Categoria>)ViewBag.categorias)
-        {
-
-
-            <div class="tab_content" id="@itemC.Id">
-                <h2>@itemC.Descripcion</h2>
-
-                <table>
-                    <thead>
-                        <tr>
-
-
-                            <th>Detalle</th>
-                            <th>@Html.DisplayNameFor(model => model.Id)</th>
-                            <th>@Html.DisplayNameFor(model => model.Nombre)</th>
-                            <th>@Html.DisplayNameFor(model => model.cantidad_minima)</th>
-                            <th>@Html.DisplayNameFor(model => model.cantidad_maxima)</th>
-                            <th>@Html.DisplayNameFor(model => model.Total)</th>
-                            <th>Acciones </th>
-                            <th>     </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            if (item.Categoria1.Id == itemC.Id)
-                            {
-                                <tr>
-                                    <div class="modal fade" id="a-@item.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h3 class="modal-title" id="title-modal" style="text-align:center;">   Detalle del producto</h3>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <img class="productPhoto" src="~/Source/img/pro.png" />
-                                                    <div class="productInformation">
-                                                        <h5>Código del producto:  @Html.DisplayFor(modelItem => item.Id)</h5>
-
-                                                        <h5>Nombre del producto:@Html.DisplayFor(modelItem => item.Nombre) </h5>
-
-                                                        <h5>Precio: ₡1500</h5>
-
-                                                        <h5>Detalle:  @Html.DisplayFor(modelItem => item.Descripcion) </h5>
-                                                        <h5>Categoría: @Html.DisplayFor(modelItem => item.Categoria1.Descripcion)</h5>
-                                                        <h5>Cantidad mínima: @Html.DisplayFor(modelItem => item.cantidad_minima)</h5>
-                                                        <h5>Cantidad máxima:  @Html.DisplayFor(modelItem => item.cantidad_maxima)</h5>
-                                                        <h5>Total:  @Html.DisplayFor(modelItem => item.Total)</h5>
-                                                        <h5>Ubicaciones</h5>
-                                                        <div>
-                                                            <select class="selecI">
-
-                                                                @foreach (var u in item.ProductoSeccion)
-                                                                {
-                                                                    <option>@u.Seccion.Descripcion</option>
-                                                                }
-
-                                                                <option>Bodega 1 </option>
-                                                                <option>Bodega 2</option>
-                                                                <option>Almacen</option>
-
-                                                            </select>
-                                                        </div>
-
-                                                        <h5>
-                                                            Proveedores
-                                                        </h5>
-
-                                                        <div>
-                                                            <select class="selecI">
-
-                                                                @foreach (var p in item.Proveedor)
-                                                                {
-                                                                    <option>@p.NombreOrganizacion</option>
-                                                                }
-
-
-                                                            </select>
-                                                        </div>
-
-
-
-
-                                                    </div>
-
-
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <td><i class='bx bxs-detail btn btn-primary' data-toggle="modal" data-target="#a-@item.Id"></i></td>
-
-
-                                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.cantidad_minima)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.cantidad_maxima)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.Total)</td>
-                                    <td><a class='bx bx-edit'></a></td>
-                                    <td><a class='bx bxs-trash'></a></td>
-                                </tr>
-                            }
-                        }
-                    </tbody>
-
-                </table>
-            </div>
-        }
-
-    </div>*@
