@@ -62,14 +62,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <img src="~/Source/img/jesus.png" class="user-image img-circle elevation-2" alt="User Image">
-                       
-                         
-                                <span class="d-none d-md-inline">
-                                    @nombre </ span >}
-                               
+
+                        
+                        <span class="d-none d-md-inline">
+                            @nombre </ span > </span>
 
 
-</a>
+
+                    </a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <!-- User image -->
                         <li class="user-header bg-primary">
@@ -79,7 +79,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 @if (Session["User"] != null)
                                 {
                                     <strong>@nombre</strong>
-                                    @rol
+                                       <p>--</p> @rol<p>--</p>
                                 }
                                 else
                                 {
