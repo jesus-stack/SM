@@ -21,12 +21,12 @@ namespace Infraestructure.Models
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Descripcion { get; set; }
         [Display(Name ="Cantidad Mínima")]
-        [MaxLength(9, ErrorMessage = "El {0} no debe de sobrepasar 9 caraceteres")]
+        
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public Nullable<int> cantidad_minima { get; set; }
         [Display(Name = "Cantidad Máxima")]
         [Required(ErrorMessage = "{0} es un dato requerido")]
-        [MaxLength(18, ErrorMessage = "El {0} no debe de sobrepasar 18 caraceteres")]
+       
         public Nullable<long> cantidad_maxima { get; set; }
         [Required(ErrorMessage = "{0} es un dato requerido")]
         public Nullable<decimal> Costo { get; set; }
