@@ -122,6 +122,7 @@
     <Compile Include="Repository\IrepositoryProveedor.cs" />
     <Compile Include="Repository\IRepositorySalida.cs" />
     <Compile Include="Repository\IRepositorySeccion.cs" />
+    <Compile Include="Repository\IRepositoryUsuario.cs" />
     <Compile Include="Repository\RepositoryProductoSeccion.cs" />
     <Compile Include="Repository\RepositorySeccion.cs" />
     <Compile Include="Repository\RepositoryCategoria.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Repository\RepositoryProducto.cs" />
     <Compile Include="Repository\RepositoryProveedor.cs" />
     <Compile Include="Repository\RepositorySalida.cs" />
+    <Compile Include="Repository\RepositoryUsuario.cs" />
     <Compile Include="Utils\Log.cs" />
   </ItemGroup>
   <ItemGroup>

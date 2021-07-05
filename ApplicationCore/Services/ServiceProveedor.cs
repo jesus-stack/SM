@@ -10,10 +10,28 @@ namespace ApplicationCore.Services
 {
     public class ServiceProveedor : IServiceProveedor
     {
+        public void Delete(int id)
+        {
+            IrepositoryProveedor repository = new RepositoryProveedor();
+            repository.Eliminar(id);
+        }
+
         public IEnumerable<Proveedor> GetProveedor()
         {
             IrepositoryProveedor repository = new RepositoryProveedor();
             return repository.GetProveedor();
+        }
+
+        public Proveedor GetProveedorById(int id)
+        {
+            IrepositoryProveedor repository = new RepositoryProveedor();
+          return  repository.GetProveedorById(id);
+        }
+
+        public Proveedor Save(Proveedor pro, string[] selectedProducto)
+        {
+            IrepositoryProveedor repository = new RepositoryProveedor();
+           return repository.Save(pro,selectedProducto);
         }
     }
 }

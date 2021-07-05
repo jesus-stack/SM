@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 
 namespace Web.Controllers
 {
@@ -130,6 +131,8 @@ namespace Web.Controllers
 
             return new MultiSelectList(listaproveedores, "Id", "NombreOrganizacion", listaproveedoresSelect);
         }
+
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Crear(long? id)
         {
             ServiceProducto service = new ServiceProducto();
@@ -201,7 +204,7 @@ namespace Web.Controllers
             }
         }
 
-      
+        [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Delete(long id)
         {
             IserviceProducto service = new ServiceProducto();
@@ -221,6 +224,7 @@ namespace Web.Controllers
 
 
         }
+        [CustomAuthorize((int)Roles.Administrador)]
 
         public ActionResult saveps(ProductoSeccion ps) 
         {
