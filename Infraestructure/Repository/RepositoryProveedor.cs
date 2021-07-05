@@ -65,23 +65,27 @@ namespace Infraestructure.Repository
                         if (selectedProducto != null)
                         {
 
-                            pr.Producto = new List<Producto>();
-                            foreach (var prov in selectedProducto)
+                            if (selectedProducto != null)
                             {
-                                int i = Convert.ToInt32(prov);
-                                var Productotoadd = ctx.Producto.FirstOrDefault(x => x.Id == i);
-                                ctx.Producto.Attach(Productotoadd);
-                                pr.Producto.Add(Productotoadd);
+
+                                pr.Producto = new List<Producto>();
+                                foreach (var prov in selectedProducto)
+                                {
+                                    long i = Convert.ToInt64(prov);
+                                    var protoadd = ctx.Producto.FirstOrDefault(x => x.Id == i);
+                                    ctx.Producto.Attach(protoadd);
+                                    pr.Producto.Add(protoadd);
 
 
+                                }
                             }
+                            pr.Estado = true;
+
+                            pr.Id = ctx.Proveedor.Max(x => x.Id) + 1;
+                            pr = ctx.Proveedor.Add(pr);
+                            ctx.SaveChanges();
                         }
-                        pr.Estado = true;
-                        pr.NombreOrganizacion = ctx.Proveedor.FirstOrDefault(x => x.Id == prove.Id).NombreOrganizacion;
-                        pr.Direccion = ctx.Proveedor.FirstOrDefault(x => x.Id == prove.Id).Direccion;
-                        pr.Pais = ctx.Proveedor.FirstOrDefault(x => x.Id == prove.Id).Pais;
-                        pr.Producto = ctx.Proveedor.FirstOrDefault(X => X.Id == prove.Id).Producto;
-                        ctx.SaveChanges();
+
                     }
                     else
                     {
@@ -89,24 +93,25 @@ namespace Infraestructure.Repository
                         ctx.Entry(pr).State = EntityState.Modified;
                         ctx.SaveChanges();
                         //Actualizar Categorias
-                        // var selectedproveedoresID = new HashSet<string>(selectedProveedores);
-                        //if (selectedProveedores != null)
-                        //{
-                        //    ctx.Entry(pro).Collection(p => p.Proveedor).Load();
-                        //    var newProveedorforProducto = ctx.Proveedor
-                        //     .Where(x => selectedproveedoresID.Contains(x.Id.ToString())).ToList();
-                        //    pro.Proveedor = newProveedorforProducto;
+                        var selectedpro = new HashSet<string>(selectedProducto);
+                        if (selectedProducto != null)
+                        {
+                            ctx.Entry(pr).Collection(p => p.Producto).Load();
+                            var newpro = ctx.Producto
+                             .Where(x => selectedpro.Contains(x.Id.ToString())).ToList();
+                            pr.Producto = newpro;
 
-                        //    ctx.Entry(pro).State = EntityState.Modified;
-                        //    ctx.SaveChanges();
-                        //}
+                            ctx.Entry(pr).State = EntityState.Modified;
+                            ctx.SaveChanges();
+
+
+                        }
 
 
                     }
-
                     return prove;
-                }
 
+                }
             }
             catch (DbUpdateException dbEx)
             {
