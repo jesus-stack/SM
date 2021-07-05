@@ -84,11 +84,11 @@ namespace Web.Controllers
 
             return PartialView("_PartialModalProducto",pro);
         }
-        private SelectList listaCategorias(int idCategoria = 0)
+        private SelectList listaCategorias(int Categoria = 0)
         {
             IServiceCategoria serviceCategoria = new ServiceCategoria();
             IEnumerable<Categoria> categorias = serviceCategoria.GetCategoria();
-            return new SelectList(categorias, "Id", "Descripcion", idCategoria);
+            return new SelectList(categorias, "Id", "Descripcion", Categoria);
         }
         public MultiSelectList listaProveedores(ICollection<Proveedor> proveedores)
         {
@@ -165,55 +165,29 @@ namespace Web.Controllers
                     Util.ValidateErrors(this);
                     ViewBag.ListaCategorias = listaCategorias((int) producto.Categoria);
                     ViewBag.ListaProveedores = listaProveedores(producto.Proveedor);
-                    return View("Crear", producto);
+                    return RedirectToAction("Crear",producto.Id);
                 }
 
             }
             catch
             {
-                return RedirectToAction("Crear");
+                return RedirectToAction("Crear",producto);
             }
         }
 
-        public ActionResult Editar(int? id)
-        {
-            Producto pro = null;
-            ServiceProducto service = new ServiceProducto();
-
-
-            try
-            {
-                if (id != null)
-                {
-                    pro = service.GetProductoById((int)id);
-                   
-                }
-                else
-                {
-                    pro = new Producto();
-
-                }
-
-
-            }
-            catch (Exception e)
-            {
-                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
-            }
-            return View();
-        }
+      
         public ActionResult Delete(long id)
         {
             IserviceProducto service = new ServiceProducto();
-            try
-            {
+            //try
+            //{
 
                 service.Delete(id);
-            }
-            catch (Exception e)
-            {
-                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
-            }
+            //}
+            //catch (Exception e)
+            //{
+            //    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
+            //}
            
             return RedirectToAction("Index");
 

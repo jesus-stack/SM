@@ -84,15 +84,17 @@ namespace Web.Controllers
                 {
 
                     service.Save(ps);
-                    return RedirectToAction("Crear","Producto",ps.IdProducto);
-                }
+                Producto pro = new Producto();
+                pro.Nombre = "fffff";
+               return  RedirectToAction("Crear", "Producto",new {id = ps.IdProducto });
+            }
                 else
                 {
                     // Valida Errores si Javascript está deshabilitado
                     Util.ValidateErrors(this);
                     ViewBag.ListaSecciones = listaSecciones(ps.Lote);
-                    return View("Create", ps);
-                }
+                return RedirectToAction("create", new { idproducto = ps.IdProducto, lote = ps.Lote });
+            }
 
             //}
             //catch
@@ -114,7 +116,7 @@ namespace Web.Controllers
             {
                 Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
             }
-            return RedirectToAction("Crear", "Producto", idproducto);
+            return RedirectToAction("Crear", "Producto", new { id = idproducto, lote=lote });
         }
 
         

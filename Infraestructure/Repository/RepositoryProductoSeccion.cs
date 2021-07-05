@@ -108,11 +108,14 @@ namespace Infraestructure.Repository
 
                     ProductoSeccion prse = GetProductoSeccionByLote(ps.Lote);
                     long lote= ctx.ProductoSeccion.Max(x => x.Lote) + 1;
-                    if (prse.IdSeccion != ps.IdSeccion)
+                    if (prse != null)
                     {
-                        Eliminar(prse.Lote);
-                        prse = null;
-                        lote = ps.Lote;
+                        if (prse.IdSeccion != ps.IdSeccion)
+                        {
+                            Eliminar(prse.Lote);
+                            prse = null;
+                            lote = ps.Lote;
+                        }
                     }
                    
                     if (prse == null)

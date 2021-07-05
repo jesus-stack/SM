@@ -2280,11 +2280,11 @@
     <Content Include="Views\Salida\Index.cshtml" />
     <Content Include="Views\Producto\_PartialTablaP.cshtml" />
     <Content Include="Views\Producto\_PartialModalProducto.cshtml" />
-    <Content Include="Views\Producto\Crear.cshtml" />
     <Content Include="Views\Producto\_PartialModalCrear.cshtml" />
     <Content Include="Views\ProductoSeccion\Index.cshtml" />
     <Content Include="Views\ProductoSeccion\PartialCrear.cshtml" />
     <Content Include="Views\ProductoSeccion\create.cshtml" />
+    <Content Include="Views\Producto\Crear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
