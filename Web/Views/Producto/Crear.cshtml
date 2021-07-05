@@ -123,8 +123,9 @@
 
                         @Html.LabelFor(model => model.imagen, htmlAttributes: new { @class = "control-label col-md-2" })
                         <br />
+                        @if (Model.imagen !=null) { }
                         <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(@Model.imagen)" style="height:75px;width:75px" alt="Producto @Model.Nombre">
-                        <br />   <br />
+                        <br /> }  <br />
                         <div class="col-md-7">
                             <input type="file" name="ImageFile"  />
                         </div>

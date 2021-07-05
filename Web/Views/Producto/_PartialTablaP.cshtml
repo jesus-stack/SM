@@ -22,7 +22,7 @@
             {
             <tr>
 
-                @*@Html.Partial("_PartialModalProducto", item)*@
+                @Html.Partial("_PartialModalProducto", item)
                 <td><i class='bx bxs-detail ' data-toggle="modal" data-target="#b-@item.Id"></i></td>
 
                 <td>@Html.DisplayFor(modelItem => item.Id)</td>

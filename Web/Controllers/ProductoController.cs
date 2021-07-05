@@ -12,6 +12,32 @@ namespace Web.Controllers
     public class ProductoController : Controller
     {
         // GET: Producto
+        public PartialViewResult listarNombre(string filtro)
+        {
+            IEnumerable<Producto> lista = null;
+            ServiceProducto service = new ServiceProducto();
+            
+
+            try
+            {
+                if (String.IsNullOrEmpty(filtro))
+                {
+                    lista = service.GetProducto();
+                }
+                else
+                {
+                    lista = service.GetProductoBy(filtro);
+                }
+                return PartialView("_PartialTablaP", lista);
+
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
+            }
+            return PartialView("_PartialTablaP", lista);
+        }
+
         public ActionResult Index()
         {
             IEnumerable<Producto> lista = null;
@@ -31,7 +57,7 @@ namespace Web.Controllers
                 Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
             }
             ViewBag.categorias = listaCategorias;
-          
+            ViewBag.ListaNombres = service.GetProDuctosNombres();
             return View(lista);
         }
         public PartialViewResult listarTabla(int? id,String sub)
@@ -179,15 +205,15 @@ namespace Web.Controllers
         public ActionResult Delete(long id)
         {
             IserviceProducto service = new ServiceProducto();
-            //try
-            //{
+            try
+            {
 
                 service.Delete(id);
-            //}
-            //catch (Exception e)
-            //{
-            //    Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
-            //}
+        }
+            catch (Exception e)
+            {
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
+            }
            
             return RedirectToAction("Index");
 

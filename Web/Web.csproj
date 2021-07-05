@@ -216,7 +216,16 @@
     <Content Include="Content\dist\js\pages\dashboard.js" />
     <Content Include="Content\dist\js\pages\dashboard2.js" />
     <Content Include="Content\dist\js\pages\dashboard3.js" />
+    <Content Include="Content\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\inventario.css" />
+    <Content Include="Content\jquery-ui.css" />
+    <Content Include="Content\jquery-ui.structure.css" />
+    <Content Include="Content\jquery-ui.theme.css" />
     <Content Include="Content\myIndex.css" />
     <Content Include="Content\MyStyle.css" />
     <Content Include="Content\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
@@ -2163,6 +2172,7 @@
     <Content Include="Scripts\jquery-3.6.0.slim.js" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />

@@ -37,6 +37,18 @@ namespace ApplicationCore.Services
             return repository.GetProductoById(id);
         }
 
+        public IEnumerable<Producto> GetProductoBy(String filtro)
+        {
+            IRepositoryProducto repository = new RepositoryProducto();
+            return repository.GetProducto().Where(x => x.Nombre.ToLower().Contains(filtro.ToLower()));
+        }
+
+        public IEnumerable<string> GetProDuctosNombres()
+        {
+            IRepositoryProducto repository = new RepositoryProducto();
+            return repository.GetProducto().Select(x=> x.Nombre);
+        }
+
         public Producto Save(Producto pro, string[] selectedProveedores)
         {
             IRepositoryProducto repository = new RepositoryProducto();
