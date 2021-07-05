@@ -1,0 +1,108 @@
+﻿<br />
+@model IEnumerable<Infraestructure.Models.Proveedor>
+
+<div class="row container table-responsive col-12">
+    <table class="table  table-striped table-bordered text-center">
+        <thead class="bg-sprimary">
+            <tr>
+                <th>Detalle</th>
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.NombreOrganizacion)</th>
+                <th>@Html.DisplayNameFor(model => model.Direccion)</th>
+                <th>@Html.DisplayNameFor(model => model.Pais)</th>
+               
+                <th>Acciones</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td><i class='bx bxs-detail  bx bxs-detail btn btn-primary' data-toggle="modal" data-target="#a-@item.Id"  ></i></td>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NombreOrganizacion)</td>
+                    <td class="col-2">@Html.DisplayFor(modelItem => item.Direccion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Pais)</td>
+
+                    <td><i class='action_right bx bx-edit'></i><i class='action_left bx bxs-trash'></i></td>
+
+                </tr>
+
+
+                <div class="modal fade" id="a-@item.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title" id="title-modal" style="text-align:center;">   Detalle del Proveedor</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img class="productPhoto" style=" float: right; width: 20vh; height: 20vh;" src="~/Source/img/proveedor.png" />
+                                <div class="productInformation">
+                                    <h5>Identificador del Proveedor: @item.Id</h5>
+
+                                    <h5>Nombre de organización: @item.NombreOrganizacion</h5>
+
+                                    <h5>Dirección: @item.Direccion</h5>
+
+                                    <h5>País: @item.Pais</h5>
+
+
+
+                                    <h5>
+                                        Contactos
+                                    </h5>
+
+                                    <div>
+                                        <select class="List-P" size="5">
+                                            @foreach (var c in item.Contacto)
+                                            {
+                                                <option>@c.Nombre _ @c.Telefono</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <h5>
+                                        Productos
+                                    </h5>
+
+                                    <div>
+                                        <select class="List-P" size="6">
+                                            @foreach (var c in item.Producto)
+                                            {
+                                                <option>@c.Nombre </option>
+                                            }
+                                        </select>
+                                    </div>
+
+
+
+
+                                </div>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </tbody>
+    </table>
+
+
+
+
+
+
+
+
+</div>

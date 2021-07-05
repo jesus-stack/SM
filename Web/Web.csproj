@@ -148,6 +148,7 @@
     <Compile Include="Controllers\EntradaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
+    <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\SalidaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2276,6 +2277,8 @@
     <Content Include="Views\Entrada\Index.cshtml" />
     <Content Include="Views\Salida\Index.cshtml" />
     <Content Include="Views\Producto\_PartialTablaP.cshtml" />
+    <Content Include="Views\Proveedor\_PartialProveedor.cshtml" />
+    <Content Include="Views\Proveedor\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
