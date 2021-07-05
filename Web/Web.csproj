@@ -147,15 +147,19 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\EntradaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductoController.cs" />
-    <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\ProductoSeccionController.cs" />
     <Compile Include="Controllers\SalidaController.cs" />
+    <Compile Include="Enum\Enum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\CustomAuthenticationFilter.cs" />
+    <Compile Include="Security\CustomAuthorizeAttribute.cs" />
     <Compile Include="Utils\Log.cs" />
+    <Compile Include="Utils\SweetAlertHelper.cs" />
     <Compile Include="Utils\Util.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2063,6 +2067,7 @@
     <Content Include="Content\plugins\uplot\uPlot.min.css" />
     <Content Include="Content\producto.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\sweetalert.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -2249,6 +2254,7 @@
     <Content Include="Scripts\src\utils\setAttributes.js" />
     <Content Include="Scripts\src\utils\setStyles.js" />
     <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\sweetalert.min.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -2290,14 +2296,14 @@
     <Content Include="Views\Entrada\Index.cshtml" />
     <Content Include="Views\Salida\Index.cshtml" />
     <Content Include="Views\Producto\_PartialTablaP.cshtml" />
-    <Content Include="Views\Proveedor\_PartialProveedor.cshtml" />
-    <Content Include="Views\Proveedor\index.cshtml" />
     <Content Include="Views\Producto\_PartialModalProducto.cshtml" />
     <Content Include="Views\Producto\_PartialModalCrear.cshtml" />
     <Content Include="Views\ProductoSeccion\Index.cshtml" />
     <Content Include="Views\ProductoSeccion\PartialCrear.cshtml" />
     <Content Include="Views\ProductoSeccion\create.cshtml" />
     <Content Include="Views\Producto\Crear.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\NoAutorizado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

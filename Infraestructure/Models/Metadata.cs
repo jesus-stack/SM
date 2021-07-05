@@ -103,10 +103,31 @@ namespace Infraestructure.Models
         public Nullable<long> Cantidad { get; set; }
         [Required(ErrorMessage = "{0} es un dato requerido")]
         [Display(Name ="Fecha de vencimiento")]
+        [DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}",ApplyFormatInEditMode =true)]
         [DataType(DataType.Date, ErrorMessage ="Formato de fecha no valido")]
         public Nullable<System.DateTime> FechaVencimiento { get; set; }
 
         public virtual Producto Producto { get; set; }
         public virtual Seccion Seccion { get; set; }
+
+       
+    }
+    public partial class UsuarioMetadata
+    {    [Display(Name ="Codigo de Usuario")]
+    [Required(ErrorMessage ="{0} Es un dato requerido")]
+        public long Id { get; set; }
+        [Display(Name = "Contraseña")]
+        [Required(ErrorMessage = "{0} Es un dato requerido")]
+        public string contrasena { get; set; }
+        public string Nombre { get; set; }
+        public Nullable<int> TipoUsuario { get; set; }
+        public Nullable<bool> Estado { get; set; }
+        public byte[] Imagen { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Entrada> Entrada { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Salida> Salida { get; set; }
+        public virtual TipoUsuario TipoUsuario1 { get; set; }
     }
 }

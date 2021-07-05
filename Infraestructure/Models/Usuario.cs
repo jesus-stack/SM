@@ -11,7 +11,9 @@ namespace Infraestructure.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+    [MetadataType(typeof(UsuarioMetadata))]
     public partial class Usuario
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +24,7 @@ namespace Infraestructure.Models
         }
     
         public long Id { get; set; }
-        public byte[] contrasena { get; set; }
+        public string contrasena { get; set; }
         public string Nombre { get; set; }
         public Nullable<int> TipoUsuario { get; set; }
         public Nullable<bool> Estado { get; set; }

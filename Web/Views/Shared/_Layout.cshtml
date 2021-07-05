@@ -43,23 +43,51 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <!-- Navbar Search -->
-
+                @{
+                    string nombre = "";
+                    string rol = "Administrador";
+                    Infraestructure.Models.Usuario oUsuario;
+                    //Validar si existe en la sesión
+                    if (Session["User"] != null)
+                    {
+                        oUsuario = (Infraestructure.Models.Usuario)Session["User"];
+                        if (oUsuario != null)
+                        {
+                            nombre = $"{oUsuario.Nombre}";
+                            rol = oUsuario.TipoUsuario1.Descripcion;
+                        }
+                    }
+                }
 
                 <li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                         <img src="~/Source/img/jesus.png" class="user-image img-circle elevation-2" alt="User Image">
-                        <span class="d-none d-md-inline">Jesus Castilla</span>
-                    </a>
+                       
+                         
+                                <span class="d-none d-md-inline">
+                                    @nombre </ span >}
+                               
+
+
+</a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <!-- User image -->
                         <li class="user-header bg-primary">
                             <img src="~/Source/img/jesus.png" class="img-circle elevation-2" alt="User Image">
 
                             <p>
-                                <strong>Jesus Castilla   </strong>
-                                --Administrador--
-                            </p>
+                                @if (Session["User"] != null)
+                                {
+                                    <strong>@nombre</strong>
+                                    @rol
+                                }
+                                else
+                                {
+                                    <strong>Jesus Castilla</strong>
+                                    @rol
 
+                                }
+                            </p>
                             <!-- Menu Body -->
                         <li class="user-body">
 
@@ -67,8 +95,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
                         <!-- Menu Footer-->
                         <li class="user-footer">
-                            <a href="#" class="btn btn-default btn-flat">Profile</a>
-                            <a href="#" class="btn btn-default btn-flat float-right">Sign out</a>
+                            <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                           
+                            <@Html.ActionLink("Desconectarse","Logout","Login",null,new {@class=" btn btn-default btn-flat float-right" })
                         </li>
                     </ul>
                 </li>
@@ -106,7 +135,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
-         with font-awesome or any other icon font library -->
+                        with font-awesome or any other icon font library -->
                         <li class="nav-item menu-open">
                             <a href="#" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -207,7 +236,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
-    
+
 
     @RenderSection("scripts", required: false)
 
@@ -216,6 +245,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- AdminLTE App -->
     <script src="~/Content/dist/js/adminlte.min.js"></script>
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/sweetalert")
+<script>
+        @Html.Raw(@ViewBag.NotificationMessage);
+</script>
+
 </body>
 </html>
 

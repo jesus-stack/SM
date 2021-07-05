@@ -49,6 +49,7 @@
     <Compile Include="Services\IServiceProveedor.cs" />
     <Compile Include="Services\IServiceSalida.cs" />
     <Compile Include="Services\IServiceSeccion.cs" />
+    <Compile Include="Services\IServiceUsuario.cs" />
     <Compile Include="Services\ServiceCategoria.cs" />
     <Compile Include="Services\ServiceEntrada.cs" />
     <Compile Include="Services\ServiceProducto.cs" />
@@ -56,6 +57,8 @@
     <Compile Include="Services\ServiceProveedor.cs" />
     <Compile Include="Services\ServiceSalida.cs" />
     <Compile Include="Services\ServiceSeccion.cs" />
+    <Compile Include="Services\ServiceUsuario.cs" />
+    <Compile Include="Utils\Cryptography.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOS\" />

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="SMModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Categoria">
           <Key>
             <PropertyRef Name="Id" />
@@ -65,7 +65,7 @@
           <Property Name="Costo" Type="decimal" Precision="18" Scale="5" />
           <Property Name="Total" Type="bigint" />
           <Property Name="Categoria" Type="int" />
-          <Property Name="imagen" Type="image" />
+          <Property Name="imagen" Type="varbinary(max)" />
           <Property Name="Estado" Type="bit" />
         </EntityType>
         <EntityType Name="ProductoSeccion">
@@ -137,11 +137,11 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="bigint" Nullable="false" />
-          <Property Name="contrasena" Type="varbinary(max)" />
+          <Property Name="contrasena" Type="varchar" MaxLength="50" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" />
           <Property Name="TipoUsuario" Type="int" />
           <Property Name="Estado" Type="bit" />
-          <Property Name="Imagen" Type="image" />
+          <Property Name="Imagen" Type="varbinary(max)" />
         </EntityType>
         <Association Name="FK_Contacto_Proveedor">
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
@@ -431,8 +431,7 @@
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SMModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -589,7 +588,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" />
-          <Property Name="contrasena" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="contrasena" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TipoUsuario" Type="Int32" />
           <Property Name="Estado" Type="Boolean" />
