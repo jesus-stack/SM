@@ -10,5 +10,16 @@ namespace ApplicationCore.Services
    public interface IServiceProveedor
     {
         IEnumerable<Proveedor> GetProveedor();
+     
+       
+        Proveedor GetProveedorById(int id);
+
+       
+
+        Proveedor Save(Proveedor pro, string[] selectedProducto);
+
+
+        void Delete(int id);
+        //IEnumerable<String> GetProDuctosNombres();
     }
 }
