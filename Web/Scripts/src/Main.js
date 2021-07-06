@@ -125,4 +125,8 @@ function mostrar(evt, tab) {
     evt.currentTarget.className += " active";
 }
 
+function goBack() {
+    window.history.back();
+}
+
 

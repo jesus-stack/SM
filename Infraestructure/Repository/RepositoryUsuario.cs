@@ -19,7 +19,7 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    oUsuario = ctx.Usuario.
+                    oUsuario = ctx.Usuario.Include("TipoUsuario1").
                      Where(p => p.Id==id&& p.contrasena.Equals(password)).
                     FirstOrDefault<Usuario>();
                 }

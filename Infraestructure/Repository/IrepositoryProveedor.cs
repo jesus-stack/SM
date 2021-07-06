@@ -11,7 +11,7 @@ namespace Infraestructure.Repository
     {
         IEnumerable<Proveedor> GetProveedor();
         Proveedor Save(Proveedor pr, string[] selectedProductos);
-        void Eliminar(long id);
+        void Eliminar(int id);
         Proveedor GetProveedorById(int id);
         // Contacto GetProductoSeccionByLote(int id);
 

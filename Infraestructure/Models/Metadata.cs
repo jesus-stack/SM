@@ -52,17 +52,23 @@ namespace Infraestructure.Models
     }
     internal partial class ProveedorMetadata
     {
-        [Display(Name ="Identificador")]
+        [Display(Name = "Identificador")]
         public int Id { get; set; }
         [Display(Name = "Nombre Organización")]
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string NombreOrganizacion { get; set; }
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Direccion { get; set; }
+        [Required(ErrorMessage = "{0} es un dato requerido")]
         public string Pais { get; set; }
+        public Nullable<bool> Estado { get; set; }
 
-        
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Contacto> Contacto { get; set; }
-       
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Producto> Producto { get; set; }
+      
+      
     }
 
    internal partial class EntradaMetadata

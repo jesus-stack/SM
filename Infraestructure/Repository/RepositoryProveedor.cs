@@ -20,7 +20,7 @@ namespace Infraestructure.Repository
                 using (MyContext ctx = new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-                    lista = ctx.Proveedor.Include("Contacto").Include("Producto").ToList();
+                    lista = ctx.Proveedor.Include("Contacto").Include("Producto").Where(x=>x.Estado==true).ToList();
 
                     return lista;
                 }
@@ -43,9 +43,33 @@ namespace Infraestructure.Repository
 
 
 
-        public void Eliminar(long id)
+        public void Eliminar(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+
+                    Proveedor prod = ctx.Proveedor.FirstOrDefault(x => x.Id == id);
+                    prod.Estado = false;
+                    ctx.SaveChanges();
+                }
+
+            }
+            catch (DbUpdateException dbEx)
+            {
+
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
         }
 
 
@@ -62,23 +86,21 @@ namespace Infraestructure.Repository
                     if (prove == null)
                     {
 
+
                         if (selectedProducto != null)
                         {
 
-                            if (selectedProducto != null)
+                            pr.Producto = new List<Producto>();
+                            foreach (var prov in selectedProducto)
                             {
-
-                                pr.Producto = new List<Producto>();
-                                foreach (var prov in selectedProducto)
-                                {
-                                    long i = Convert.ToInt64(prov);
-                                    var protoadd = ctx.Producto.FirstOrDefault(x => x.Id == i);
-                                    ctx.Producto.Attach(protoadd);
-                                    pr.Producto.Add(protoadd);
+                                long i = Convert.ToInt64(prov);
+                                var protoadd = ctx.Producto.FirstOrDefault(x => x.Id == i);
+                                ctx.Producto.Attach(protoadd);
+                                pr.Producto.Add(protoadd);
 
 
-                                }
                             }
+                        }
                             pr.Estado = true;
 
                             pr.Id = ctx.Proveedor.Max(x => x.Id) + 1;
@@ -86,7 +108,7 @@ namespace Infraestructure.Repository
                             ctx.SaveChanges();
                         }
 
-                    }
+                    
                     else
                     {
                         ctx.Proveedor.Add(pr);

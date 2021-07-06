@@ -165,6 +165,8 @@ namespace Web.Controllers
 
             return View(pro);
         }
+
+        [CustomAuthorize((int)Roles.Administrador)]
         [HttpPost]
         public ActionResult save(Producto producto, HttpPostedFileBase ImageFile, string[] selectedProveedores)
         {
