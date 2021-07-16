@@ -1,0 +1,77 @@
+﻿
+
+
+<div class="row container table-responsive col-12" id="list">
+    <table class="table  table-striped table-bordered text-center">
+        <thead class="bg-sprimary">
+            <tr>
+                <th>Lote</th>
+                <th>Seccion</th>
+                <th>Cantidad</th>
+                <th>Vencimiento</th>
+                <th class="">Editar</th>
+                <th class="">Eliminar</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @{ List<Infraestructure.Models.ProductoSeccion> lista = (List<Infraestructure.Models.ProductoSeccion>)TempData["Secciones"];
+                TempData.Keep("Secciones"); }
+
+            @foreach (var item in lista)
+            {
+
+                <tr>
+
+
+                    <td>@Html.DisplayFor(modelItem => item.Lote)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Seccion.Descripcion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Cantidad)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FechaVencimiento)</td>
+                    <td><i class='action_right bx bx-edit' data-toggle="modal" data-target="#b-@item.Lote"></i></td>
+
+                    <td><i class='action_left bx bxs-trash' data-toggle="modal" data-target="#c-@item.Lote"></i></td>
+
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+
+
+</div>
+@foreach (var item in lista)
+{
+   
+
+    <div class="modal fade del" id="c-@item.Lote" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Seccion Producto</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    Esta seguro que desea eliminar el registro de
+                    <br />
+                    "@item.Seccion.Descripcion  Lote @item.Lote "?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    @Ajax.ActionLink("Confirmar", "Eliminarps", new { index = lista.IndexOf(item), lote = item.Lote }, new AjaxOptions
+               {
+                   UpdateTargetId = "list",
+                   InsertionMode = InsertionMode.Replace,
+                   HttpMethod = "POST",
+                   OnComplete = "hidemodal('#c-" + item.Lote + "')"
+               }, new { @class = "btn btn-primary" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

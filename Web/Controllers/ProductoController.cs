@@ -131,6 +131,12 @@ namespace Web.Controllers
 
             return new MultiSelectList(listaproveedores, "Id", "NombreOrganizacion", listaproveedoresSelect);
         }
+        private SelectList listaSecciones(long idSeccion = 0)
+        {
+            IServiceSeccion serviceSeccion = new ServiceSeccion();
+            IEnumerable<Seccion> secciones = serviceSeccion.GetSeccion();
+            return new SelectList(secciones, "Id", "Descripcion", idSeccion);
+        }
 
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Crear(long? id)
@@ -140,20 +146,23 @@ namespace Web.Controllers
             Producto pro = new Producto();
             try
             {
-               
+                ViewBag.ListaSecciones = listaSecciones();
                 if (id != null)
-                {    
+                {
                     pro = service.GetProductoById((long)id);
-                    ViewBag.ListaCategorias = listaCategorias((int) pro.Categoria);
+                    ViewBag.ListaCategorias = listaCategorias((int)pro.Categoria);
                     ViewBag.ListaProveedores = listaProveedores(pro.Proveedor);
-                   
                     ViewBag.Mantenimientotitulo = "Modificar";
+                    TempData["Secciones"] = pro.ProductoSeccion.ToList();
+                 
+
                 }
                 else
                 {
                     ViewBag.ListaCategorias = listaCategorias();
                     ViewBag.ListaProveedores = listaProveedores(null);
                     ViewBag.Mantenimientotitulo = "Crear";
+                    TempData["Secciones"] = new List<ProductoSeccion>();
                 }
                
             }
@@ -171,9 +180,14 @@ namespace Web.Controllers
         public ActionResult save(Producto producto, HttpPostedFileBase ImageFile, string[] selectedProveedores)
         {
             ServiceProducto service = new ServiceProducto();
+            List<ProductoSeccion> lista = (List<ProductoSeccion>)TempData["Secciones"];
             MemoryStream target = new MemoryStream();
             try
             {
+                if (lista != null)
+                {
+                    producto.ProductoSeccion = lista;
+                }
 
                 if (ImageFile != null)
                     {
@@ -199,12 +213,12 @@ namespace Web.Controllers
                     return RedirectToAction("Crear",producto.Id);
                 }
 
-            }
+        }
             catch
             {
-                return RedirectToAction("Crear",producto);
-            }
-        }
+                return RedirectToAction("Crear", producto);
+    }
+}
 
         [CustomAuthorize((int)Roles.Administrador)]
         public ActionResult Delete(long id)
@@ -227,14 +241,66 @@ namespace Web.Controllers
 
         }
         [CustomAuthorize((int)Roles.Administrador)]
-
-        public ActionResult saveps(ProductoSeccion ps) 
+       
+        public PartialViewResult Saveps(long producto,DateTime fecha,int Seccion,int cantidad) 
         {
-            IServiceProductoSeccion serviceProductoSeccion = new ServiceProductoSeccion();
-            ps.IdProducto = (long) 1002;
-            serviceProductoSeccion.Save(ps);
-            return View("Crear");
+            IServiceProductoSeccion service = new ServiceProductoSeccion();
+            IServiceSeccion sec = new ServiceSeccion();
+            IserviceProducto pro = new ServiceProducto();
+            List<ProductoSeccion> lista =(List<ProductoSeccion>) TempData["Secciones"];
+            TempData.Keep("Secciones");
+            if (cantidad>0&&Seccion>0&&fecha!=null)
+            {
+
+                ProductoSeccion ps = new ProductoSeccion();
+                ps.FechaVencimiento = fecha;
+                ps.Cantidad = cantidad;
+                ps.IdProducto = producto;
+                ps.IdSeccion = Seccion;
+       
+                    ps.Seccion = sec.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
+                    ps.Producto = pro.GetProductoById(producto);
+                    lista.Add(ps);
+             
+                TempData["Secciones"] = lista;
+                return PartialView("_SeccionLista");
+               
+            }
+            else
+            {
+                // Valida Errores si Javascript está deshabilitado
+                Util.ValidateErrors(this);
+                ViewBag.ListaSecciones = listaSecciones(Seccion);
+                
+                return PartialView("_SeccionLista");
+
+            }
         }
+
+        public PartialViewResult Eliminarps(int index, long lote)
+        {
+
+            ServiceProductoSeccion service = new ServiceProductoSeccion();
+            try
+            {
+              List<ProductoSeccion>  lista = (List<ProductoSeccion>)TempData["Secciones"];
+
+                if (lote != 0)
+                {
+               
+                    service.Eliminar(lote);
+
+                }
+                lista.RemoveAt(index);
+                TempData["Secciones"] = lista;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
+            }
+            return PartialView("_SeccionLista");
+        }
+        
     }
 
  

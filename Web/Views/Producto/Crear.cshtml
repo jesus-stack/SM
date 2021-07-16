@@ -72,38 +72,41 @@
                 @Html.LabelFor(model => model.Categoria, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-7">
                     @Html.DropDownListFor(model => Model.Categoria, (SelectList)ViewBag.ListaCategorias, "Seleccione una categoria"
-        , new { htmlAttributes = new { @class = "form-control" } })
+, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Categoria, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.Proveedor
-        , htmlAttributes: new { @class = "control-label col-md-2" })
+, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-7">
                     @Html.DropDownList("selectedProveedores",
-        (MultiSelectList)ViewBag.ListaProveedores,
-        new { htmlAttributes = new { @class = "form-control" }, multiple = "multiple" });
+(MultiSelectList)ViewBag.ListaProveedores,
+new { htmlAttributes = new { @class = "form-control" }, multiple = "multiple" });
 
                 </div>
             </div>
             <div class="form-group">
+                <label class="control-label col-md-2">Secciones</label>
 
+                <br />
+
+                <div class="container">
+                    <br />
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#crear">Agregar</button>
+                    <br />
+                    <br />
+
+                    <div id="lista" class="col-md-10">
+                        @Html.Partial("_SeccionLista")
+                    </div>
+                </div>
 
                 @if (Model.Estado == true)
                 {
-                    <label class="control-label col-md-2">Secciones</label>
 
-                    <br />
 
-                    <div class="container">
-                        <br />
-
-                        @Html.ActionLink("Agregar", "Create", "ProductoSeccion", new { idproducto = Model.Id }, new { @class = "btn btn-primary" })
-                        <div class="col-md-10">
-                            @Html.Partial("~/Views/ProductoSeccion/Index.cshtml", Model.ProductoSeccion)
-                        </div>
-                    </div>
                     <div class="form-group">
                         @Html.LabelFor(model => model.Total, htmlAttributes: new { @class = "control-label col-md-2" })
                         <div class="col-md-7">
@@ -123,11 +126,12 @@
 
                         @Html.LabelFor(model => model.imagen, htmlAttributes: new { @class = "control-label col-md-2" })
                         <br />
-                        @if (Model.imagen !=null) { 
-                        <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(@Model.imagen)" style="height:75px;width:75px" alt="Producto @Model.Nombre">
-                        <br /> }  <br />
+                        @if (Model.imagen != null)
+                        {
+                            <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(@Model.imagen)" style="height:75px;width:75px" alt="Producto @Model.Nombre">
+                            <br />}  <br />
                         <div class="col-md-7">
-                            <input type="file" name="ImageFile"  />
+                            <input type="file" name="ImageFile" />
                         </div>
                     </div>
                 }
@@ -156,8 +160,104 @@
         </div>
     }
 </div>
+<div class="modal fade" id="crear" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="title-modal" style="text-align:center;">   Detalle del producto</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+               
+                    @using (Ajax.BeginForm("Saveps", "Producto", new AjaxOptions
+                    {
+                        UpdateTargetId = "lista",
+                        InsertionMode = InsertionMode.Replace,
+                        HttpMethod = "POST",
+                        OnComplete="hidemodal('#crear')"
+                    },new {@id="form"}))
+                    {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+                    <h4>ProductoSeccion</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    <div class="form-group">
+
+                        <label class="control-label col-md-2" for="Seccion">Seccion</label>
+                        <div class="col-md-7">
+    
+                            <select class="form-control" id="Seccion" name="Seccion" sele required>
+                                <option value="0">Seleccione una Seccion</option>
+                                @foreach (var item in (SelectList)ViewBag.ListaSecciones)
+                                {
+
+                                    String selected = "";
+                                    if (item.Value.Equals(item.Selected)) { selected = "selected"; }
+
+                                    <option @selected value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                            @Html.ValidationMessage("Seccion", "*", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <input type="hidden" name="producto" value="@Model.Id" />
+
+
+             
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="c">Cantidad</label>
+                            <div class="col-md-6">
+
+                                <input class="form-control" type="number" id="c" name="cantidad" required min="0" />
+                                @Html.ValidationMessage("cantidad", "*", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="f">
+                                Vencimiento
+                            </label>
+                            <div class="col-md-6">
+
+                                <input class="form-control" type="date" id="f" name="fecha" required />
+                                @Html.ValidationMessage("cantidad", "*", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                  
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-6">
+                            <input type="submit" value="Aceptar" class="btn btn-default bg-sprimary  shover" />
+                        </div>
+                    </div>
+                </div>
+
+                    }
+                    
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
 
 
 }

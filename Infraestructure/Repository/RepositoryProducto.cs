@@ -134,14 +134,18 @@ namespace Infraestructure.Repository
 
         public Producto Save(Producto pro, string[] selectedProveedores)
         {
+            ICollection<ProductoSeccion> lista = pro.ProductoSeccion;
+            pro.ProductoSeccion=null;
            
             try
             {
                 using (MyContext ctx = new MyContext())
                 {
-                   
-                        ctx.Configuration.LazyLoadingEnabled = false;
+                    long c = ctx.ProductoSeccion.Max(x => x.Lote) + 1;
+                    ctx.Configuration.LazyLoadingEnabled = false;
                     Producto prod = GetProductoById(pro.Id);
+                   
+                   
                     if (prod==null)
                     {
 
@@ -159,14 +163,33 @@ namespace Infraestructure.Repository
 
                             }
                         }
+                       
                         pro.Estado = true;
                         pro.Total = 0;
                         pro.Id = ctx.Producto.Max(x => x.Id) + 1;
                         pro = ctx.Producto.Add(pro);
                         ctx.SaveChanges();
+                        foreach (var item in lista)
+                        {
+                            if (item.Lote == 0)
+                            {
+                                item.Producto = null;
+                                item.Seccion = null;
+                                item.IdProducto=pro.Id;
+                                item.Lote = c;
+                                ctx.ProductoSeccion.Add(item);
+
+                                c++;
+                            }
+
+                        }
+                        ctx.SaveChanges();
+                        ctx.SaveChanges();
+                      
                     }
                     else
                     {
+                      
                         ctx.Producto.Add(pro);
                         ctx.Entry(pro).State = EntityState.Modified;
                          ctx.SaveChanges();
@@ -181,7 +204,25 @@ namespace Infraestructure.Repository
 
                             ctx.Entry(pro).State = EntityState.Modified;
                              ctx.SaveChanges();
+                         
+
                         }
+                      
+                        foreach(var item in lista)
+                        {
+                            if (item.Lote == 0)
+                            {
+                                item.Producto = null;
+                                item.Seccion = null;
+                                item.Lote = c;
+                                ctx.ProductoSeccion.Add(item);
+                               
+                                c++;
+                            }
+                         
+                        }
+                        ctx.SaveChanges();
+
 
 
                     }

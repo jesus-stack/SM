@@ -102,6 +102,18 @@ function CrearModal() {
   
    $('#create').modal('show');
 }
+function hidemodal(id) {
+
+    $(id+'').modal('hide');
+    document.getElementById("form").reset();
+   
+}
+function delmodal() {
+    var modal = $('.del');
+    for (var i = 0; i < modal.length; i++) {
+        modal[i].modal('hide');
+    }
+}
 
 
 function mostrar(evt, tab) {

@@ -2308,6 +2308,8 @@
     <Content Include="Views\Proveedor\index.cshtml" />
     <Content Include="Views\Proveedor\_PartialProveedor.cshtml" />
     <Content Include="Views\Proveedor\Crear.cshtml" />
+    <Content Include="Views\Producto\_SeccionLista.cshtml" />
+    <Content Include="Views\Producto\_crear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
