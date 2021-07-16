@@ -47,7 +47,7 @@ namespace Web.Controllers
             catch (Exception ex)
             {
                 // Salvar el error en un archivo 
-                Log.Error(ex, MethodBase.GetCurrentMethod());
+                //Log.Error(ex, MethodBase.GetCurrentMethod());
                 // Pasar el Error a la página que lo muestra
                 TempData["Message"] = ex.Message;
                 TempData.Keep();

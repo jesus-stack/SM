@@ -50,7 +50,7 @@
     </div>
     @if (Model.Estado == true)
     {
-    @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.Id)
     }
     <div class="form-group">
         @Html.LabelFor(model => model.Producto
@@ -64,10 +64,13 @@ new { htmlAttributes = new { @class = "form-control" }, multiple = "multiple" })
     </div>
 
 
+    @Html.Action("_ListaContacto")
+
+
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-7">
-            <input type="submit" value="@ViewBag.Mantenimientotitulo"class="btn btn-default" />
+            <input type="submit" value="@ViewBag.Mantenimientotitulo" class="btn btn-default" />
         </div>
     </div>
 </div>

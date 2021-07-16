@@ -1,16 +1,17 @@
 ﻿@model IEnumerable<Infraestructure.Models.Proveedor>
 
+
 @{
     ViewBag.Title = "Proveedores";
 }
 
 
 <div class="container">
-    <h1 class="stock_h1 col-12">Productos</h1>
+    <h1 class="stock_h1 col-12">Proveedores</h1>
     <br />
     <div class="row">
         <div class="col-2 new_action">
-            <a href="~/Producto/Crear" class="bx bx-message-square-add">
+            <a href="~/Proveedor/Crear" class="bx bx-message-square-add">
                 <strong>Nuevo</strong>
             </a>
         </div>
@@ -29,6 +30,10 @@
     <div id="tabla-proveedores">
 
     </div>
+
+    <br />
+    
+    @*@Html.Partial("~/Views/Proveedor/_ListaContacto")*@
 
 </div>
     @section scripts {
