@@ -107,6 +107,7 @@ function hidemodal(id) {
     $(id+'').modal('hide');
     document.getElementById("form").reset();
    
+   
 }
 function delmodal() {
     var modal = $('.del');

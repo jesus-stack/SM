@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+<div class="container">
+    <div class="row">
+        <div class="offset-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Gestion a realizar
+                </button>
+                <div class="dropdown-menu dropdown-menu-right bg-primary">
+                    <strong>
+                        @Ajax.ActionLink("Entrada",
+              "Entrada", null
+                       , new AjaxOptions
+                       {
+                           UpdateTargetId = "result",
+                           InsertionMode = InsertionMode.Replace
+                       }, new { @class = "dropdown-item shover text-capitalize" })
+                    </strong>
+                    <strong>
+                        @Ajax.ActionLink("Salida",
+              "Salida", null
+                       , new AjaxOptions
+                       {
+                           UpdateTargetId = "result",
+                           InsertionMode = InsertionMode.Replace
+                       }, new { @class = "dropdown-item shover text-capitalize" })
+                    </strong>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="offset-md-2">
+            <label for="user" class="control-label">Usuario</label>
+            <input name="usuario" id="user" value="Jesus Castilla" class="form-control" readonly />
+        </div>
+       
+    </div>
+    <br />
+    <div id="result">
+
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
+    @Scripts.Render("~/bundles/jqueryui")
+}

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Web.Security;
+using Web.Utils;
 
 namespace Web.Controllers
 {
@@ -263,6 +264,7 @@ namespace Web.Controllers
                     lista.Add(ps);
              
                 TempData["Secciones"] = lista;
+                ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Producto", "Seccion Agregada", SweetAlertMessageType.info);
                 return PartialView("_SeccionLista");
                
             }
