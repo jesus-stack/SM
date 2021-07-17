@@ -15,9 +15,11 @@ namespace Web.Controllers
         {
             IEnumerable<Salida> lista = null;
             ServiceSalida service = new ServiceSalida();
+            IserviceProducto producto = new ServiceProducto();
             try
             {
                 lista = service.GetSalida();
+                TempData["productos"] = producto.GetProducto();
             }
             catch (Exception e)
             {
