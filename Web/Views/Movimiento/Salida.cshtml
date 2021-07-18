@@ -6,181 +6,202 @@
     <div class="offset-md-2">
         <h1 class="stock_h1">@ViewBag.titulo</h1>
     </div>
-   
+
 
 </div>
 <br />
-@{ String nombre =(String) TempData["usuario"];TempData.Keep("usuario");
-    IEnumerable<Infraestructure.Models.SalidaProducto> detalle = (IEnumerable<Infraestructure.Models.SalidaProducto>)TempData["detalle"];
-    TempData.Keep("detalle");}
+@{ String nombre = (String)TempData["usuario"]; TempData.Keep("usuario");
+}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-<div class="row">
-    <div class="form-horizontal col-8">
-
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="row">
+        <div class="form-horizontal col-8">
 
-        <div class="form-group">
-            <label>Fecha</label>
-            <div class="col-md-10">
-                <label>@DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year</label>
-            </div>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
 
-        </div>
-        <div class="offset-md-1">
-            <label for="tipo">Tipo de movimiento</label>
-            <select class="form-control" id="tipo">
-                <option value="1">Venta</option>
-                <option value="2">Desapacho</option>
-            </select>
-        </div>
-        <div class="form-group offset-md-1 col-2">
-            <label>Usuario</label>
-            <div class="col-md-10">
-                <label>@nombre</label>
-            </div>
-
-        </div>
-    </div>
-        <div class="form-group ">
-            @Html.LabelFor(model => model.comentario, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.comentario, new { htmlAttributes = new { @class = "form-control " } })
-                @Html.ValidationMessageFor(model => model.comentario, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Registrar" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-    <ul class="list-group col-4">
-        @foreach (var detail in detalle)
-        {
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                @detail.Producto.Nombre
-                <span class="badge badge-primary badge-pill">@detail.Cantidad</span>
-                <i class="bx bxs-trash"></i>
-            </li>
-
-        }
-    </ul>
-</div>
-        }
-       
-    <br />
-@{ IEnumerable<Infraestructure.Models.Producto> lista = (IEnumerable<Infraestructure.Models.Producto>)TempData["productos"];
-    TempData.Keep("productos");}
-
-<div class="row" style="margin-left: 50px;">
-    @foreach (var item in lista)
-    {
-    <div class="card" style="width: 10rem;margin: 10px;">
-        @if (item.imagen != null)
-        {
-            <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.imagen)" class="card-img-top" alt="Producto @item.Nombre">
-        }
-        else
-        {
-            <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        }
-
-        <div class="card-body">
-            <h5 class="card-title">@item.Nombre</h5>
-        </div>
-        <button ="btn btn-primary" data-toggle="modal" data-target="#a-@item.Id">Agregar</button>
-        <div class="modal fade" id="a-@item.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title" id="title-modal" style="text-align:center;">   Detalle del producto</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                <div class="form-group">
+                    <label>Fecha</label>
+                    <div class="col-md-10">
+                        <label>@DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year</label>
                     </div>
-                    <div class="modal-body">
 
-                        @using (Ajax.BeginForm("Saveps", "Producto", new AjaxOptions
-                        {
-                            UpdateTargetId = "lista",
-                            InsertionMode = InsertionMode.Replace,
-                            HttpMethod = "POST",
-                            OnComplete = "hidemodal('#crear')"
-                        }, new { @id = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-
-                            <div class="form-horizontal">
-                                <h4>ProductoSeccion</h4>
-                                <hr />
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
-                                <div class="form-group">
-
-                                    <label class="control-label col-md-2" for="Seccion">Seccion</label>
-                                    <div class="col-md-7">
-
-                                        <select class="form-control" id="Seccion" name="Seccion" sele required>
-                                            @{ IEnumerable<Infraestructure.Models.Seccion> secciones = (IEnumerable<Infraestructure.Models.Seccion>)TempData["Secciones"];
-                                                TempData.Keep("Secciones");}
-                                            @foreach (var sec in secciones)
-                                            {
-
-
-
-                                                <option  value="@sec.Id">@sec.Descripcion</option>
-                                            }
-                                        </select>
-                                        @Html.ValidationMessage("Seccion", "*", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-
-                                <input type="hidden" name="producto" value="@Model.Id" />
-
-
-
-
-                                <div class="form-group">
-                                    <label class="control-label col-md-2" for="c">Cantidad</label>
-                                    <div class="col-md-6">
-
-                                        <input class="form-control" type="number" id="c" name="cantidad" required min="0" />
-                                        @Html.ValidationMessage("cantidad", "*", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-
-
-
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-md-6">
-                                        <input type="submit" value="Aceptar" class="btn btn-default bg-sprimary  shover" />
-                                    </div>
-                                </div>
-                            </div>
-
-                        }
-
-
-
+                </div>
+                <div class="offset-md-1">
+                    <label for="tipo">Tipo de movimiento</label>
+                    <select class="form-control" id="tipo">
+                        <option value="1">Venta</option>
+                        <option value="2">Desapacho</option>
+                    </select>
+                </div>
+                <div class="form-group offset-md-1 col-2">
+                    <label>Usuario</label>
+                    <div class="col-md-10">
+                        <label>@nombre</label>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
 
-                    </div>
+                </div>
+            </div>
+            <div class="form-group ">
+                @Html.LabelFor(model => model.comentario, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.comentario, new { htmlAttributes = new { @class = "form-control " } })
+                    @Html.ValidationMessageFor(model => model.comentario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Registrar" class="btn btn-default" />
                 </div>
             </div>
         </div>
-
+        <div id="detail" class="col-4">
+            @Html.Partial("_producto")
+        </div>
     </div>
+}
+
+<br />
+@{ IEnumerable<Infraestructure.Models.Producto> lista = (IEnumerable<Infraestructure.Models.Producto>)TempData["productos"];
+    TempData.Keep("productos");}
+<div class="offset-md-8">
+    @using (Ajax.BeginForm("listarNombre", "Movimiento", new AjaxOptions
+    {
+        UpdateTargetId = "pros",
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "GET"
+    }))
+    {
+        <div class="card-body">
+            <div class="input-group">
+                <div class="ui-widget">
+                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Nombre" })
+                 
+                </div>
+
+
+                <button type="submit" class="btn btn-default">Buscar</button>
+
+            </div>
+        </div>
+
+    }
+</div>
+<div class="row" id="pros" style="margin-left: 50px;">
+    @foreach (var item in lista)
+    {
+        <div class="card" style="width: 10rem;margin: 10px;">
+            @if (item.imagen != null)
+            {
+                <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.imagen)" class="card-img-top" alt="Producto @item.Nombre">
+            }
+            else
+            {
+                <img src="~/source/img/stock.png" class="card-img-top" alt="...">
+            }
+
+            <div class="card-body">
+                <h5 class="card-title">@item.Nombre</h5>
+            </div>
+            <button class="btn bg-sprimary shover" data-toggle="modal" data-target="#a-@item.Id">Agregar</button>
+            <div class="modal fade" id="a-@item.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="title-modal" style="text-align:center;">   Detalle del producto</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            @using (Ajax.BeginForm("saveSalidaProducto", "Movimiento", new AjaxOptions
+                            {
+                                UpdateTargetId = "detail",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "POST",
+                                OnComplete = "hidemodal('#a-" + item.Id + "')"
+                            }, new { @id = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal">
+                                    <h4>ProductoSeccion</h4>
+                                    <hr />
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                                    <div class="form-group">
+
+                                        <label class="control-label col-md-2" for="Seccion">Seccion</label>
+                                        <div class="col-md-7">
+
+                                            <select class="form-control" id="Seccion" name="Seccion" sele required>
+                                                @{ IEnumerable<Infraestructure.Models.Seccion> secciones = (IEnumerable<Infraestructure.Models.Seccion>)TempData["Secciones"];
+                                                    TempData.Keep("Secciones");}
+                                                @foreach (var sec in secciones)
+                                                {
+
+
+
+                                                    <option value="@sec.Id">@sec.Descripcion</option>
+                                                }
+                                            </select>
+                                            @Html.ValidationMessage("Seccion", "*", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+
+                                    <input type="hidden" name="producto" value="@item.Id" />
+                                    <input type="hidden" name="salida" value="@Model.Id" />
+                                    <input type="hidden" name="movimiento" value="@Model.IdMovimiento" />
+
+
+
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-2" for="c">Cantidad</label>
+                                        <div class="col-md-6">
+
+                                            <input class="form-control" type="number" id="c" name="cantidad" required min="0" />
+                                            @Html.ValidationMessage("cantidad", "*", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-6">
+                                            <input type="submit" value="Aceptar" class="btn btn-default bg-sprimary  shover" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     }
 
 
 </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
+
+
+}

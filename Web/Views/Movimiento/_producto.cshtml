@@ -1,0 +1,55 @@
+﻿@{  List<Infraestructure.Models.SalidaProducto> detalle = (List<Infraestructure.Models.SalidaProducto>)TempData["detalle"];
+    TempData.Keep("detalle");}
+<div id="rs">
+    <ul class="list-group " style="height:200px;overflow-y:auto">
+        @foreach (var detail in detalle)
+        {
+
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+
+            <a class="" data-toggle="collapse" href="#f-@detail.IdProducto@detail.IdSeccion" role="button" aria-expanded="false" aria-controls="f-@detail.IdProducto">
+                @detail.Producto.Nombre
+            </a>
+
+            <span class="badge badge-primary badge-pill">@detail.Cantidad</span>
+            <i class="bx bxs-trash" data-toggle="modal" data-target="#l-@detail.IdProducto" ></i>
+            <div class="modal fade del" id="l-@detail.IdProducto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Seccion Producto</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            Esta seguro que desea eliminar el registro?
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            @Ajax.ActionLink("Confirmar", "eliminarpro", new { index = detalle.IndexOf(detail) }, new AjaxOptions
+                       {
+                           UpdateTargetId = "rs",
+                           InsertionMode = InsertionMode.Replace,
+                           HttpMethod = "POST",
+                           OnBegin = "hidemodal('#l-" + detail.IdProducto + "')"
+                       }, new { @class = "btn btn-primary" })
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </li>
+            <div class="collapse" id="f-@detail.IdProducto@detail.IdSeccion">
+                <div class="card card-body">
+                    Seccion: @detail.Seccion.Descripcion <br />    Cantidad:@detail.Cantidad<br />
+                    Codigo: @detail.Producto.Id<br />    Producto: @detail.Producto.Nombre
+                </div>
+            </div>
+
+        }
+    </ul>
+</div>

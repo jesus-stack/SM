@@ -1,0 +1,107 @@
+﻿@{ IEnumerable<Infraestructure.Models.Producto> lista = (IEnumerable<Infraestructure.Models.Producto>)TempData["productos"];
+    TempData.Keep("productos");}
+@foreach (var item in lista)
+{
+    <div class="card" style="width: 10rem;margin: 10px;">
+        @if (item.imagen != null)
+        {
+            <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.imagen)" class="card-img-top" alt="Producto @item.Nombre">
+        }
+        else
+        {
+            <img src="~/source/img/stock.png" class="card-img-top" alt="...">
+        }
+
+        <div class="card-body">
+            <h5 class="card-title">@item.Nombre</h5>
+        </div>
+        <button class="btn bg-sprimary shover" data-toggle="modal" data-target="#a-@item.Id">Agregar</button>
+        <div class="modal fade" id="a-@item.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="title-modal" style="text-align:center;">   Detalle del producto</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        @using (Ajax.BeginForm("saveSalidaProducto", "Movimiento", new AjaxOptions
+                        {
+                            UpdateTargetId = "detail",
+                            InsertionMode = InsertionMode.Replace,
+                            HttpMethod = "POST",
+                            OnComplete = "hidemodal('#a-" + item.Id + "')"
+                        }, new { @id = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-horizontal">
+                                <h4>ProductoSeccion</h4>
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                                <div class="form-group">
+
+                                    <label class="control-label col-md-2" for="Seccion">Seccion</label>
+                                    <div class="col-md-7">
+
+                                        <select class="form-control" id="Seccion" name="Seccion" sele required>
+                                            @{ IEnumerable<Infraestructure.Models.Seccion> secciones = (IEnumerable<Infraestructure.Models.Seccion>)TempData["Secciones"];
+                                                TempData.Keep("Secciones");}
+                                            @foreach (var sec in secciones)
+                                            {
+
+
+
+                                                <option value="@sec.Id">@sec.Descripcion</option>
+                                            }
+                                        </select>
+                                        @Html.ValidationMessage("Seccion", "*", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <input type="hidden" name="producto" value="@item.Id" />
+                                
+                              
+
+
+
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-2" for="c">Cantidad</label>
+                                    <div class="col-md-6">
+
+                                        <input class="form-control" type="number" id="c" name="cantidad" required min="0" />
+                                        @Html.ValidationMessage("cantidad", "*", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-6">
+                                        <input type="submit" value="Aceptar" class="btn btn-default bg-sprimary  shover" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
