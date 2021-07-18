@@ -145,6 +145,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ContactoController.cs" />
     <Compile Include="Controllers\EntradaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -2315,6 +2316,9 @@
     <Content Include="Views\Movimiento\Entrada.cshtml" />
     <Content Include="Views\Movimiento\Salida.cshtml" />
     <Content Include="Views\Movimiento\ty.cshtml" />
+    <Content Include="Views\Contacto\Index.cshtml" />
+    <Content Include="Views\Proveedor\_PartialContactos.cshtml" />
+    <Content Include="Views\Proveedor\_ListaContacto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

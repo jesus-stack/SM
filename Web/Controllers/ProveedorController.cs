@@ -155,5 +155,30 @@ namespace Web.Controllers
 
         }
 
+
+
+        public PartialViewResult _ListaContacto()
+        {
+            IEnumerable<Contacto> lista = null;
+            ServiceContacto service = new ServiceContacto();
+
+
+            try
+            {
+
+                lista = service.GetContactos().ToList();
+
+
+
+
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
+            }
+            ViewBag.listaContacto = service.GetContactos();
+            return PartialView("_ListaContacto", lista);
+        }
+
     }
 }

@@ -123,6 +123,8 @@
     <Compile Include="Repository\IRepositorySalida.cs" />
     <Compile Include="Repository\IRepositorySeccion.cs" />
     <Compile Include="Repository\IRepositoryUsuario.cs" />
+    <Compile Include="Repository\IRepositoyContacto.cs" />
+    <Compile Include="Repository\RepositoryContacto.cs" />
     <Compile Include="Repository\RepositoryProductoSeccion.cs" />
     <Compile Include="Repository\RepositorySeccion.cs" />
     <Compile Include="Repository\RepositoryCategoria.cs" />
