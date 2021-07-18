@@ -1,7 +1,7 @@
 ﻿@{  List<Infraestructure.Models.SalidaProducto> detalle = (List<Infraestructure.Models.SalidaProducto>)TempData["detalle"];
     TempData.Keep("detalle");}
 <div id="rs">
-    <ul class="list-group " style="height:200px;overflow-y:auto">
+    <ul class="list-group " style="height:300px;overflow-y:auto">
         @foreach (var detail in detalle)
         {
 
@@ -17,7 +17,7 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Seccion Producto</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Salida de Producto</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -53,3 +53,6 @@
         }
     </ul>
 </div>
+<script>
+        @Html.Raw(@ViewBag.NotificationMessage);
+</script>

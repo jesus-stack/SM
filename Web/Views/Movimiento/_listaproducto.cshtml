@@ -20,7 +20,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title" id="title-modal" style="text-align:center;">   Detalle del producto</h3>
+                        <h3 class="modal-title" id="title-modal" style="text-align:center;">   Salida de producto</h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -38,14 +38,14 @@
                             @Html.AntiForgeryToken()
 
                             <div class="form-horizontal">
-                                <h4>ProductoSeccion</h4>
+                                
                                 <hr />
                                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
                                 <div class="form-group">
 
-                                    <label class="control-label col-md-2" for="Seccion">Seccion</label>
+                                    <label class="control-label col-md-5" for="Seccion">Seccion</label>
                                     <div class="col-md-7">
 
                                         <select class="form-control" id="Seccion" name="Seccion" sele required>
@@ -72,7 +72,7 @@
 
 
                                 <div class="form-group">
-                                    <label class="control-label col-md-2" for="c">Cantidad</label>
+                                    <label class="control-label col-md-5" for="c">Cantidad</label>
                                     <div class="col-md-6">
 
                                         <input class="form-control" type="number" id="c" name="cantidad" required min="0" />

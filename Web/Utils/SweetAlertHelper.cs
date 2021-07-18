@@ -12,6 +12,11 @@ namespace Web.Utils
         {
             return "swal({title: '" + titulo + "',text: '" + mensaje + "',type: '" + tipoMensaje + "'});";
         }
+        public static string extra(string titulo, string mensaje, SweetAlertMessageType
+      tipoMensaje,String extra)
+        {
+            return "swal({title: '" + titulo + "',text: '" + mensaje + "',type: '" + tipoMensaje + "'"+extra+"});";
+        }
     }
     public enum SweetAlertMessageType
     {

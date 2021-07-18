@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.Utils;
 
 namespace Web.Controllers
 {
@@ -48,7 +49,15 @@ namespace Web.Controllers
             ou.fecha = DateTime.Now;
             return PartialView(ou);
         }
-        
+        public  ActionResult Save()
+        {
+            Session["out"] =null;
+            TempData["productos"] = new List<Producto>();
+            
+            ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Salida", "Registrada Exitosamente", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
+            return View("Index");
+        }
+
         public PartialViewResult saveSalidaProducto(int cantidad,int Seccion, long producto)
         {
             List<SalidaProducto> salidas = (List<SalidaProducto>)TempData["detalle"];
@@ -93,7 +102,7 @@ namespace Web.Controllers
                 }
               
             }
-
+            ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Salida", "Registro Agregado Exitosamente", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
             return PartialView("_producto");
         }
         public PartialViewResult eliminarpro(int index)
@@ -101,6 +110,7 @@ namespace Web.Controllers
             List<SalidaProducto> salidas = (List<SalidaProducto>)TempData["detalle"];
             salidas.RemoveAt(index);
             TempData["detalle"] = salidas;
+            ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Salida", "Registro Eliminado Exitosamente", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
             return PartialView("_producto");
         }
         public PartialViewResult listarNombre(string filtro)

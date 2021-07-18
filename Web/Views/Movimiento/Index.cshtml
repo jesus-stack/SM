@@ -43,7 +43,9 @@
 
     </div>
 </div>
-
+<script>
+        @Html.Raw(@ViewBag.NotificationMessage);
+</script>
 @section scripts {
     @Scripts.Render("~/bundles/jqueryajax")
     @Scripts.Render("~/bundles/jqueryui")
