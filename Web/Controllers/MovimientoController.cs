@@ -221,7 +221,7 @@ namespace Web.Controllers
                 EntradaProducto.Producto = iservice.GetProductoById(producto);
                 EntradaProducto.IdProveedor = Proveedor;
                 EntradaProducto.Proveedor = isProveedor.GetProveedor().FirstOrDefault(x => x.Id == Proveedor);
-                EntradaProducto.FechaVencimiento = fechaV;
+                EntradaProducto.FechaVencimiento = Convert.ToDateTime(fechaV.ToString("dd/MM/yyyy"));
 
                 entradas.Add(EntradaProducto);
             }
@@ -237,12 +237,30 @@ namespace Web.Controllers
                     EntradaProducto.Producto = iservice.GetProductoById(producto);
                     EntradaProducto.IdProveedor = Proveedor;
                     EntradaProducto.Proveedor = isProveedor.GetProveedor().FirstOrDefault(x => x.Id == Proveedor);
-                    EntradaProducto.FechaVencimiento = fechaV;
+                    EntradaProducto.FechaVencimiento = Convert.ToDateTime(fechaV.ToString("dd/MM/yyyy"));
 
                     entradas.Add(EntradaProducto);
                 }
                 else
                 {
+                    if (EntradaProducto.IdProveedor != Proveedor)
+                    {
+                        EntradaProducto = new EntradaProducto();
+                        EntradaProducto.cantidad = cantidad;
+                        EntradaProducto.idSeccion = Seccion;
+                        EntradaProducto.Seccion = seccion.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
+                        EntradaProducto.IdProducto = producto;
+                        EntradaProducto.Producto = iservice.GetProductoById(producto);
+                        EntradaProducto.IdProveedor = Proveedor;
+                        EntradaProducto.Proveedor = isProveedor.GetProveedor().FirstOrDefault(x => x.Id == Proveedor);
+                        EntradaProducto.FechaVencimiento = Convert.ToDateTime(fechaV.ToString("dd/MM/yyyy"));
+
+                        entradas.Add(EntradaProducto);
+
+
+                    }
+                    else { 
+
                     int c = entradas.IndexOf(EntradaProducto);
                     EntradaProducto = new EntradaProducto();
                     EntradaProducto.cantidad = cantidad;
@@ -252,8 +270,9 @@ namespace Web.Controllers
                     EntradaProducto.Producto = iservice.GetProductoById(producto);
                     EntradaProducto.IdProveedor = Proveedor;
                     EntradaProducto.Proveedor = isProveedor.GetProveedor().FirstOrDefault(x => x.Id == Proveedor);
-                    EntradaProducto.FechaVencimiento = fechaV;
-                    entradas[c] = EntradaProducto;
+                        EntradaProducto.FechaVencimiento = Convert.ToDateTime(fechaV.ToString("dd/MM/yyyy"));
+                        entradas[c] = EntradaProducto;
+                }
                 }
 
             }
