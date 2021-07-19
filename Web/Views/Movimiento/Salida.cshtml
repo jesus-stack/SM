@@ -20,30 +20,33 @@
 
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <div class="row">
+        <div class="row">
 
-                <div class="form-group">
-                    <label>Fecha</label>
-                    <div class="col-md-10">
-                        <label>@DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year</label>
-                    </div>
-
+            <div class="form-group">
+                <label>Fecha</label>
+                <div class="col-md-10">
+                    <label>@DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year</label>
                 </div>
-                <div class="offset-md-1">
-                    <label for="tipo">Tipo de movimiento</label>
-                    <select class="form-control" id="tipo">
-                        <option value="1">Venta</option>
-                        <option value="2">Desapacho</option>
-                    </select>
-                </div>
-                <div class="form-group offset-md-1 col-2">
-                    <label>Usuario</label>
-                    <div class="col-md-10">
-                        <label>@nombre</label>
-                    </div>
 
+            </div>
+            <div class="form-group offset-md-1">
+                <label>Usuario</label>
+                <div class="col-md-10">
+                    <label>@nombre</label>
+                </div>
+
+            </div>
+
+            <div class="form-group offset-md-1">
+                @Html.LabelFor(model => model.IdMovimiento, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.DropDownListFor(model => Model.IdMovimiento, (SelectList)ViewBag.movimientos, "Seleccione un Movimiento"
+, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.IdMovimiento, "", new { @class = "text-danger" })
                 </div>
             </div>
+        </div>
+           
             <div class="form-group ">
                 @Html.LabelFor(model => model.comentario, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">

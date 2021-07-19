@@ -90,11 +90,13 @@ namespace Infraestructure.Models
 
         [Display(Name = "N° Salida")]
         public long Id { get; set; }
+        [Display(Name ="Tipo Movimiento")]
+        [Required(ErrorMessage ="{0} es un dato requerrido")]
         public Nullable<int> IdMovimiento { get; set; }
         public string comentario { get; set; }
         public Nullable<long> IdUsuario { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
-
+        [Required(ErrorMessage = "{0} es un dato requerrido")]
         public virtual Movimiento Movimiento { get; set; }
         public virtual Usuario Usuario { get; set; }
        
