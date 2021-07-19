@@ -24,6 +24,12 @@ namespace Web.Controllers
             IEnumerable<Movimiento> movimientos = service.GetEntradas();
             return new SelectList(movimientos, "Id", "Nombre", movimiento);
         }
+        private SelectList ListaProveedor()
+        {
+            IServiceProveedor service = new ServiceProveedor();
+            IEnumerable<Proveedor> movimientos = service.GetProveedor(); ;
+            return new SelectList(movimientos, "Id", "Nombre");
+        }
 
         // GET: Movimiento
         public ActionResult Index()
@@ -40,6 +46,7 @@ namespace Web.Controllers
                 TempData["Secciones"] = serviceSeccion.GetSeccion();
                 ViewBag.movimientos = ListaSalidas();
                 ViewBag.MEntradas = ListaEntrada();
+                ViewBag.Proveedores = ListaProveedor();
             }
             catch (Exception e)
             {
@@ -88,7 +95,16 @@ namespace Web.Controllers
             
             return View("~/Views/Home/Index.cshtml");
         }
+        public ActionResult SaveEntrada()
+        {
+            Session["in"] = null;
+            TempData["productos"] = new List<Producto>();
 
+            ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Entrada", "Registrada Exitosamente", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
+
+
+            return View("~/Views/Home/Index.cshtml");
+        }
 
 
         public PartialViewResult saveSalidaProducto(int cantidad,int Seccion, long producto)
@@ -173,6 +189,72 @@ namespace Web.Controllers
             TempData["productos"] = lista;
             return PartialView("_listaproducto", lista);
         }
+
+
+
+
+
+        public PartialViewResult saveEntradaProducto(int cantidad, int Seccion, int Proveedor, long producto, DateTime fechaV)
+        {
+            List<EntradaProducto> entradas = (List<EntradaProducto>)TempData["detalle"];
+            IserviceProducto iservice = new ServiceProducto();
+            IServiceSeccion seccion = new ServiceSeccion();
+            IServiceProveedor isProveedor = new ServiceProveedor();
+            EntradaProducto EntradaProducto = entradas.FirstOrDefault(x => x.IdProducto == producto);
+            if (EntradaProducto == null)
+            {
+
+                EntradaProducto = new EntradaProducto();
+                EntradaProducto.cantidad = cantidad;
+                EntradaProducto.idSeccion = Seccion;
+                EntradaProducto.Seccion = seccion.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
+                EntradaProducto.IdProducto = producto;
+                EntradaProducto.Producto = iservice.GetProductoById(producto);
+                EntradaProducto.IdProveedor = Proveedor;
+                EntradaProducto.Proveedor = isProveedor.GetProveedor().FirstOrDefault(x => x.Id == Proveedor);
+                EntradaProducto.FechaVencimiento = fechaV;
+
+                entradas.Add(EntradaProducto);
+            }
+            else
+            {
+                if (EntradaProducto.idSeccion != Seccion)
+                {
+                    EntradaProducto = new EntradaProducto();
+                    EntradaProducto.cantidad = cantidad;
+                    EntradaProducto.idSeccion = Seccion;
+                    EntradaProducto.Seccion = seccion.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
+                    EntradaProducto.IdProducto = producto;
+                    EntradaProducto.Producto = iservice.GetProductoById(producto);
+                    EntradaProducto.IdProveedor = Proveedor;
+                    EntradaProducto.Proveedor = isProveedor.GetProveedor().FirstOrDefault(x => x.Id == Proveedor);
+                    EntradaProducto.FechaVencimiento = fechaV;
+
+                    entradas.Add(EntradaProducto);
+                }
+                else
+                {
+                    int c = entradas.IndexOf(EntradaProducto);
+                    EntradaProducto = new EntradaProducto();
+                    EntradaProducto.cantidad = cantidad;
+                    EntradaProducto.idSeccion = Seccion;
+                    EntradaProducto.Seccion = seccion.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
+                    EntradaProducto.IdProducto = producto;
+                    EntradaProducto.Producto = iservice.GetProductoById(producto);
+                    EntradaProducto.IdProveedor = Proveedor;
+                    EntradaProducto.Proveedor = isProveedor.GetProveedor().FirstOrDefault(x => x.Id == Proveedor);
+                    EntradaProducto.FechaVencimiento = fechaV;
+                    entradas[c] = EntradaProducto;
+                }
+
+            }
+            ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Entrada", "Registro Agregado Exitosamente", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
+            return PartialView("_productoEntrada");
+        }
+
+
+
+
 
 
 

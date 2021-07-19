@@ -163,56 +163,89 @@
                             {
                                 @Html.AntiForgeryToken()
 
-                                <div class="form-horizontal">
+                            <div class="form-horizontal">
 
-                                    <hr />
-                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
-                                    <div class="form-group">
-
-                                        <label class="control-label col-md-5" for="Seccion">Seccion</label>
-                                        <div class="col-md-7">
-
-                                            <select class="form-control" id="Seccion" name="Seccion" sele required>
-                                                @{ IEnumerable<Infraestructure.Models.Seccion> secciones = (IEnumerable<Infraestructure.Models.Seccion>)TempData["Secciones"];
-                                                    TempData.Keep("Secciones");}
-                                                @foreach (var sec in secciones)
-                                                {
+                                <hr />
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
+                                <div class="form-group">
 
-                                                    <option value="@sec.Id">@sec.Descripcion</option>
-                                                }
-                                            </select>
-                                            @Html.ValidationMessage("Seccion", "*", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
+                                    <label class="control-label col-md-5" for="Seccion">Seccion</label>
+                                    <div class="col-md-7">
 
-
-                                    <input type="hidden" name="producto" value="@item.Id" />
+                                        <select class="form-control" id="Seccion" name="Seccion" sele required>
+                                            @{ IEnumerable<Infraestructure.Models.Seccion> secciones = (IEnumerable<Infraestructure.Models.Seccion>)TempData["Secciones"];
+                                                TempData.Keep("Secciones");}
+                                            @foreach (var sec in secciones)
+                                            {
 
 
 
-
-                                    <div class="form-group">
-                                        <label class="control-label col-md-5" for="c">Cantidad</label>
-                                        <div class="col-md-6">
-
-                                            <input class="form-control" type="number" id="c" name="cantidad" required min="0" />
-                                            @Html.ValidationMessage("cantidad", "*", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-
-
-
-
-                                    <div class="form-group">
-                                        <div class="col-md-offset-2 col-md-6">
-                                            <input type="submit" value="Aceptar" class="btn btn-default bg-sprimary  shover" />
-                                        </div>
+                                                <option value="@sec.Id">@sec.Descripcion</option>
+                                            }
+                                        </select>
+                                        @Html.ValidationMessage("Seccion", "*", new { @class = "text-danger" })
                                     </div>
                                 </div>
+
+
+                                <input type="hidden" name="producto" value="@item.Id" />
+
+
+
+                                <div class="form-group">
+
+                                    <label class="control-label col-md-5" for="Proveedor">Proveedor</label>
+                                    <div class="col-md-7">
+
+                                        <select class="form-control" id="Proveedor" name="Proveedor" sele required>
+                                            @{ IEnumerable<Infraestructure.Models.Proveedor> Provee = (IEnumerable<Infraestructure.Models.Proveedor>)item.Proveedor;
+                                            }
+
+                                            @foreach (var sec in Provee)
+                                            {
+
+
+
+                                                <option value="@sec.Id">@sec.NombreOrganizacion</option>
+                                            }
+                                        </select>
+                                        @Html.ValidationMessage("Proveedor", "*", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <label>Fecha de vencimiento</label>
+                                    <div class="col-md-10">
+                                        <input  type="date" name="fechaV" class="form-control" />
+                                    </div>
+
+                                </div>
+
+
+
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-5" for="c">Cantidad</label>
+                                    <div class="col-md-6">
+
+                                        <input class="form-control" type="number" id="c" name="cantidad" required min="0" />
+                                        @Html.ValidationMessage("cantidad", "*", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-6">
+                                        <input type="submit" value="Aceptar" class="btn btn-default bg-sprimary  shover" />
+                                    </div>
+                                </div>
+                            </div>
 
                             }
 

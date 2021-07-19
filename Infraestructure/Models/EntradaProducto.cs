@@ -27,5 +27,6 @@ namespace Infraestructure.Models
         public virtual Entrada Entrada { get; set; }
         public virtual Producto Producto { get; set; }
         public virtual Seccion Seccion { get; set; }
+        public virtual Proveedor Proveedor { get; set; }
     }
 }
