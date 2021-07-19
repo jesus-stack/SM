@@ -15,5 +15,11 @@ namespace ApplicationCore.Services
            IRepositoryMovimiento repository=new RepositoryMovimiento();
             return repository.GetSalidas();
         }
+
+        public IEnumerable<Movimiento> GetEntradas()
+        {
+            IRepositoryMovimiento repository = new RepositoryMovimiento();
+            return repository.GetEntradas();
+        }
     }
 }

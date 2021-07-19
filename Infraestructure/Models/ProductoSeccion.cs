@@ -13,7 +13,7 @@ namespace Infraestructure.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    [MetadataType(typeof(ProductoSeccionMetadata))]
+    [MetadataType(typeof(ProductoSeccionMetadata ))]
     public partial class ProductoSeccion
     {
         public int IdSeccion { get; set; }

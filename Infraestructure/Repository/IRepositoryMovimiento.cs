@@ -10,5 +10,6 @@ namespace Infraestructure.Repository
   public  interface IRepositoryMovimiento
     {
         IEnumerable<Movimiento> GetSalidas();
+        IEnumerable<Movimiento> GetEntradas();
     }
 }

@@ -80,7 +80,7 @@ namespace Infraestructure.Models
         public string Comentario { get; set; }
         public Nullable<long> IdUsuario { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
-
+        [Display(Name ="Movimiento")]
         public virtual Movimiento Movimiento { get; set; }
         public virtual Usuario Usuario { get; set; }
        

@@ -10,5 +10,6 @@ namespace ApplicationCore.Services
  public    interface IServiceMovimiento
     {
         IEnumerable<Movimiento> GetSalidas();
+        IEnumerable<Movimiento> GetEntradas();
     }
 }

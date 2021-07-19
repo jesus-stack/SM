@@ -17,6 +17,14 @@ namespace Web.Controllers
             IEnumerable<Movimiento> movimientos = service.GetSalidas();
             return new SelectList(movimientos, "Id", "Nombre", movimiento);
         }
+
+        private SelectList ListaEntrada(int movimiento = 0)
+        {
+            IServiceMovimiento service = new ServiceMovimiento();
+            IEnumerable<Movimiento> movimientos = service.GetEntradas();
+            return new SelectList(movimientos, "Id", "Nombre", movimiento);
+        }
+
         // GET: Movimiento
         public ActionResult Index()
         {
@@ -31,6 +39,7 @@ namespace Web.Controllers
                 TempData["usuario"] = u.Nombre;
                 TempData["Secciones"] = serviceSeccion.GetSeccion();
                 ViewBag.movimientos = ListaSalidas();
+                ViewBag.MEntradas = ListaEntrada();
             }
             catch (Exception e)
             {
@@ -40,7 +49,19 @@ namespace Web.Controllers
         }
         public PartialViewResult Entrada()
         {
-            return PartialView();
+            ViewBag.MEntradas = ListaEntrada();
+
+            Entrada ou = (Entrada)Session["in"];
+            if (ou == null)
+            {
+                ou = new Entrada();
+                Session["in"] = ou;
+                TempData["detalle"] = ou.EntradaProducto.ToList();
+
+
+            }
+            ou.fecha = DateTime.Now;
+            return PartialView(ou);
         }
         public PartialViewResult Salida()
         {
@@ -67,6 +88,8 @@ namespace Web.Controllers
             
             return View("~/Views/Home/Index.cshtml");
         }
+
+
 
         public PartialViewResult saveSalidaProducto(int cantidad,int Seccion, long producto)
         {

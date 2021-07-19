@@ -2321,6 +2321,7 @@
     <Content Include="Views\Proveedor\_ListaContacto.cshtml" />
     <Content Include="Views\Movimiento\_producto.cshtml" />
     <Content Include="Views\Movimiento\_listaproducto.cshtml" />
+    <Content Include="Views\Movimiento\_ProductoEntrada.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
