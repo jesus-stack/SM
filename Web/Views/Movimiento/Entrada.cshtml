@@ -8,13 +8,7 @@
     <div class="offset-md-2">
         <h1 class="stock_h1">@ViewBag.titulo</h1>
     </div>
-    <div class="offset-md-2">
-        <label for="tipo">Tipo de movimiento</label>
-        <select class="form-control" id="tipo">
-            <option value="1">Compra</option>
-            <option value="2">Devolucion</option>
-        </select>
-    </div>
+   
 </div>
 <br />
 <br />
@@ -63,7 +57,7 @@
                 @Html.LabelFor(model => model.Comentario  , htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Comentario, new { htmlAttributes = new { @class = "form-control " } })
-                    @Html.ValidationMessageFor(model => model.Comentario, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Comentario, "*", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -220,7 +214,9 @@
                                 <div class="form-group">
                                     <label>Fecha de vencimiento</label>
                                     <div class="col-md-10">
-                                        <input  type="date" name="fechaV" class="form-control" />
+                                        <input type="date" name="fechaV" class="form-control" required min="0"  />
+                                        @Html.ValidationMessage("Vencimiento", "*", new { @class = "text-danger" })
+                                     
                                     </div>
 
                                 </div>

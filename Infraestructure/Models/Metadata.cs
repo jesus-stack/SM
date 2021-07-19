@@ -77,6 +77,7 @@ namespace Infraestructure.Models
         [Display(Name ="N° Entrada")]
         public long Id { get; set; }
         public Nullable<int> IdMovimiento { get; set; }
+        [Required(ErrorMessage = "{0} es un dato requerrido")]
         public string Comentario { get; set; }
         public Nullable<long> IdUsuario { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
@@ -93,10 +94,12 @@ namespace Infraestructure.Models
         [Display(Name ="Tipo Movimiento")]
         [Required(ErrorMessage ="{0} es un dato requerrido")]
         public Nullable<int> IdMovimiento { get; set; }
+        [Required(ErrorMessage = "{0} es un dato requerrido")]
         public string comentario { get; set; }
         public Nullable<long> IdUsuario { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
         [Required(ErrorMessage = "{0} es un dato requerrido")]
+        [Display(Name = "Movimiento")]
         public virtual Movimiento Movimiento { get; set; }
         public virtual Usuario Usuario { get; set; }
        
