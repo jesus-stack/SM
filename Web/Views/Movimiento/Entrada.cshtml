@@ -24,7 +24,7 @@
 <br />
 @{ String nombre = (String)TempData["usuario"]; TempData.Keep("usuario");
 }
-@using (Html.BeginForm("Save", "movimiento", FormMethod.Post))
+@using (Html.BeginForm("SaveEntrada", "movimiento", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <div class="row">
