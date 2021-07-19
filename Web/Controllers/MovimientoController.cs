@@ -63,42 +63,42 @@ namespace Web.Controllers
             List<SalidaProducto> salidas = (List<SalidaProducto>)TempData["detalle"];
             IserviceProducto iservice = new ServiceProducto();
             IServiceSeccion seccion = new ServiceSeccion();
-            SalidaProducto salidaProducto = salidas.FirstOrDefault(x => x.IdProducto == producto);
-            if (salidaProducto == null)
+            SalidaProducto SalidaProducto = salidas.FirstOrDefault(x => x.IdProducto == producto);
+            if (SalidaProducto == null)
             {
               
-                 salidaProducto = new SalidaProducto();
-                salidaProducto.Cantidad = cantidad;
-                salidaProducto.IdSeccion = Seccion;
-                salidaProducto.Seccion = seccion.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
-                salidaProducto.IdProducto = producto;
-                salidaProducto.Producto = iservice.GetProductoById(producto);
+                 SalidaProducto = new SalidaProducto();
+                SalidaProducto.Cantidad = cantidad;
+                SalidaProducto.IdSeccion = Seccion;
+                SalidaProducto.Seccion = seccion.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
+                SalidaProducto.IdProducto = producto;
+                SalidaProducto.Producto = iservice.GetProductoById(producto);
 
-                salidas.Add(salidaProducto);
+                salidas.Add(SalidaProducto);
             }
             else
             {
-                if (salidaProducto.IdSeccion != Seccion)
+                if (SalidaProducto.IdSeccion != Seccion)
                 {
-                    salidaProducto = new SalidaProducto();
-                    salidaProducto.Cantidad = cantidad;
-                    salidaProducto.IdSeccion = Seccion;
-                    salidaProducto.Seccion = seccion.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
-                    salidaProducto.IdProducto = producto;
-                    salidaProducto.Producto = iservice.GetProductoById(producto);
+                    SalidaProducto = new SalidaProducto();
+                    SalidaProducto.Cantidad = cantidad;
+                    SalidaProducto.IdSeccion = Seccion;
+                    SalidaProducto.Seccion = seccion.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
+                    SalidaProducto.IdProducto = producto;
+                    SalidaProducto.Producto = iservice.GetProductoById(producto);
 
-                    salidas.Add(salidaProducto);
+                    salidas.Add(SalidaProducto);
                 }
                 else
                 {
-                    int c = salidas.IndexOf(salidaProducto);
-                  salidaProducto = new SalidaProducto();
-                    salidaProducto.Cantidad = cantidad;
-                    salidaProducto.IdSeccion = Seccion;
-                    salidaProducto.Seccion = seccion.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
-                    salidaProducto.IdProducto = producto;
-                    salidaProducto.Producto = iservice.GetProductoById(producto);
-                    salidas[c] = salidaProducto;
+                    int c = salidas.IndexOf(SalidaProducto);
+                  SalidaProducto = new SalidaProducto();
+                    SalidaProducto.Cantidad = cantidad;
+                    SalidaProducto.IdSeccion = Seccion;
+                    SalidaProducto.Seccion = seccion.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
+                    SalidaProducto.IdProducto = producto;
+                    SalidaProducto.Producto = iservice.GetProductoById(producto);
+                    salidas[c] = SalidaProducto;
                 }
               
             }

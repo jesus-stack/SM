@@ -1,5 +1,5 @@
 ﻿@{
- ViewBag.titulo = "Entrada";
+    ViewBag.titulo = "Entrada";
 }
 <div class="row">
     <div class="offset-md-2">
@@ -16,161 +16,147 @@
 <br />
 <br />
 
-<div class="row" style="margin-left: 50px;">
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
+
+
+<br />
+@{ IEnumerable<Infraestructure.Models.Producto> lista = (IEnumerable<Infraestructure.Models.Producto>)TempData["productos"];
+    TempData.Keep("productos");}
+<div class="offset-md-8">
+    @using (Ajax.BeginForm("listarNombre", "Movimiento", new AjaxOptions
+    {
+        UpdateTargetId = "pros",
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "GET"
+    }))
+    {
         <div class="card-body">
-            <h5 class="card-title">Card title</h5>
+            <div class="input-group">
+                <div class="ui-widget">
+                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Nombre" })
+
+                </div>
+
+
+                <button type="submit" class="btn btn-default">Buscar</button>
+
+            </div>
         </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
+
+    }
+</div>
+<div class="row" id="pros" style="margin-left: 50px;">
+    @foreach (var item in lista)
+    {
+        <div class="card" style="width: 10rem;margin: 10px;">
+            @if (item.imagen != null)
+            {
+                <img src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.imagen)" class="card-img-top" alt="Producto @item.Nombre">
+            }
+            else
+            {
+                <img src="~/source/img/stock.png" class="card-img-top" alt="...">
+            }
+
+            <div class="card-body">
+                <h5 class="card-title">@item.Nombre</h5>
+            </div>
+            <button class="btn bg-sprimary shover" data-toggle="modal" data-target="#a-@item.Id">Agregar</button>
+            <div class="modal fade" id="a-@item.Id" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="title-modal" style="text-align:center;">   Salida de producto</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+
+                            @using (Ajax.BeginForm("saveEntradaProducto", "Movimiento", new AjaxOptions
+                            {
+                                UpdateTargetId = "detail",
+                                InsertionMode = InsertionMode.Replace,
+                                HttpMethod = "POST",
+                                OnComplete = "hidemodal('#a-" + item.Id + "')"
+                            }, new { @id = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <div class="form-horizontal">
+
+                                    <hr />
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                                    <div class="form-group">
+
+                                        <label class="control-label col-md-5" for="Seccion">Seccion</label>
+                                        <div class="col-md-7">
+
+                                            <select class="form-control" id="Seccion" name="Seccion" sele required>
+                                                @{ IEnumerable<Infraestructure.Models.Seccion> secciones = (IEnumerable<Infraestructure.Models.Seccion>)TempData["Secciones"];
+                                                    TempData.Keep("Secciones");}
+                                                @foreach (var sec in secciones)
+                                                {
+
+
+
+                                                    <option value="@sec.Id">@sec.Descripcion</option>
+                                                }
+                                            </select>
+                                            @Html.ValidationMessage("Seccion", "*", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+
+                                    <input type="hidden" name="producto" value="@item.Id" />
+                                   
+
+
+
+                                    <div class="form-group">
+                                        <label class="control-label col-md-5" for="c">Cantidad</label>
+                                        <div class="col-md-6">
+
+                                            <input class="form-control" type="number" id="c" name="cantidad" required min="0" />
+                                            @Html.ValidationMessage("cantidad", "*", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-6">
+                                            <input type="submit" value="Aceptar" class="btn btn-default bg-sprimary  shover" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
-    <div class="card" style="width: 10rem;margin: 10px;">
-        <img src="~/source/img/stock.png" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-        </div>
-        <a href="#" class="btn btn-primary">Agregar</a>
-    </div>
+    }
 
 
 </div>
+<script>
+        @Html.Raw(@ViewBag.NotificationMessage);
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
+
+
+}
