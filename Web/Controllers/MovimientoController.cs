@@ -154,6 +154,7 @@ namespace Web.Controllers
             ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Salida", "Registro Agregado Exitosamente", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
             return PartialView("_producto");
         }
+
         public PartialViewResult eliminarpro(int index)
         {
             List<SalidaProducto> salidas = (List<SalidaProducto>)TempData["detalle"];
@@ -161,6 +162,14 @@ namespace Web.Controllers
             TempData["detalle"] = salidas;
             ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Salida", "Registro Eliminado Exitosamente", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
             return PartialView("_producto");
+        }
+        public PartialViewResult eliminarproentrada(int index)
+        {
+            List<EntradaProducto> entradas = (List<EntradaProducto>)TempData["detall"];
+            entradas.RemoveAt(index);
+            TempData["detall"] = entradas;
+            ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Entrada", "Registro Eliminado Exitosamente", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
+            return PartialView("_ProductoEntrada");
         }
         public PartialViewResult listarNombre(string filtro)
         {
