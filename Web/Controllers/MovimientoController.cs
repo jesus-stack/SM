@@ -63,7 +63,7 @@ namespace Web.Controllers
             {
                 ou = new Entrada();
                 Session["in"] = ou;
-                TempData["detalle"] = ou.EntradaProducto.ToList();
+                TempData["detall"] = ou.EntradaProducto.ToList();
 
 
             }
@@ -196,7 +196,7 @@ namespace Web.Controllers
 
         public PartialViewResult saveEntradaProducto(int cantidad, int Seccion, int Proveedor, long producto, DateTime fechaV)
         {
-            List<EntradaProducto> entradas = (List<EntradaProducto>)TempData["detalle"];
+            List<EntradaProducto> entradas = (List<EntradaProducto>)TempData["detall"];
             IserviceProducto iservice = new ServiceProducto();
             IServiceSeccion seccion = new ServiceSeccion();
             IServiceProveedor isProveedor = new ServiceProveedor();
