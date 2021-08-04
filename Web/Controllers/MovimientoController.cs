@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.Security;
 using Web.Utils;
 
 namespace Web.Controllers
@@ -32,6 +33,7 @@ namespace Web.Controllers
         }
 
         // GET: Movimiento
+        [CustomAuthorize((int)Roles.Administrador, (int)Roles.encargado)]
         public ActionResult Index()
         {
             
@@ -42,7 +44,13 @@ namespace Web.Controllers
                
                 TempData["productos"] = producto.GetProducto();
                 Usuario u =(Usuario) Session["User"];
-                TempData["usuario"] = u.Nombre;
+                if (u != null)
+                {
+                    TempData["usuario"] = u.Nombre;
+                }
+                else{
+                    TempData["usuario"] = "";
+                }
                 TempData["Secciones"] = serviceSeccion.GetSeccion();
                 ViewBag.movimientos = ListaSalidas();
                 ViewBag.MEntradas = ListaEntrada();
@@ -54,6 +62,7 @@ namespace Web.Controllers
             }
             return View();
         }
+      
         public PartialViewResult Entrada()
         {
             ViewBag.MEntradas = ListaEntrada();
@@ -70,6 +79,7 @@ namespace Web.Controllers
             ou.fecha = DateTime.Now;
             return PartialView(ou);
         }
+        [CustomAuthorize((int)Roles.Administrador)]
         public PartialViewResult Salida()
         {
             ViewBag.movimientos = ListaSalidas();
@@ -85,74 +95,126 @@ namespace Web.Controllers
             ou.fecha = DateTime.Now;
             return PartialView(ou);
         }
-        public  ActionResult Save()
-        {
-            Session["out"] =null;
-           
-            
-            ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Salida", "Registrada Exitosamente", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
 
-            
-            return View("Salida");
+        public  ActionResult Save(Salida salida)
+        {
+           
+            ICollection < SalidaProducto > list= (ICollection<SalidaProducto>) TempData["detalle"];
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Usuario u = (Usuario)Session["User"];
+                    salida.IdUsuario = u.Id;
+                    salida.SalidaProducto = list;
+                    Session["out"] = null;
+
+                    ServiceSalida service = new ServiceSalida();
+
+                    service.Save(salida);
+
+                    Salida ou = (Salida)Session["out"];
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Salida", "Registrada Exitosamente", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
+
+
+                    return View("~/Views/Movimiento/Index.cshtml");
+                }
+                else
+                {
+                    ViewBag.movimientos = ListaSalidas();
+                   
+                    Salida ou = (Salida)Session["out"];
+
+                    return View("Salida",ou);
+
+                }
+            }
+            catch(Exception e)
+            {
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
+                ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Salida", "ERROR! al registrar", SweetAlertMessageType.error);
+
+
+                return View("~/Views/Home/Index.cshtml");
+
+            }
         }
         public ActionResult SaveEntrada()
         {
             Session["in"] = null;
-            TempData["productos"] = new List<Producto>();
+           
 
             ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Entrada", "Registrada Exitosamente", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
 
-
-            return View("~/Views/Home/Index.cshtml");
+            return View("~/Views/Movimiento/Index.cshtml");
         }
 
 
         public PartialViewResult saveSalidaProducto(int cantidad,int Seccion, long producto)
         {
-            List<SalidaProducto> salidas = (List<SalidaProducto>)TempData["detalle"];
-            IserviceProducto iservice = new ServiceProducto();
-            IServiceSeccion seccion = new ServiceSeccion();
-            SalidaProducto SalidaProducto = salidas.FirstOrDefault(x => x.IdProducto == producto);
-            if (SalidaProducto == null)
+            try
             {
-              
-                 SalidaProducto = new SalidaProducto();
-                SalidaProducto.Cantidad = cantidad;
-                SalidaProducto.IdSeccion = Seccion;
-                SalidaProducto.Seccion = seccion.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
-                SalidaProducto.IdProducto = producto;
-                SalidaProducto.Producto = iservice.GetProductoById(producto);
 
-                salidas.Add(SalidaProducto);
-            }
-            else
-            {
-                if (SalidaProducto.IdSeccion != Seccion)
+                List<SalidaProducto> salidas = (List<SalidaProducto>)TempData["detalle"];
+                ServiceProducto iservice = new ServiceProducto();
+                long cant =(long) iservice.GetProductoBySeccion(producto, Seccion).Sum(x=>x.Cantidad);
+                if (cant>=cantidad)
                 {
-                    SalidaProducto = new SalidaProducto();
-                    SalidaProducto.Cantidad = cantidad;
-                    SalidaProducto.IdSeccion = Seccion;
-                    SalidaProducto.Seccion = seccion.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
-                    SalidaProducto.IdProducto = producto;
-                    SalidaProducto.Producto = iservice.GetProductoById(producto);
+                    IServiceSeccion seccion = new ServiceSeccion();
+                    SalidaProducto SalidaProducto = salidas.FirstOrDefault(x => x.IdProducto == producto);
+                   
+                    if (SalidaProducto == null)
+                    {
 
-                    salidas.Add(SalidaProducto);
+                        SalidaProducto = new SalidaProducto();
+                        SalidaProducto.Cantidad = cantidad;
+                        SalidaProducto.IdSeccion = Seccion;
+                        SalidaProducto.Seccion = seccion.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
+                        SalidaProducto.IdProducto = producto;
+                        SalidaProducto.Producto = iservice.GetProductoById(producto);
+
+                        salidas.Add(SalidaProducto);
+                    }
+                    else
+                    {
+                        if (SalidaProducto.IdSeccion != Seccion)
+                        {
+                            SalidaProducto = new SalidaProducto();
+                            SalidaProducto.Cantidad = cantidad;
+                            SalidaProducto.IdSeccion = Seccion;
+                            SalidaProducto.Seccion = seccion.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
+                            SalidaProducto.IdProducto = producto;
+                            SalidaProducto.Producto = iservice.GetProductoById(producto);
+
+                            salidas.Add(SalidaProducto);
+                        }
+                        else
+                        {
+                            int c = salidas.IndexOf(SalidaProducto);
+                            SalidaProducto = new SalidaProducto();
+                            SalidaProducto.Cantidad = cantidad;
+                            SalidaProducto.IdSeccion = Seccion;
+                            SalidaProducto.Seccion = seccion.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
+                            SalidaProducto.IdProducto = producto;
+                            SalidaProducto.Producto = iservice.GetProductoById(producto);
+                            salidas[c] = SalidaProducto;
+                        }
+
+                    }
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Salida", "Registro Agregado Exitosamente", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
+                    return PartialView("_producto");
                 }
                 else
                 {
-                    int c = salidas.IndexOf(SalidaProducto);
-                  SalidaProducto = new SalidaProducto();
-                    SalidaProducto.Cantidad = cantidad;
-                    SalidaProducto.IdSeccion = Seccion;
-                    SalidaProducto.Seccion = seccion.GetSeccion().FirstOrDefault(x => x.Id == Seccion);
-                    SalidaProducto.IdProducto = producto;
-                    SalidaProducto.Producto = iservice.GetProductoById(producto);
-                    salidas[c] = SalidaProducto;
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Productos Insuficientes!", "cantidad actual en Seccion : "+cant, SweetAlertMessageType.error);
+                    return PartialView("_producto");
                 }
-              
+            }catch(Exception e)
+            {
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
+                ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Salida", "ERROR!", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
+                return PartialView("_producto");
             }
-            ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Salida", "Registro Agregado Exitosamente", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
-            return PartialView("_producto");
         }
 
         public PartialViewResult eliminarpro(int index)

@@ -21,7 +21,7 @@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="row">
-
+              @Html.HiddenFor(x=>x.fecha )
             <div class="form-group">
                 <label>Fecha</label>
                 <div class="col-md-10">
@@ -70,28 +70,32 @@
 <br />
 @{ IEnumerable<Infraestructure.Models.Producto> lista = (IEnumerable<Infraestructure.Models.Producto>)TempData["productos"];
     TempData.Keep("productos");}
-<div class="offset-md-8">
-    @using (Ajax.BeginForm("listarNombre", "Movimiento", new AjaxOptions
-    {
-        UpdateTargetId = "pros",
-        InsertionMode = InsertionMode.Replace,
-        HttpMethod = "GET"
-    }))
-    {
-        <div class="card-body">
-            <div class="input-group">
-                <div class="ui-widget">
-                    @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Nombre" })
-                 
+<div class="row">
+    <h1 class="stock_h1 ">Productos</h1>
+
+    <div class="offset-md-7">
+        @using (Ajax.BeginForm("listarNombre", "Movimiento", new AjaxOptions
+        {
+            UpdateTargetId = "pros",
+            InsertionMode = InsertionMode.Replace,
+            HttpMethod = "GET"
+        }))
+        {
+            <div class="card-body">
+                <div class="input-group">
+                    <div class="ui-widget">
+                        @Html.TextBox("filtro", "", new { @class = "form-control", @placeholder = "Nombre" })
+
+                    </div>
+
+
+                    <button type="submit" class="btn btn-default">Buscar</button>
+
                 </div>
-
-
-                <button type="submit" class="btn btn-default">Buscar</button>
-
             </div>
-        </div>
 
-    }
+        }
+    </div>
 </div>
 <div class="row" id="pros" style="margin-left: 50px;">
     @foreach (var item in lista)

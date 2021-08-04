@@ -13,7 +13,7 @@ namespace Infraestructure.Models
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    [MetadataType(typeof(SalidaMetadata))]
+  
     public partial class SalidaProducto
     {
         public long IdProducto { get; set; }

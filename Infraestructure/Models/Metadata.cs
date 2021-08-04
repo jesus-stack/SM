@@ -98,7 +98,7 @@ namespace Infraestructure.Models
         public string comentario { get; set; }
         public Nullable<long> IdUsuario { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
-        [Required(ErrorMessage = "{0} es un dato requerrido")]
+        
         [Display(Name = "Movimiento")]
         public virtual Movimiento Movimiento { get; set; }
         public virtual Usuario Usuario { get; set; }

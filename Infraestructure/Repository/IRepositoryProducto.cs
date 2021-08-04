@@ -16,6 +16,9 @@ namespace Infraestructure.Repository
         Producto Save(Producto pro, string[] selectedProveedores);
 
         void Delete(long id);
+
+        IEnumerable<ProductoSeccion> GetProductoBySeccion(long id, int seccion);
+        
          
     }
 }

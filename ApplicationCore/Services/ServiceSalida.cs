@@ -15,5 +15,10 @@ namespace ApplicationCore.Services
             IRepositorySalida repository = new RepositorySalida();
             return repository.GetSalida();
         }
+        public void Save(Salida sal)
+        {
+            RepositorySalida repository = new RepositorySalida();
+             repository.Save(sal);
+        }
     }
 }

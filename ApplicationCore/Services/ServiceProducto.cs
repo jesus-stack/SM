@@ -54,6 +54,13 @@ namespace ApplicationCore.Services
             IRepositoryProducto repository = new RepositoryProducto();
             return repository.Save(pro,selectedProveedores);
         }
-        
+
+        public IEnumerable<ProductoSeccion> GetProductoBySeccion(long id, int seccion)
+        {
+            RepositoryProducto repository = new RepositoryProducto();
+            return repository.GetProductoBySeccion(id,seccion);
+        }
+
+
     }
 }
