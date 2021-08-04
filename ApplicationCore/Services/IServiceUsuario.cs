@@ -12,5 +12,7 @@ namespace ApplicationCore.Services
         Usuario GetUsuarioByID(long id);
         Usuario Save(Usuario usuario);
         Usuario GetUsuario(long id, string password);
+        IEnumerable<Usuario> GetUsuarios();
+        void desactivar(long id);
     }
 }

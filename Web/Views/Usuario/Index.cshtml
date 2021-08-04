@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Infraestructure.Models.Usuario>
+
+@{
+    ViewBag.Title = "Usuarios";
+}
+<div class="container">
+    <h1 class="stock_h1 col-12">Usuarios</h1>
+    <br />
+    <div class="row">
+        <div class="col-2 new_action">
+            <a href="~/Producto/Crear" class="bx bx-message-square-add">
+                <strong>Nuevo</strong>
+            </a>
+        </div>
+      
+       
+        <br />
+     
+    </div>
+    <div id="tabla" class="col-12">
+        <div id="ajaxLoader" class="center-block" alt="Cargando ..." style="height:100px;width:100px; display:none">
+            <img src="~/Source/img/load.gif" />
+        </div>
+        @Html.Partial("_PartialTablaU")
+    </div>
+</div>
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryajax")
+    @Scripts.Render("~/bundles/jqueryui")
+}

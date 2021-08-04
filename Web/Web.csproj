@@ -154,6 +154,7 @@
     <Compile Include="Controllers\ProductoSeccionController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
     <Compile Include="Controllers\SalidaController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Enum\Enum.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2322,10 +2323,13 @@
     <Content Include="Views\Movimiento\_producto.cshtml" />
     <Content Include="Views\Movimiento\_listaproducto.cshtml" />
     <Content Include="Views\Movimiento\_ProductoEntrada.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\_PartialTablaU.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\C\" />
     <Folder Include="Views\ProveedorContacto\" />
   </ItemGroup>
   <ItemGroup>

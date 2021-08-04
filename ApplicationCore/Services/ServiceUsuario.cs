@@ -11,6 +11,13 @@ namespace ApplicationCore.Services
 {
   public   class ServiceUsuario : IServiceUsuario
     {
+        public void desactivar(long id)
+        {
+            IRepositoryUsuario repository = new RepositoryUsuario();
+
+            repository.desactivar(id);
+        }
+
         public Usuario GetUsuario(long id, string password)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
@@ -25,6 +32,13 @@ namespace ApplicationCore.Services
             Usuario oUsuario = repository.GetUsuarioByID(id);
             oUsuario.contrasena = Cryptography.DecrypthAES(oUsuario.contrasena);
             return oUsuario;
+        }
+
+        public IEnumerable<Usuario> GetUsuarios()
+        {
+            IRepositoryUsuario repository = new RepositoryUsuario();
+        
+            return repository.GetUsuarios();
         }
 
         public Usuario Save(Usuario usuario)

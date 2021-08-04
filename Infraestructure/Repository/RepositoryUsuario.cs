@@ -11,6 +11,31 @@ namespace Infraestructure.Repository
 {
     public class RepositoryUsuario : IRepositoryUsuario
     {
+        public void desactivar(long id)
+        {
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    Usuario user = ctx.Usuario.FirstOrDefault(x => x.Id == id);
+                    user.Estado = false;
+                    ctx.SaveChanges();
+                }
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
+
         public Usuario GetUsuario(long id, string password)
         {
             Usuario oUsuario = null;
@@ -69,6 +94,32 @@ namespace Infraestructure.Repository
                 Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
                 throw;
             }
+        }
+
+        public IEnumerable<Usuario> GetUsuarios()
+        {
+            IEnumerable<Usuario> lista = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    lista = ctx.Usuario.Include("TipoUsuario1").ToList();
+                }
+                  
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+            return lista;
         }
 
         public Usuario Save(Usuario usuario)

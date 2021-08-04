@@ -1,0 +1,65 @@
+﻿<br />
+@model IEnumerable<Infraestructure.Models.Usuario>
+
+<h2 class="offset-md-5 col-3">@ViewBag.Subtitle</h2>
+<div class="row container table-responsive col-12">
+    <table class="table  table-striped table-bordered text-center">
+        <thead class="bg-sprimary">
+            <tr>
+
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                <th>@Html.DisplayNameFor(model => model.Estado)</th>
+                <th>@Html.DisplayNameFor(model => model.TipoUsuario)</th>
+
+
+                <th class="">Desactivar</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                   
+                 
+
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@if((Boolean) item.Estado) { <p>Activo</p>} else { <p>Inactivo</p>}</td>
+                    <td>@item.TipoUsuario1.Descripcion</td>
+                  
+                   
+                    <td><i class='action_left bx bxs-trash' data-toggle="modal" data-target="#c-@item.Id"></i></td>
+                    <div class="modal fade" id="c-@item.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Desactivar Usuario</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Esta seguro que desea desactivar el Usuario
+                                    <br />
+                                    "@item.Nombre "?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    @Html.ActionLink("Confirmar", "Desactivar", new { id = item.Id }, new { @class = "btn btn-primary" })
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+
+
+</div>
