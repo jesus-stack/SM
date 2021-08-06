@@ -20,7 +20,7 @@ namespace Web.Controllers
 
 
 
-        public PartialViewResult _ListaContacto()
+        public PartialViewResult _ListaContacto(long? id)
         {
             IEnumerable<Contacto> lista = null;
            ServiceContacto service = new ServiceContacto();
@@ -29,7 +29,7 @@ namespace Web.Controllers
             try
             {
 
-                lista = service.GetContactos().ToList();
+                lista = service.GetContactos(id).ToList();
 
 
 
@@ -39,7 +39,7 @@ namespace Web.Controllers
             {
                 Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
             }
-            ViewBag.listaContacto = service.GetContactos();
+            ViewBag.listaContacto = service.GetContactos(id);
             return PartialView("_ListaContacto", lista);
         }
 

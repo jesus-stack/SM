@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Infraestructure.Models.Contacto>
+﻿@{List<Infraestructure.Models.Contacto> contactos = (List<Infraestructure.Models.Contacto>)TempData["contac"];}
 
 
 
@@ -8,8 +8,8 @@
         <thead class="bg-sprimary">
             <tr>
 
-                <th>@Html.DisplayNameFor(model => model.Nombre)</th>
-                <th>@Html.DisplayNameFor(model => model.Telefono)</th>
+                <th> Nombre </th>
+                <th>Contacto</th>
 
                 <th class="">Editar</th>
                 <th class="">Eliminar</th>
@@ -19,7 +19,7 @@
         <tbody>
 
             <h1> Contactos</h1>
-            @foreach (var item in Model)
+            @foreach (var item in contactos)
             {
                 <tr>
 

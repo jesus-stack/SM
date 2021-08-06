@@ -22,10 +22,10 @@ namespace ApplicationCore.Services
            return repo.GetContactoById(id);
         }
 
-        public IEnumerable<Contacto> GetContactos()
+        public IEnumerable<Contacto> GetContactos(long? id)
         {
             IRepositoyContacto repo = new RepositoryContacto();
-            return repo.GetContactos();
+            return repo.GetContactos(id);
         }
 
         public Contacto Save(Contacto con)

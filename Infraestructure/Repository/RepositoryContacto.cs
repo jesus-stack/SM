@@ -69,14 +69,14 @@ namespace Infraestructure.Repository
             }
         }
 
-        public IEnumerable<Contacto> GetContactos()
+        public IEnumerable<Contacto> GetContactos(long? id)
         {
             IEnumerable<Contacto> lista = null;
             try
             {
                 using (MyContext ctx = new MyContext())
                 {
-                    lista = ctx.Contacto.ToList<Contacto>();
+                    lista = ctx.Contacto.Where(x => x.IdProveedor == id).ToList<Contacto>();
                     return lista;
                 }
             }
@@ -95,6 +95,7 @@ namespace Infraestructure.Repository
             }
 
         }
+    
 
         public Contacto Save(Contacto con)
         {

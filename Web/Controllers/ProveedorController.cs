@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Web.Security;
+using Web.Utils;
 
 namespace Web.Controllers
 {
@@ -15,15 +16,15 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             IEnumerable<Proveedor> lista = null;
-            
+
             ServiceProveedor service = new ServiceProveedor();
-           
+
 
 
             try
             {
-                lista = service.GetProveedor() ;
-               
+                lista = service.GetProveedor();
+
 
             }
             catch (Exception e)
@@ -73,6 +74,7 @@ namespace Web.Controllers
         {
             ServiceProducto service = new ServiceProducto();
             ServiceProveedor servicep = new ServiceProveedor();
+          
 
             Proveedor pr = new Proveedor();
             try
@@ -80,14 +82,18 @@ namespace Web.Controllers
 
                 if (id != null)
                 {
-                    pr = servicep.GetProveedorById((int)id);
-                    ViewBag.ListaProductos = listaProductos(pr.Producto);
                     
 
+                    pr = servicep.GetProveedorById((int)id);
+                    ViewBag.ListaProductos = listaProductos(pr.Producto);
+
+                    TempData["contac"] = pr.Contacto.ToList();
                     ViewBag.Mantenimientotitulo = "Modificar";
                 }
                 else
                 {
+                    TempData["contac"] = new List<Contacto>();
+                    
                     ViewBag.ListaProductos = listaProductos(null);
                     ViewBag.Mantenimientotitulo = "Crear";
                 }
@@ -106,17 +112,25 @@ namespace Web.Controllers
         public ActionResult save(Proveedor proveedor, string[] selectedPrpductos)
         {
             IServiceProveedor service = new ServiceProveedor();
+            List<Contacto> lista = (List<Contacto>)TempData["contac"];
 
             try
             {
-
+                if (lista != null)
+                {
+                    proveedor.Contacto = lista;
+                }
 
 
 
                 if (ModelState.IsValid)
                 {
-
+                    proveedor.Contacto = (List<Infraestructure.Models.Contacto>)TempData["contac"];
+                    proveedor.Estado = true;
                     service.Save(proveedor, selectedPrpductos);
+
+
+
                     return RedirectToAction("Index");
                 }
                 else
@@ -124,6 +138,8 @@ namespace Web.Controllers
                     // Valida Errores si Javascript está deshabilitado
                     Util.ValidateErrors(this);
                     ViewBag.ListaProductos = listaProductos(proveedor.Producto);
+
+
                     return RedirectToAction("Crear", proveedor.Id);
                 }
 
@@ -132,6 +148,7 @@ namespace Web.Controllers
             {
                 return RedirectToAction("Crear", proveedor);
             }
+          
         }
 
         [CustomAuthorize((int)Roles.Administrador)]
@@ -156,18 +173,25 @@ namespace Web.Controllers
         }
 
 
-
-        public PartialViewResult _ListaContacto()
+        [CustomAuthorize((int)Roles.Administrador)]
+        public PartialViewResult _ListaContacto(long? id)
         {
             IEnumerable<Contacto> lista = null;
+            IEnumerable<Contacto> listaTem=(List<Infraestructure.Models.Contacto>)TempData["contac"];
             ServiceContacto service = new ServiceContacto();
 
 
             try
             {
 
-                lista = service.GetContactos().ToList();
+                if (listaTem == null)
+                {
 
+                    lista = service.GetContactos(id).ToList();
+                }
+                else {
+                    lista = listaTem;
+                }
 
 
 
@@ -176,9 +200,57 @@ namespace Web.Controllers
             {
                 Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
             }
-            ViewBag.listaContacto = service.GetContactos();
+            ViewBag.listaContacto = service.GetContactos(id);
             return PartialView("_ListaContacto", lista);
         }
+
+
+
+        [CustomAuthorize((int)Roles.Administrador)]
+        public PartialViewResult SaveContac(long identificacion, String nombre, String telefono, String email, int idProveedor)
+        {
+            List<Infraestructure.Models.Contacto> lista = ((List<Infraestructure.Models.Contacto>)TempData["contac"]);
+            TempData.Keep("contac");
+
+            try
+            {
+
+                if (identificacion!=0 && !nombre.Equals("")&& !email.Equals(""))
+                {
+                    Contacto c = new Contacto();
+
+                    c.Id = identificacion;
+                    c.Nombre = nombre;
+                    c.Telefono = telefono;
+                    c.Correo = email;
+                    c.IdProveedor = idProveedor;
+
+
+                    lista.Add(c);
+
+                    TempData["contac"] = lista;
+
+
+                    return PartialView("_ListaContacto");
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Util.ValidateErrors(this);
+
+                    return PartialView("_ListaContacto");
+                }
+
+            }
+            catch
+            {
+                return PartialView("_ListaContacto");
+            }
+        }
+
+
+
+
 
     }
 }

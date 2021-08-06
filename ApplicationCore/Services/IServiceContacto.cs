@@ -9,7 +9,7 @@ namespace ApplicationCore.Services
 {
     public interface IServiceContacto
     {
-        IEnumerable<Contacto> GetContactos();
+        IEnumerable<Contacto> GetContactos(long? id);
 
 
         Contacto GetContactoById(long id);

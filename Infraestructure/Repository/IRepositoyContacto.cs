@@ -10,7 +10,7 @@ namespace Infraestructure.Repository
     public interface IRepositoyContacto
     {
 
-        IEnumerable<Contacto> GetContactos();
+        IEnumerable<Contacto> GetContactos(long? id);
        
 
         Contacto GetContactoById(long id);
