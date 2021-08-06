@@ -126,6 +126,7 @@ namespace Web.Controllers
                 if (ModelState.IsValid)
                 {
                     proveedor.Contacto = (List<Infraestructure.Models.Contacto>)TempData["contac"];
+                    TempData.Keep("contac");
                     proveedor.Estado = true;
                     service.Save(proveedor, selectedPrpductos);
 
@@ -178,6 +179,7 @@ namespace Web.Controllers
         {
             IEnumerable<Contacto> lista = null;
             IEnumerable<Contacto> listaTem=(List<Infraestructure.Models.Contacto>)TempData["contac"];
+            TempData.Keep("contac");
             ServiceContacto service = new ServiceContacto();
 
 
@@ -209,8 +211,14 @@ namespace Web.Controllers
         [CustomAuthorize((int)Roles.Administrador)]
         public PartialViewResult SaveContac(long identificacion, String nombre, String telefono, String email, int idProveedor)
         {
-            List<Infraestructure.Models.Contacto> lista = ((List<Infraestructure.Models.Contacto>)TempData["contac"]);
+            List<Infraestructure.Models.Contacto> lista = ((List<Infraestructure.Models.Contacto>)TempData["contac"]); 
             TempData.Keep("contac");
+
+            if (lista == null)
+            {
+                lista = new List<Contacto>();
+            }
+
 
             try
             {

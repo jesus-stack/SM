@@ -87,6 +87,16 @@
 
 
 
+<<<<<<< Updated upstream
+=======
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-7">
+                    <input type="submit" value="@ViewBag.Mantenimientotitulo" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+>>>>>>> Stashed changes
 
 
 
@@ -99,6 +109,7 @@
     }
 
 
+<<<<<<< Updated upstream
 </div>
 <div class="modal fade" id="crear" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -110,6 +121,8 @@
                 </button>
             </div>
             <div class="modal-body">
+=======
+>>>>>>> Stashed changes
 
                 @using (Ajax.BeginForm("SaveContac", "Proveedor", new AjaxOptions
                 {
@@ -133,27 +146,60 @@
                         </div>
                     </div>
 
+    <div class="modal fade" id="crear" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="title-modal" style="text-align:center;"> Registrar contacto</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
 
+                    @using (Ajax.BeginForm("SaveContac", "Proveedor", new AjaxOptions
+                    {
+                        UpdateTargetId = "Contac",
+                        InsertionMode = InsertionMode.Replace,
+                        HttpMethod = "POST",
+                        OnComplete = "hidemodal('#crear')"
+                    }, new { @id = "form" }))
+                    {
+                        @Html.AntiForgeryToken()
 
                     <div class="form-group">
                         <label class="control-label col-md-2" for="c">Nombre</label>
                         <div class="col-md-6">
                             @Html.TextBox("nombre", "", new { @class = "form-control", @placeHolder = "Nombre" })
 
+<<<<<<< Updated upstream
                         </div>
                     </div>
+=======
+>>>>>>> Stashed changes
 
+                        @Html.Hidden("idProveedor", Model.Id)
 
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="c">Identificación</label>
+                            <div class="col-md-6">
+                                @Html.TextBox("identificacion", "", new { @class = "form-control", @placeHolder = "Identificación" })
 
+<<<<<<< Updated upstream
                     <div class="form-group">
                         <label class="control-label col-md-2" for="c">Teléfono</label>
                         <div class="col-md-6">
                             @Html.TextBox("telefono", "", new { @class = "form-control", @placeHolder = "Teléfono" })
+=======
+                            </div>
+                        </div>
+>>>>>>> Stashed changes
 
                         </div>
                     </div>
 
 
+<<<<<<< Updated upstream
                     <div class="form-group">
                         <label class="control-label col-md-2" for="c">Email</label>
                         <div class="col-md-6">
@@ -161,14 +207,38 @@
 
                         </div>
                     </div>
+=======
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="c">Nombre</label>
+                            <div class="col-md-6">
+                                @Html.TextBox("nombre", "", new { @class = "form-control", @placeHolder = "Nombre" })
+
+                            </div>
+                        </div>
+>>>>>>> Stashed changes
 
 
 
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="c">Teléfono</label>
+                            <div class="col-md-6">
+                                @Html.TextBox("telefono", "", new { @class = "form-control", @placeHolder = "Teléfono" })
+
+                            </div>
+                        </div>
 
 
+                        <div class="form-group">
+                            <label class="control-label col-md-2" for="c">Email</label>
+                            <div class="col-md-6">
+                                @Html.TextBox("email", "", new { @class = "form-control", @placeHolder = "Email" })
 
-
+<<<<<<< Updated upstream
                     <div class="modal-footer">
+=======
+                            </div>
+                        </div>
+>>>>>>> Stashed changes
 
 
 
@@ -178,12 +248,23 @@
 
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
 
-                    </div>
+                        <div class="modal-footer">
 
                 }
 
 
+<<<<<<< Updated upstream
+=======
+                            <button type="submit" class="btn btn-primary">Aceptar</button>
+>>>>>>> Stashed changes
 
+
+
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+                        </div>
+
+                    }
 
 
 
@@ -195,7 +276,45 @@
 
 
 
+<<<<<<< Updated upstream
         </div>
+=======
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> Stashed changes
 
 
     </div>
