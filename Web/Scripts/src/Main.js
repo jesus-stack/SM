@@ -137,7 +137,23 @@ function mostrar(evt, tab) {
     document.getElementById(tab).style.display = "block";
     evt.currentTarget.className += " active";
 }
+function active(evt) {
+    alert();
+    var i, tablinks;
 
+
+   
+
+
+    tablinks = document.getElementsByClassName("nav-link");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace("active", "");
+    }
+
+
+  
+    evt.currentTarget.className += "active";
+}
 function goBack() {
     window.history.back();
 }

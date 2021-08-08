@@ -22,7 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini sidebar-closed sidebar-collapse">
     <div class="wrapper">
 
         <!-- Navbar -->
@@ -33,10 +33,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars toplink"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="~/Home/Index" class="nav-link toplink">Home</a>
+                    <a href="~/Home/Index" class="nav-link toplink">Inico</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="~/Home/About" class="nav-link toplink">Contact</a>
+                    <a href="~/Home/About" class="nav-link toplink">Contacto</a>
                 </li>
             </ul>
 
@@ -136,29 +136,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                         with font-awesome or any other icon font library -->
-                        <li class="nav-item menu-open">
+                        <li class="nav-item ">
                             <a href="#" class="nav-link ">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <i class="nav-icon fas fa-users-cog"></i>
                                 <p>
                                     Mantenimiento
                                     <i class="right fas fa-angle-left"></i>
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="~/Producto/Index" class="nav-link ">
+                                <li class="nav-item" >
+                                    <a href="~/Producto/Index" class="nav-link" onclick="active(event)">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Productos</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="~/Proveedor/index" class="nav-link">
+                                <li class="nav-item nav-active">
+                                    <a href="~/Proveedor/index" class="nav-link"  onclick="active(event)">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Proveedores</p>
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a href="~/Usuario/Index" class="nav-link">
+                                <li class="nav-item" >
+                                    <a href="~/Usuario/Index" class="nav-link" onclick="active(event)">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Usuarios</p>
                                     </a>
@@ -167,9 +167,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         </li>
                         <li class="nav-item">
                             <a href="~/Movimiento/index" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class="nav-icon"><span class='bx bx-up-arrow-alt bx-sm'><span class='bx bx-down-arrow-alt bx-sm'></span></span></i>
                                 <p>
-                                    Entradas y Salidas
+                                    Movimientos
                                 </p>
                             </a>
                         </li>
@@ -212,8 +212,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         </aside>
         <!-- /.control-sidebar -->
         <!-- Main Footer -->
-        <footer class="main-footer">
-        </footer>
+       
     </div>
     <!-- ./wrapper -->
     <!-- REQUIRED SCRIPTS -->

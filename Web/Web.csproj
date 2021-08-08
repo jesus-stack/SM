@@ -2325,6 +2325,7 @@
     <Content Include="Views\Movimiento\_ProductoEntrada.cshtml" />
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Usuario\_PartialTablaU.cshtml" />
+    <Content Include="Views\Usuario\Crear.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

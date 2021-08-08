@@ -35,6 +35,30 @@ namespace Infraestructure.Repository
                 throw;
             }
         }
+        public void activar(long id)
+        {
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    Usuario user = ctx.Usuario.FirstOrDefault(x => x.Id == id);
+                    user.Estado = true;
+                    ctx.SaveChanges();
+                }
+            }
+            catch (DbUpdateException dbEx)
+            {
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw;
+            }
+        }
 
         public Usuario GetUsuario(long id, string password)
         {
@@ -45,7 +69,7 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     oUsuario = ctx.Usuario.Include("TipoUsuario1").
-                     Where(p => p.Id==id&& p.contrasena.Equals(password)).
+                     Where(p => p.Id==id&& p.contrasena.Equals(password)&& p.Estado==true).
                     FirstOrDefault<Usuario>();
                 }
                 if (oUsuario != null)
@@ -77,7 +101,7 @@ namespace Infraestructure.Repository
                     ctx.Configuration.LazyLoadingEnabled = false;
                     usuario = ctx.Usuario.
                      Include("TipoUsuario1").
-                    Where(p => p.Id == id).
+                    Where(p => p.Id == id && p.Estado==true).
                     FirstOrDefault<Usuario>();
                 }
                 return usuario;

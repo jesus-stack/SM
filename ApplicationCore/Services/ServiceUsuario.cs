@@ -17,13 +17,20 @@ namespace ApplicationCore.Services
 
             repository.desactivar(id);
         }
+        public void activar(long id)
+        {
+            RepositoryUsuario repository = new RepositoryUsuario();
+
+            repository.activar(id);
+        }
+
 
         public Usuario GetUsuario(long id, string password)
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
             // Encriptar el password para poder compararlo
             string crytpPasswd = Cryptography.EncrypthAES(password);
-            return repository.GetUsuario(id, password);
+            return repository.GetUsuario(id, crytpPasswd);
         }
 
         public Usuario GetUsuarioByID(long id)

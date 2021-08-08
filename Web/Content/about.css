@@ -1,11 +1,5 @@
 ﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
-}
 
 .title {
     background: rgba(241, 97, 65, 0.8);
@@ -15,7 +9,6 @@
     border-bottom: solid 3px black;
     text-align: center;
 }
-
 .company {
     background: #E4E9F7;
     color: #1d1b31;
@@ -25,7 +18,7 @@
 }
 
     .company p {
-        font-size:50px;
+        font-size: 50px;
         margin-left: 35%;
         margin-top: 5px;
         margin-bottom: 5px;
@@ -35,26 +28,18 @@
         color: #E4E9F7;
         font-size: 30px;
     }
-
-
-
-
-
-.content, .content_hide {
+ .container-fluid {
     background-color: rgba(0, 0, 0, 0.5);
-    min-height: 100vh;
-    position: absolute;
-    padding-left:2px;
-    top: 0;
-      left: 0;
     
+   
 }
+
 
 .equipo {
     position: relative;
     width: 950px;
     display: flex;
-    margin-left:15%;
+    margin-left: 15%;
 }
 
 h3 {
@@ -120,6 +105,7 @@ h3 {
     width: 100%;
     min-height: 150px;
     position: relative;
+  
 }
 
     .contact_content .contact {
@@ -136,7 +122,10 @@ h3 {
         font-weight: bold;
     }
 
-.imgAbout{
-    height:30px;
+.imgAbout {
+    height: 30px;
+}
+.content-wrapper{
+    margin-bottom:0px;
 }
 
