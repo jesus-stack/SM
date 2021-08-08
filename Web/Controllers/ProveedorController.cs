@@ -252,5 +252,35 @@ namespace Web.Controllers
 
 
 
+
+        public PartialViewResult EliminarContact(long idContacto)
+        {
+            List<Contacto> lista = null;
+            ServiceContacto service = new ServiceContacto();
+
+
+
+
+            try
+            {
+                service.Delete(idContacto);
+
+                lista = (List<Infraestructure.Models.Contacto>)TempData["contac"];
+                lista.Remove(lista.FirstOrDefault(item =>item.Id==idContacto));
+                TempData["contac"] = lista;
+
+
+
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
+            }
+
+            return PartialView("_ListaContacto");
+
+        }
+
+     
     }
 }
