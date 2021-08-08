@@ -153,6 +153,7 @@
     <Compile Include="Controllers\ProductoController.cs" />
     <Compile Include="Controllers\ProductoSeccionController.cs" />
     <Compile Include="Controllers\ProveedorController.cs" />
+    <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\SalidaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Enum\Enum.cs" />
@@ -2326,6 +2327,7 @@
     <Content Include="Views\Usuario\Index.cshtml" />
     <Content Include="Views\Usuario\_PartialTablaU.cshtml" />
     <Content Include="Views\Usuario\Crear.cshtml" />
+    <Content Include="Views\Reporte\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

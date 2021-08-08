@@ -151,11 +151,12 @@ function active(evt) {
     }
 
 
-  
-    evt.currentTarget.className += "active";
+
+    evt.currentTarget.toggle("active");
 }
 function goBack() {
     window.history.back();
 }
+
 
 

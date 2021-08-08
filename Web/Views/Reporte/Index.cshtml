@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@Styles.Render("~/Content/inventario")
+@Styles.Render("~/Content/Index")
+
+
+
+
+<h1 class="title">
+    Reportes 
+</h1>
+<br />
+<br />
+
+
+
+
+<div class="tab_list">
+    <div class=" tab active" onclick="mostrar(event,'in')"> Entradas Registradas </div>
+    <div class=" tab" onclick="mostrar(event,'out')"> Salidas Registradas </div>
+    <div class=" tab" onclick="mostrar(event,'pro')"> Producto mas despachados </div>
+    
+</div>
+
+
+<section class="tab-list">
+
+    <div class=" tab_content tab_active" id="in">
+        <h1> Entradas Registradas</h1>
+
+     
+
+
+    </div>
+
+    <div class="tab_content" id="out">
+        <h1>  Salidas Registradas  </h1>
+       
+
+
+      
+
+
+    </div>
+
+    <div class="tab_content" id="pro">
+        <h1> Producto mas despachados</h1>
+   
+      
+     
+
+    </div>
+
+  
+
+
+</section>
+
+
+
+

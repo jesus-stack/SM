@@ -113,7 +113,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="index3.html" class="brand-link">
+            <a href="~/Home/Index" class="brand-link">
                 <img src="~/Source/img/stock.png" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
 
                 <span class="brand-text font-weight-light">Stock Manage</span>
@@ -174,8 +174,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                            <a href="~/Reporte/Index" class="nav-link">
+                                <i class="nav-icon bx bxs-report"></i>
                                 <p>
                                     Reportes
                                 </p>
@@ -184,7 +184,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <li class="nav-item">
                             <a href="~/Home/About" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
+                                <i class='nav-icon bx bxs-info-circle'></i>
                                 <p>
                                     Acerca de
                                 </p>
@@ -231,6 +231,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
     @Scripts.Render("~/bundles/sweetalert")
 <script>
         @Html.Raw(@ViewBag.NotificationMessage);
+    /** add active class and stay opened when selected */
+    var url = window.location;
+
+    // for sidebar menu entirely but not cover treeview
+    $('ul.nav-sidebar a').filter(function () {
+        return this.href == url;
+    }).addClass('active');
+
+    // for treeview
+    $('ul.nav-treeview a').filter(function () {
+        return this.href == url;
+    }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open').prev('a').addClass('active');
 </script>
 
 </body>
