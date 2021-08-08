@@ -126,7 +126,6 @@ namespace Web.Controllers
                 if (ModelState.IsValid)
                 {
                     proveedor.Contacto = (List<Infraestructure.Models.Contacto>)TempData["contac"];
-                    TempData.Keep("contac");
                     proveedor.Estado = true;
                     service.Save(proveedor, selectedPrpductos);
 
@@ -179,7 +178,6 @@ namespace Web.Controllers
         {
             IEnumerable<Contacto> lista = null;
             IEnumerable<Contacto> listaTem=(List<Infraestructure.Models.Contacto>)TempData["contac"];
-            TempData.Keep("contac");
             ServiceContacto service = new ServiceContacto();
 
 
@@ -211,14 +209,8 @@ namespace Web.Controllers
         [CustomAuthorize((int)Roles.Administrador)]
         public PartialViewResult SaveContac(long identificacion, String nombre, String telefono, String email, int idProveedor)
         {
-            List<Infraestructure.Models.Contacto> lista = ((List<Infraestructure.Models.Contacto>)TempData["contac"]); 
+            List<Infraestructure.Models.Contacto> lista = ((List<Infraestructure.Models.Contacto>)TempData["contac"]);
             TempData.Keep("contac");
-
-            if (lista == null)
-            {
-                lista = new List<Contacto>();
-            }
-
 
             try
             {
@@ -260,5 +252,35 @@ namespace Web.Controllers
 
 
 
+
+        public PartialViewResult EliminarContact(long idContacto)
+        {
+            List<Contacto> lista = null;
+            ServiceContacto service = new ServiceContacto();
+
+
+
+
+            try
+            {
+                service.Delete(idContacto);
+
+                lista = (List<Infraestructure.Models.Contacto>)TempData["contac"];
+                lista.Remove(lista.FirstOrDefault(item =>item.Id==idContacto));
+                TempData["contac"] = lista;
+
+
+
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
+            }
+
+            return PartialView("_ListaContacto");
+
+        }
+
+     
     }
 }
