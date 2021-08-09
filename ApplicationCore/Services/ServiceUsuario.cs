@@ -37,7 +37,9 @@ namespace ApplicationCore.Services
         {
             IRepositoryUsuario repository = new RepositoryUsuario();
             Usuario oUsuario = repository.GetUsuarioByID(id);
-            oUsuario.contrasena = Cryptography.DecrypthAES(oUsuario.contrasena);
+            if (oUsuario != null) { 
+                oUsuario.contrasena = Cryptography.DecrypthAES(oUsuario.contrasena);
+        }
             return oUsuario;
         }
 

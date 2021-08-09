@@ -130,6 +130,7 @@ namespace Infraestructure.Models
         [Display(Name = "Contraseña")]
         [Required(ErrorMessage = "{0} Es un dato requerido")]
         public string contrasena { get; set; }
+        [Required(ErrorMessage = "{0} Es un dato requerido")]
         public string Nombre { get; set; }
         public Nullable<int> TipoUsuario { get; set; }
         public Nullable<bool> Estado { get; set; }

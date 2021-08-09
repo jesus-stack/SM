@@ -2269,6 +2269,7 @@
     <Content Include="Source\img\pro.png" />
     <Content Include="Source\img\proveedor.png" />
     <Content Include="Source\img\stock.png" />
+    <Content Include="Source\img\user.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -2330,6 +2331,7 @@
     <Content Include="Views\Reporte\Index.cshtml" />
     <Content Include="Views\Reporte\_PartialProductos.cshtml" />
     <Content Include="Views\Reporte\_PartialModalProducto.cshtml" />
+    <Content Include="Views\Usuario\CrearInferiorAdministrador.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Web.Utils;
 
 namespace Web.Controllers
 {
@@ -85,6 +86,14 @@ namespace Web.Controllers
             return new SelectList(tipoUsuarios, "Id", "Descripcion", tipoUsuario);
            
         }
+        private SelectList ListaTipoUsuariosInferior(int tipoUsuario = 0)
+        {
+            IServiceTipoUsuario serviceTipoUsuario = new ServiceTipoUsuario();
+            List<TipoUsuario> tipoUsuarios = serviceTipoUsuario.GetTipoUsuarios().ToList();
+            tipoUsuarios.Remove(tipoUsuarios.FirstOrDefault(x => x.Id == 1));
+            return new SelectList(tipoUsuarios, "Id", "Descripcion", tipoUsuario);
+
+        }
         public ActionResult Crear()
         {
 
@@ -97,6 +106,30 @@ namespace Web.Controllers
             try
             {
                 ViewBag.ListaTipoUsuarios = ListaTipoUsuarios();
+
+
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
+            }
+
+            return View(new Usuario());
+        }
+        public ActionResult CrearInferiorAdministrador()
+        {
+
+
+            ServiceUsuario service = new ServiceUsuario();
+
+
+
+
+            try
+            {
+              
+               
+                ViewBag.ListaTipoUsuarios = ListaTipoUsuariosInferior();
 
 
             }
@@ -120,7 +153,13 @@ namespace Web.Controllers
 
                 if (ModelState.IsValid)
                 {
-                  
+                    Usuario user = service.GetUsuarioByID(usuario.Id);
+                    if (user != null)
+                    {
+                        ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("!Error", "Usuario con este ID ya existe", SweetAlertMessageType.warning);
+                        ViewBag.ListaTipoUsuarios = ListaTipoUsuarios();
+                        return View("Crear");
+                    }
                     usuario.Estado = true;
                     service.Save(usuario);
 
@@ -142,6 +181,50 @@ namespace Web.Controllers
             catch
             {
                 return RedirectToAction("Crear");
+            }
+
+        }
+        public ActionResult saveI(Usuario usuario)
+        {
+            IServiceUsuario service = new ServiceUsuario();
+
+
+            try
+            {
+
+
+
+
+                if (ModelState.IsValid)
+                {
+                    Usuario user = service.GetUsuarioByID(usuario.Id);
+                    if (user != null)
+                    {
+                        ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("!Error", "Usuario con este ID ya existe", SweetAlertMessageType.warning);
+                        ViewBag.ListaTipoUsuarios = ListaTipoUsuariosInferior();
+                        return View("CrearInferiorAdministrador");
+                    }
+                    usuario.Estado = true;
+                    service.Save(usuario);
+
+
+
+                    return RedirectToAction("Index","Login");
+                }
+                else
+                {
+                    // Valida Errores si Javascript está deshabilitado
+                    Util.ValidateErrors(this);
+                    ViewBag.ListaTipoUsuarios = ListaTipoUsuarios();
+
+
+                    return View(usuario);
+                }
+
+            }
+            catch
+            {
+                return RedirectToAction("CrearInferiorAdministrador");
             }
 
         }
