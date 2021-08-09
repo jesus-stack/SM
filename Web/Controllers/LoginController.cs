@@ -15,7 +15,10 @@ namespace Web.Controllers
         // GET: Login
         public ActionResult Index()
         {
-            return View();
+            Usuario user = new Usuario();
+            user.Nombre = "log";
+            user.TipoUsuario = 1;
+            return View(user);
         }
 
         public ActionResult Login(Usuario usuario)
