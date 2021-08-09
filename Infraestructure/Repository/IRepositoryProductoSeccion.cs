@@ -13,5 +13,6 @@ namespace Infraestructure.Repository
         ProductoSeccion Save(ProductoSeccion ps);
         void Eliminar(long id);
         ProductoSeccion GetProductoSeccionByLote(long lote);
+
     }
 }

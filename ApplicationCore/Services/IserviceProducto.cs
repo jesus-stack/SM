@@ -17,5 +17,6 @@ namespace ApplicationCore.Services
         Producto Save(Producto pro, string[] selectedProveedores);
         void Delete(long id);
         IEnumerable<String> GetProDuctosNombres();
+        IEnumerable<Producto> GetProductosMostOut();
     }
 }

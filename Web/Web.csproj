@@ -2328,6 +2328,8 @@
     <Content Include="Views\Usuario\_PartialTablaU.cshtml" />
     <Content Include="Views\Usuario\Crear.cshtml" />
     <Content Include="Views\Reporte\Index.cshtml" />
+    <Content Include="Views\Reporte\_PartialProductos.cshtml" />
+    <Content Include="Views\Reporte\_PartialModalProducto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

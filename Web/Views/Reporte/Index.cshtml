@@ -48,8 +48,9 @@
 
     <div class="tab_content" id="pro">
         <h1> Producto mas despachados</h1>
-   
-      
+   @{IEnumerable<Infraestructure.Models.Producto> lista = (IEnumerable<Infraestructure.Models.Producto>)TempData["Productos"];
+       TempData.Keep("Productos");}
+      @Html.Partial("_PartialProductos",lista);
      
 
     </div>
