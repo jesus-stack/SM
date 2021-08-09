@@ -152,10 +152,13 @@ namespace Web.Controllers
                 if (id != null)
                 {
                     pro = service.GetProductoById((long)id);
-                    ViewBag.ListaCategorias = listaCategorias((int)pro.Categoria);
-                    ViewBag.ListaProveedores = listaProveedores(pro.Proveedor);
-                    ViewBag.Mantenimientotitulo = "Modificar";
-                    TempData["Secciones"] = pro.ProductoSeccion.ToList();
+                        ViewBag.ListaCategorias = listaCategorias((int)pro.Categoria);
+                        ViewBag.ListaProveedores = listaProveedores(pro.Proveedor);
+                        TempData["Secciones"] = pro.ProductoSeccion.ToList();
+                        ViewBag.Mantenimientotitulo = "Modificar";
+                    
+                   
+                    
                  
 
                 }

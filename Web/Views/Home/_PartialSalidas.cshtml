@@ -1,4 +1,4 @@
-﻿@model List<Infraestructure.Models.Entrada>
+﻿@model List<Infraestructure.Models.Salida>
 
 
 <div class="row container table-responsive col-12">
@@ -17,14 +17,13 @@
         <tbody>
             @foreach (var item in Model)
             {
-                
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.Id)</td>
-                <td>@Html.DisplayFor(modelItem => item.Usuario.Nombre)</td>
-                <td>@Html.DisplayFor(modelItem => item.Movimiento.Nombre)</td>
-                <td>@Html.DisplayFor(modelItem => item.fecha)</td>
-            </tr>
-                
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Usuario.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Movimiento.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.fecha)</td>
+                </tr>
+
             }
         </tbody>
     </table>
@@ -32,3 +31,4 @@
 
 
 </div>
+

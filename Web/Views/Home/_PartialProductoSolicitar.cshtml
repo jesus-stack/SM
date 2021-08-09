@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Infraestructure.Models.Producto>
+
+
+<div class="row container table-responsive col-12">
+    <table class="table  table-striped table-bordered text-center">
+        <thead class="bg-sprimary">
+            <tr>
+
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <th>@Html.DisplayNameFor(model => model.Nombre)</th>
+                <th>@Html.DisplayNameFor(model => model.cantidad_minima)</th>
+                <th>@Html.DisplayNameFor(model => model.cantidad_maxima)</th>
+                <th>@Html.DisplayNameFor(model => model.Total)</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+
+                    <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.cantidad_minima)</td>
+                    <td>@Html.DisplayFor(modelItem => item.cantidad_maxima)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Total)</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+
+
+
+</div>
+

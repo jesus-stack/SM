@@ -13,9 +13,14 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             IEnumerable<Producto> lista = null;
+            List<Producto> listaSolicitar = null;
             List<Entrada> listaE = null;
+            List<Salida> listaS = null;
+
             ServiceProducto service = new ServiceProducto();
             ServiceEntrada serviceE = new ServiceEntrada();
+            ServiceSalida serviceS = new ServiceSalida();
+
 
 
 
@@ -23,8 +28,12 @@ namespace Web.Controllers
             {
 
                 lista = service.GetProducto();
+                listaSolicitar = service.GetProducto().ToList();
+                listaSolicitar = listaSolicitar.Where(x => x.Total < x.cantidad_minima||x.Total==null).ToList();
                 listaE = serviceE.GetEntrada().ToList();
-                
+                listaE = listaE.Where(x =>x.fecha.Value.Day==DateTime.Now.Day&& x.fecha.Value.Month == DateTime.Now.Month&& x.fecha.Value.Year == DateTime.Now.Year).ToList();
+                listaS = serviceS.GetSalida().ToList();
+                listaS = listaS.Where(x => x.fecha.Value.Day == DateTime.Now.Day && x.fecha.Value.Month == DateTime.Now.Month && x.fecha.Value.Year == DateTime.Now.Year).ToList();
 
             }
             catch (Exception e)
@@ -32,7 +41,9 @@ namespace Web.Controllers
                 Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
             }
             TempData["Productos"] = lista;
+            TempData["ProductosS"] = listaSolicitar;
             TempData["Entradas"] = listaE;
+            TempData["Salidas"] = listaS;
 
             return View();
         }

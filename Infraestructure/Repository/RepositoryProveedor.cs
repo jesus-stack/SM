@@ -111,6 +111,17 @@ namespace Infraestructure.Repository
                     
                     else
                     {
+                        ICollection<Contacto> lista = pr.Contacto;
+                        pr.Contacto = null;
+                       
+                        foreach(var item in lista)
+                        {
+                            if (item.Proveedor == null)
+                            {
+                                ctx.Contacto.Add(item);
+                                ctx.SaveChanges();
+                            }
+                        }
                         ctx.Proveedor.Add(pr);
                         ctx.Entry(pr).State = EntityState.Modified;
                         ctx.SaveChanges();

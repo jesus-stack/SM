@@ -2334,6 +2334,8 @@
     <Content Include="Views\Usuario\CrearInferiorAdministrador.cshtml" />
     <Content Include="Views\Home\_PartialProductos.cshtml" />
     <Content Include="Views\Home\_PartialEntradas.cshtml" />
+    <Content Include="Views\Home\_PartialSalidas.cshtml" />
+    <Content Include="Views\Home\_PartialProductoSolicitar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

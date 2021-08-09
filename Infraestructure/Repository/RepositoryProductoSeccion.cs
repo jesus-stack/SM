@@ -19,6 +19,7 @@ namespace Infraestructure.Repository
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
                     ProductoSeccion ps = ctx.ProductoSeccion.FirstOrDefault(x => x.Lote == id);
+                    
                     ctx.ProductoSeccion.Remove(ps);
                     ctx.SaveChanges();
                 }
@@ -121,6 +122,7 @@ namespace Infraestructure.Repository
                     if (prse == null)
                     {
                         ps.Lote = lote;
+                       
                         ctx.ProductoSeccion.Add(ps);
                             ctx.SaveChanges();
                     }
