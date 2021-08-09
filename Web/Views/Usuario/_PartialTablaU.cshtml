@@ -33,7 +33,10 @@
                     else
                     { <p>Inactivo</p>}
             </td>
+                @if (item.TipoUsuario1 != null)
+                {
             <td>@item.TipoUsuario1.Descripcion</td>
+                }
             <td><i class='action_right bx bx-edit bxs-user-check' data-toggle="modal" data-target="#r-@item.Id"></i></td>
             <div class="modal fade" id="r-@item.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -57,7 +60,15 @@
                     </div>
                 </div>
             </div>
-            @if(item.TipoUsuario!=1)
+                @{ 
+                    long entrar = 0;
+                }
+                @if(Session["User"]!=null)
+                {
+                    Infraestructure.Models.Usuario u = (Infraestructure.Models.Usuario)Session["User"];
+                    entrar = u.Id;
+                }
+            @if(item.TipoUsuario!=1 || item.Id==entrar)
                 {
                
             <td>

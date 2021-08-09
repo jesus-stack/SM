@@ -132,6 +132,7 @@ namespace Infraestructure.Models
         public string contrasena { get; set; }
         [Required(ErrorMessage = "{0} Es un dato requerido")]
         public string Nombre { get; set; }
+        [Required(ErrorMessage = "{0} Es un dato requerido")]
         public Nullable<int> TipoUsuario { get; set; }
         public Nullable<bool> Estado { get; set; }
         public byte[] Imagen { get; set; }

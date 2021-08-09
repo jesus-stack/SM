@@ -204,12 +204,15 @@ namespace Web.Controllers
                         ViewBag.ListaTipoUsuarios = ListaTipoUsuariosInferior();
                         return View("CrearInferiorAdministrador");
                     }
-                    usuario.Estado = true;
+                    usuario.Estado = false;
                     service.Save(usuario);
 
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("!Exito", "Espere a ser aprobado por un administrador", SweetAlertMessageType.success);
 
-
-                    return RedirectToAction("Index","Login");
+                    Usuario u = new Usuario();
+                    u.Nombre = "log";
+                    u.TipoUsuario = 1;
+                    return View("~/Views/Login/Index.cshtml",u);
                 }
                 else
                 {
