@@ -1,5 +1,5 @@
-﻿@{ List<Infraestructure.Models.EntradaProducto> detalle = (List<Infraestructure.Models.EntradaProducto>)TempData["detall"];
-    TempData.Keep("detall");}
+﻿@{ List<Infraestructure.Models.EntradaProducto> detalle = (List<Infraestructure.Models.EntradaProducto>)TempData["detalleProducto"];
+    TempData.Keep("detalleProducto");}
 <div id="rs">
     <ul class="list-group " style="height:300px;overflow-y:auto">
         @foreach (var detail in detalle)

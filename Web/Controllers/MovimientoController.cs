@@ -2,6 +2,7 @@
 using Infraestructure.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -72,7 +73,7 @@ namespace Web.Controllers
             {
                 ou = new Entrada();
                 Session["in"] = ou;
-                TempData["detall"] = ou.EntradaProducto.ToList();
+                TempData["detalleProducto"] = ou.EntradaProducto.ToList();
 
 
             }
@@ -139,14 +140,50 @@ namespace Web.Controllers
 
             }
         }
-        public ActionResult SaveEntrada()
+        public ActionResult SaveEntrada(Entrada entrada)
         {
-            Session["in"] = null;
-           
+            List<EntradaProducto> list = (List<EntradaProducto>)TempData["detalleProducto"];
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Usuario u = (Usuario)Session["User"];
+                    entrada.IdUsuario = u.Id;
+                    entrada.EntradaProducto = list;
+                   
+                    
+                    Session["in"] = null;
 
-            ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Entrada", "Registrada Exitosamente", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
+                    ServiceEntrada service = new ServiceEntrada();
+                    
 
-            return View("~/Views/Movimiento/Index.cshtml");
+                    service.Save(entrada);
+
+                    Entrada LogIn = (Entrada)Session["in"];
+                    ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Entrada", "Registrada Exitosamente", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
+
+
+                    return View("~/Views/Movimiento/Index.cshtml");
+                }
+                else
+                {
+                    ViewBag.movimientos = ListaSalidas();
+
+                   Entrada LogIn = (Entrada)Session["in"];
+
+                    return View("Entrada", LogIn);
+
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
+                ViewBag.NotificationMessage = Utils.SweetAlertHelper.Mensaje("Entrada", "ERROR! al registrar", SweetAlertMessageType.error);
+
+
+                return View("~/Views/Home/Index.cshtml");
+
+            }
         }
 
 
@@ -227,9 +264,9 @@ namespace Web.Controllers
         }
         public PartialViewResult eliminarproentrada(int index)
         {
-            List<EntradaProducto> entradas = (List<EntradaProducto>)TempData["detall"];
+            List<EntradaProducto> entradas = (List<EntradaProducto>)TempData["detalleProducto"];
             entradas.RemoveAt(index);
-            TempData["detall"] = entradas;
+            TempData["detalleProducto"] = entradas;
             ViewBag.NotificationMessage = Utils.SweetAlertHelper.extra("Entrada", "Registro Eliminado Exitosamente", SweetAlertMessageType.success, ",showConfirmButton: false,timer: 1500");
             return PartialView("_ProductoEntrada");
         }
@@ -267,7 +304,7 @@ namespace Web.Controllers
 
         public PartialViewResult saveEntradaProducto(int cantidad, int Seccion, int Proveedor, long producto, DateTime fechaV)
         {
-            List<EntradaProducto> entradas = (List<EntradaProducto>)TempData["detall"];
+            List<EntradaProducto> entradas = (List<EntradaProducto>)TempData["detalleProducto"];
             IserviceProducto iservice = new ServiceProducto();
             IServiceSeccion seccion = new ServiceSeccion();
             IServiceProveedor isProveedor = new ServiceProveedor();

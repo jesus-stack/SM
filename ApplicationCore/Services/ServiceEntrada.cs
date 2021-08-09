@@ -15,5 +15,11 @@ namespace ApplicationCore.Services
             IRepositoryEntrada repository = new RepositoryEntrada();
             return repository.GetEntrada();
         }
+
+        public void Save(Entrada e)
+        {
+            IRepositoryEntrada entrada = new RepositoryEntrada();
+            entrada.Save(e);
+        }
     }
 }
