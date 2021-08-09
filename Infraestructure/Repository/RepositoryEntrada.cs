@@ -46,9 +46,10 @@ namespace Infraestructure.Repository
         {
             IRepositoryProducto repository = new RepositoryProducto();
             IRepositoryProductoSeccion repositoryps = new RepositoryProductoSeccion();
+            try
+            {
 
-
-            using (MyContext ctx = new MyContext()) {
+                using (MyContext ctx = new MyContext()) {
 
 
                 using (var tran = ctx.Database.BeginTransaction())
@@ -64,32 +65,19 @@ namespace Infraestructure.Repository
                     {
                         item.IdEntrada = id;
 
-                        ctx.Producto.FirstOrDefault(x => x.Id == item.IdProducto).Total = item.Producto.Total +item.cantidad;
-
+                        Producto pro=ctx.Producto.FirstOrDefault(x => x.Id == item.IdProducto);
+                        pro.Total += item.cantidad;
                         item.Producto = null;
                         item.Seccion = null;
-                        item.Entrada = null;
 
-                        EntradaProducto en = new EntradaProducto();
-                        en.IdEntrada = item.IdEntrada;
-                        en.idSeccion = item.idSeccion;
-                        en.IdProducto = item.IdProducto;
-                        en.IdProveedor = item.IdProveedor;
-                        en.Lote = item.Lote;
-                        en.FechaVencimiento = item.FechaVencimiento;
-                        en.cantidad = item.cantidad;
-
-
-                        ctx.EntradaProducto.Add(en);
-
-
+                        ctx.EntradaProducto.Add(item);
 
                         ProductoSeccion productoSeccion = new ProductoSeccion();
                         productoSeccion.Cantidad = item.cantidad;
                         productoSeccion.FechaVencimiento = item.FechaVencimiento;
                         productoSeccion.IdProducto = item.IdProducto;
                         productoSeccion.IdSeccion = (int)item.idSeccion;
-                        productoSeccion.Lote = (int)item.Lote;
+                        productoSeccion.Lote = ctx.ProductoSeccion.Max(x=>x.Lote)+1;
                         ctx.ProductoSeccion.Add(productoSeccion);
                         
 
@@ -100,6 +88,19 @@ namespace Infraestructure.Repository
                     tran.Commit();
                 }
 
+            }
+            }
+            catch (UpdateException ex)
+            {
+                String mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception e)
+            {
+                String mensaje = "";
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
             }
 
 

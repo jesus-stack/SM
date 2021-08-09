@@ -50,7 +50,7 @@
 
         @{IEnumerable<Infraestructure.Models.Producto> lista = (IEnumerable<Infraestructure.Models.Producto>)TempData["Productos"];
             TempData.Keep("Productos");}
-        @Html.Partial("_PartialProductos", lista);
+     
 
 
     </div>
@@ -113,7 +113,7 @@
         <h4>Se han registrado 4 entradas</h4>
         @{List<Infraestructure.Models.Entrada> listaE = (List<Infraestructure.Models.Entrada>)TempData["Entradas"];
             TempData.Keep("Entradas");}
-        @Html.Partial("_PartialEntradas", listaE);
+       
         <img class="imgInven" src="~/Source/img/entrada.jpg" alt="">
 
     </div>
