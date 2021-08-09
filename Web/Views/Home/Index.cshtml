@@ -45,44 +45,12 @@
 
     <div class="tab_content" id="productRegistrados">
         <h1> Productos total registrados</h1>
-        <h4> 2</h4>
 
 
-        <center>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Código</th>
-                        <th>Descripción</th>
-                        <th>Cantidad disponible</th>
-                        <th>Precio</th>
-                        <th>Proveedor</th>
-                    </tr>
-                </thead>
 
-                <tbody>
-                    <tr>
-                        <td>001</td>
-                        <td>Atún pronto</td>
-                        <td>150</td>
-                        <td>₡  1150</td>
-                        <td> Salvador Ramirez</td>
-                    </tr>
-                    <tr>
-                        <td>002</td>
-                        <td>Arroz Armenio</td>
-                        <td>200</td>
-                        <td>₡  1450</td>
-                        <td>DIstribuidora el Armenio</td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-            <img class="imgInven" src="~/Source/img/inven.jpg" alt="">
-
-        </center>
+        @{IEnumerable<Infraestructure.Models.Producto> lista = (IEnumerable<Infraestructure.Models.Producto>)TempData["Productos"];
+            TempData.Keep("Productos");}
+        @Html.Partial("_PartialProductos", lista);
 
 
     </div>
@@ -143,65 +111,9 @@
     <div class="tab_content" id="totalEntradas">
         <h1> Total entradas del día</h1>
         <h4>Se han registrado 4 entradas</h4>
-        <center>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Número de entrada</th>
-                        <th>Usuario</th>
-                        <th>Producto</th>
-                        <th>Fecha</th>
-                        <th>Cantidad</th>
-                        <th>Proveedor</th>
-                        <th>Ubicación</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    <tr>
-                        <td>1000</td>
-                        <td>Jesús Castilla</td>
-                        <td>Leche pinito</td>
-                        <td>05/06/2021</td>
-                        <td> 40</td>
-                        <td> Dos pinos</td>
-                        <td> Sección A</td>
-                    </tr>
-                    <tr>
-                        <td>1001</td>
-                        <td>Hannyer Pitterson</td>
-                        <td>Jabón en polvo</td>
-                        <td>05/06/2021</td>
-                        <td> 50</td>
-                        <td> Salvador Ramirex</td>
-                        <td> Sección C</td>
-                    </tr>
-                    <tr>
-                        <td>1002</td>
-                        <td>Jesús Castilla</td>
-                        <td>Coca-cola 3 litros </td>
-                        <td>05/06/2021</td>
-                        <td> 32</td>
-                        <td> Coca-cola fensa CR</td>
-                        <td> Sección A</td>
-                    </tr>
-                    <tr>
-                        <td>1003</td>
-                        <td>Hannyer Pitterson</td>
-                        <td>Frijoles rojos </td>
-                        <td>05/06/2021</td>
-                        <td> 32</td>
-                        <td> Distribuidora el Armenio</td>
-                        <td> Sección A</td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-
-
-        </center>
+        @{List<Infraestructure.Models.Entrada> listaE = (List<Infraestructure.Models.Entrada>)TempData["Entradas"];
+            TempData.Keep("Entradas");}
+        @Html.Partial("_PartialEntradas", listaE);
         <img class="imgInven" src="~/Source/img/entrada.jpg" alt="">
 
     </div>

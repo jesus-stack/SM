@@ -12,6 +12,28 @@ namespace Web.Controllers
     {
         public ActionResult Index()
         {
+            IEnumerable<Producto> lista = null;
+            List<Entrada> listaE = null;
+            ServiceProducto service = new ServiceProducto();
+            ServiceEntrada serviceE = new ServiceEntrada();
+
+
+
+            try
+            {
+
+                lista = service.GetProducto();
+                listaE = serviceE.GetEntrada().ToList();
+                
+
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, System.Reflection.MethodBase.GetCurrentMethod());
+            }
+            TempData["Productos"] = lista;
+            TempData["Entradas"] = listaE;
+
             return View();
         }
 
