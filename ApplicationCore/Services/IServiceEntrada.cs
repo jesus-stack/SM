@@ -10,5 +10,6 @@ namespace ApplicationCore.Services
    public  interface IServiceEntrada
     {
         IEnumerable<Entrada> GetEntrada();
+        void Save(Entrada e);
     }
 }

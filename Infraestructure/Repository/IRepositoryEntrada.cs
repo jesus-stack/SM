@@ -10,5 +10,6 @@ namespace Infraestructure.Repository
     public interface IRepositoryEntrada
     {
         IEnumerable<Entrada> GetEntrada();
+        void Save(Entrada Entrada);
     }
 }
