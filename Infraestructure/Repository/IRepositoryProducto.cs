@@ -18,7 +18,8 @@ namespace Infraestructure.Repository
         void Delete(long id);
 
         IEnumerable<ProductoSeccion> GetProductoBySeccion(long id, int seccion);
-        
-         
+        IEnumerable<Producto> GetProductosMostOut();
+
+
     }
 }

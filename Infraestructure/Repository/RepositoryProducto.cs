@@ -50,7 +50,7 @@ namespace Infraestructure.Repository
                 using (MyContext ctx= new MyContext())
                 {
                     ctx.Configuration.LazyLoadingEnabled = false;
-
+                 
                     lista = ctx.Producto.Include("Categoria1").Include("Proveedor").Include("ProductoSeccion").Include("ProductoSeccion.Seccion").Where(x => x.Estado==true).ToList();
 
                     return lista;
@@ -142,6 +142,39 @@ namespace Infraestructure.Repository
                     lista = ctx.ProductoSeccion.Where(x => x.IdProducto == id && x.IdSeccion == seccion && x.FechaVencimiento > DateTime.Now).ToList();
                 }
                 return lista;
+
+            }
+            catch (DbUpdateException dbEx)
+            {
+
+                string mensaje = "";
+                Log.Error(dbEx, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "";
+                Log.Error(ex, System.Reflection.MethodBase.GetCurrentMethod(), ref mensaje);
+                throw new Exception(mensaje);
+            }
+        }
+
+        public IEnumerable<Producto> GetProductosMostOut()
+        {
+            IEnumerable<Producto> lista = null;
+            try
+            {
+                using (MyContext ctx = new MyContext())
+                {
+                    ctx.Configuration.LazyLoadingEnabled = false;
+                    lista = ctx.SalidaProducto.Include("Producto").Select(x=>x.Producto).Include("Categoria1").Include("Proveedor").Include("ProductoSeccion").Include("ProductoSeccion.Seccion").Distinct().ToList();
+                    foreach(var item in lista)
+                    {
+                        item.Total = ctx.SalidaProducto.Where(x=>x.IdProducto==item.Id).Sum(x => x.Cantidad);
+                    }
+                    lista = lista.OrderByDescending(x => x.Total);
+                    return lista;
+                }
 
             }
             catch (DbUpdateException dbEx)

@@ -45,6 +45,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <!-- Navbar Search -->
                 @{
                     string nombre = "";
+                    int nivel=0;
                     string rol = "Administrador";
                     Infraestructure.Models.Usuario oUsuario;
                     //Validar si existe en la sesión
@@ -55,6 +56,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         {
                             nombre = $"{oUsuario.Nombre}";
                             rol = oUsuario.TipoUsuario1.Descripcion;
+                            nivel = oUsuario.TipoUsuario1.Id;
                         }
                     }
                 }
@@ -65,7 +67,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         
                         <span class="d-none d-md-inline">
-                            @nombre </ span > </span>
+                            @nombre </span>
+
 
 
 
@@ -73,13 +76,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <!-- User image -->
                         <li class="user-header bg-primary">
-                            <img src="~/Source/img/jesus.png" class="img-circle elevation-2" alt="User Image">
+                            <img src="~/Source/img/user.png" class="img-circle elevation-2" alt="User Image">
 
                             <p>
                                 @if (Session["User"] != null)
                                 {
                                     <strong>@nombre</strong>
-                                       <p>--</p> @rol<p>--</p>
+                                     <p> @rol</p>
                                 }
                                 else
                                 {
@@ -146,23 +149,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item" >
-                                    <a href="~/Producto/Index" class="nav-link" onclick="active(event)">
+                                    <a href="~/Producto/Index" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Productos</p>
                                     </a>
                                 </li>
                                 <li class="nav-item nav-active">
-                                    <a href="~/Proveedor/index" class="nav-link"  onclick="active(event)">
+                                    <a href="~/Proveedor/index" class="nav-link"  >
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Proveedores</p>
                                     </a>
                                 </li>
+                                @if (nivel == 1)
+                                {
                                 <li class="nav-item" >
-                                    <a href="~/Usuario/Index" class="nav-link" onclick="active(event)">
+                                    <a href="~/Usuario/Index" class="nav-link" >
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Usuarios</p>
                                     </a>
                                 </li>
+                                }
                             </ul>
                         </li>
                         <li class="nav-item">

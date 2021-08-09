@@ -61,6 +61,10 @@ namespace ApplicationCore.Services
             return repository.GetProductoBySeccion(id,seccion);
         }
 
-
+        public IEnumerable<Producto> GetProductosMostOut()
+        {
+            IRepositoryProducto repository = new RepositoryProducto();
+            return repository.GetProductosMostOut();
+        }
     }
 }

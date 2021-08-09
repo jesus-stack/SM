@@ -34,10 +34,9 @@
                     <h5>Ubicaciones</h5>
                     <div>
                         <select class="selecI">
-                            @{ IEnumerable<Infraestructure.Models.Seccion> seccion=Model.ProductoSeccion.Select(x=>x.Seccion).ToList();}
-                            @foreach (var u in seccion.Distinct())
+                            @foreach (var u in Model.ProductoSeccion)
                             {
-                                <option>@u.Descripcion</option>
+                                <option>@u.Seccion.Descripcion</option>
                             }
                         </select>
                     </div>

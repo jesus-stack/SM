@@ -50,8 +50,9 @@ namespace Web.Controllers
 
             try
             {
-                lista = service.GetProducto();
                 listaCategorias = serviceCategoria.GetCategoria();
+                lista = service.GetProducto();
+                
               
             }
             catch (Exception e)

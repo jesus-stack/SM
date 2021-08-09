@@ -53,7 +53,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.TipoUsuario, htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-7">
-            @Html.DropDownListFor(model => Model.TipoUsuario, (SelectList)ViewBag.ListaTipoUsuarios, "Seleccione una categoria"
+            @Html.DropDownListFor(model => Model.TipoUsuario, (SelectList)ViewBag.ListaTipoUsuarios, "Seleccione un rol"
 , new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.TipoUsuario, "", new { @class = "text-danger" })
         </div>
@@ -89,3 +89,6 @@
 
 
 }
+<script>
+        @Html.Raw(@ViewBag.NotificationMessage);
+</script>
