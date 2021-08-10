@@ -187,8 +187,8 @@ namespace Web.Controllers
             ServiceProducto service = new ServiceProducto();
             List<ProductoSeccion> lista = (List<ProductoSeccion>)TempData["Secciones"];
             MemoryStream target = new MemoryStream();
-            try
-            {
+            //try
+            //{
                 if (lista != null)
                 {
                     producto.ProductoSeccion = lista;
@@ -218,11 +218,11 @@ namespace Web.Controllers
                     return RedirectToAction("Crear",producto.Id);
                 }
 
-        }
-            catch
-            {
-                return RedirectToAction("Crear", producto);
-    }
+    //    }
+    //        catch
+    //        {
+    //            return RedirectToAction("Crear", producto);
+    //}
 }
 
         [CustomAuthorize((int)Roles.Administrador)]

@@ -22,6 +22,11 @@ namespace Infraestructure.Repository
                     
                     ctx.ProductoSeccion.Remove(ps);
                     ctx.SaveChanges();
+                    Producto pro= ctx.Producto.FirstOrDefault(x => x.Id == ps.IdProducto);
+                    pro.Total =pro.Total- ps.Cantidad;
+                    ctx.Producto.Add(pro);
+                    ctx.Entry(pro).State = EntityState.Modified;
+                    ctx.SaveChanges();
                 }
                 
                 }

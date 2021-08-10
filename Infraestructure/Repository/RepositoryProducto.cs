@@ -254,9 +254,10 @@ namespace Infraestructure.Repository
                         ctx.Entry(pro).State = EntityState.Modified;
                          ctx.SaveChanges();
                         //Actualizar Categorias
-                        var selectedproveedoresID = new HashSet<string>(selectedProveedores);
+                        
                         if (selectedProveedores != null)
                         {
+                            var selectedproveedoresID = new HashSet<string>(selectedProveedores);
                             ctx.Entry(pro).Collection(p => p.Proveedor).Load();
                             var newProveedorforProducto = ctx.Proveedor
                              .Where(x => selectedproveedoresID.Contains(x.Id.ToString())).ToList();
